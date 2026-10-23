@@ -75,25 +75,25 @@
                 </StackPanel.Resources>
                 <Border>
                     <StackPanel ToolTip="{DynamicResource NativeText_Deaths_Tooltip}">
-                        <Image x:Name="DeathIcon" ToolTip="{Binding Source={DynamicResource NativeText_Deaths}, StringFormat= '\{0\}:'}"/>
+                        <Image x:Name="DeathIcon" ToolTip="{DynamicResource NativeText_Deaths}"/>
                         <TextBlock x:Name="DeathCounter" />
                     </StackPanel>
                 </Border>
                 <Border>
                     <StackPanel ToolTip="{DynamicResource NativeText_Death_Time_Tooltip}">
-                        <Image x:Name="DeathTimeIcon" ToolTip="{Binding Source={DynamicResource NativeText_Death_Time}, StringFormat= '\{0\}:'}" />
+                        <Image x:Name="DeathTimeIcon" ToolTip="{DynamicResource NativeText_Death_Time}" />
                         <TextBlock x:Name="DeathDuration" />
                     </StackPanel>
                 </Border>
                 <Border>
                     <StackPanel HorizontalAlignment="Left" ToolTip="{DynamicResource NativeText_Aggro_Tooltip}">
-                        <Image x:Name="AggroIcon" ToolTip="{Binding Source={DynamicResource NativeText_Aggro}, StringFormat= '\{0\}:'}" />
+                        <Image x:Name="AggroIcon" ToolTip="{DynamicResource NativeText_Aggro}" />
                         <TextBlock x:Name="AggroCounter" />
                     </StackPanel>
                 </Border>
                 <Border>
                     <StackPanel HorizontalAlignment="Left" ToolTip="{DynamicResource NativeText_Aggro_Time_Tooltip}">
-                        <Image x:Name="AggroTimeIcon" ToolTip="{Binding Source={DynamicResource NativeText_Aggro_Time}, StringFormat= '\{0\}:'}" />
+                        <Image x:Name="AggroTimeIcon" ToolTip="{DynamicResource NativeText_Aggro_Time}" />
                         <TextBlock x:Name="AggroDuration" />
                     </StackPanel>
                 </Border>
