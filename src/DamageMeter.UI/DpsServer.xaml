@@ -182,7 +182,7 @@
                     Style="{StaticResource ButtonMainStyle}"
                     Grid.Column="4"
                     VerticalAlignment="Center"
-                    ToolTip="{x:Static l:LP.RemoveDpsServer}"
+                    ToolTip="{DynamicResource NativeText_RemoveDpsServer}"
                     Command="{Binding RemoveServerCommand}" >
                 <Path Data="{StaticResource Svg.Close}" Stretch="Uniform"
                     Margin="8"
@@ -225,21 +225,21 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="1" Name="UsernameLabel" VerticalAlignment="Center" Margin="5"
                        HorizontalAlignment="Right"
-                       Text="{x:Static l:LP.Username}" />
+                       Text="{DynamicResource NativeText_Username}" />
             <TextBox Grid.Row="1"
                      Grid.Column="1" Width="Auto" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                      KeyDown="OnTbKeyDown"
                      Name="UsernameTextbox" />
             <TextBlock Grid.Row="2" Name="AuthLabel" VerticalAlignment="Center" Margin="5"
                        HorizontalAlignment="Right"
-                       Text="{x:Static l:LP.AuthToken}" />
+                       Text="{DynamicResource NativeText_AuthToken}" />
             <TextBox Grid.Row="2"
                      KeyDown="OnTbKeyDown"
                      Text="{Binding Token, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                      Grid.Column="1" Name="AuthTokenTextbox" />
             <TextBlock Grid.Row="3" Grid.Column="0" Name="ServerUrlLabel" VerticalAlignment="Center" Margin="5"
                        HorizontalAlignment="Right"
-                       Text="{x:Static l:LP.DpsUploadUrl}" />
+                       Text="{DynamicResource NativeText_DpsUploadUrl}" />
             <TextBox Grid.Row="3"
                      KeyDown="OnTbKeyDown"
                      Text="{Binding UploadUrl, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
@@ -258,7 +258,7 @@
             </TextBox>
             <TextBlock Grid.Row="4" Name="AllowedAreaUrlLabel" VerticalAlignment="Center" Margin="5"
                        HorizontalAlignment="Right"
-                       Text="{x:Static l:LP.AllowedAreaUrl}" />
+                       Text="{DynamicResource NativeText_AllowedAreaUrl}" />
             <TextBox Grid.Row="4"
                      KeyDown="OnTbKeyDown"
                      Text="{Binding WhitelistUrl, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
@@ -277,7 +277,7 @@
             </TextBox>
             <TextBlock Grid.Row="5" Name="GlyphUploadUrlLabel" VerticalAlignment="Center" Margin="5"
                        HorizontalAlignment="Right"
-                       Text="{x:Static l:LP.GlyphUploadURL}" />
+                       Text="{DynamicResource NativeText_GlyphUploadURL}" />
             <TextBox Grid.Row="5"
                      KeyDown="OnTbKeyDown"
                      Text="{Binding GlyphUrl, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"

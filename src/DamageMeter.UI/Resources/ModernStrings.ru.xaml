@@ -87,7 +87,7 @@
     <sys:String x:Key="ModernText_59ADB3BA2C4F">После возобновления смените локацию или перезайдите в игру</sys:String>
     <sys:String x:Key="ModernText_15572DD76A17">Язык интерфейса</sys:String>
     <sys:String x:Key="ModernText_23CF5192CE0A">Автоматически (Windows)</sys:String>
-    <sys:String x:Key="ModernText_1EBAE34C0C33">Перезапустите Modern Meter, чтобы применить язык интерфейса.</sys:String>
+    <sys:String x:Key="ModernText_1EBAE34C0C33">Язык интерфейса меняется сразу после выбора.</sys:String>
     <sys:String x:Key="ModernText_1634BAF6D348">В бою</sys:String>
     <sys:String x:Key="ModernText_501CB5EE5DE2">Вне боя</sys:String>
     <sys:String x:Key="ModernText_131D201B9380">Группа </sys:String>

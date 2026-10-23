@@ -203,7 +203,7 @@
                        HorizontalAlignment="Stretch"
                        Background="Transparent"
                        Foreground="Orange"
-                       Text="{x:Static l:LP.Your_computer_is_too_slow}"
+                       Text="{DynamicResource NativeText_Your_computer_is_too_slow}"
                        TextAlignment="Center"
                        TextWrapping="Wrap"
                        >
@@ -228,7 +228,7 @@
                        Background="Transparent"
                        FontWeight="DemiBold"
                        Foreground="{StaticResource LightRed}"
-                       Text="{x:Static l:LP.WaitingMapChange}"
+                       Text="{DynamicResource NativeText_WaitingMapChange}"
                        TextAlignment="Center"
                        TextWrapping="Wrap">
                 <TextBlock.Style>
@@ -261,7 +261,7 @@
                     </Style>
                 </TextBlock.Style>
                 <Run Foreground="#aaa"
-                     Text="{x:Static l:LP.UserPaused}" />
+                     Text="{DynamicResource NativeText_UserPaused}" />
                 <LineBreak />
                 <Run FontWeight="DemiBold"
                      Foreground="{StaticResource LightRed}"
@@ -286,7 +286,7 @@
                           VerticalAlignment="Center"
                           IsChecked="{Binding BlurPlayerNames}"
                           Style="{StaticResource ToggleButtonStyle}"
-                          ToolTip="{x:Static l:LP.Blur_player_names}">
+                          ToolTip="{DynamicResource NativeText_Blur_player_names}">
                 <Path Margin="6"
                       Data="{StaticResource Svg.HideNames}"
                       Style="{StaticResource PathBaseStyle}" />
@@ -296,11 +296,11 @@
                 <Button.Style>
                     <Style BasedOn="{StaticResource FooterButtonStyle}"
                            TargetType="Button">
-                        <Setter Property="ToolTip" Value="{x:Static l:LP.MainWindow_Only_boss}" />
+                        <Setter Property="ToolTip" Value="{DynamicResource NativeText_MainWindow_Only_boss}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ShowAdds}"
                                          Value="True">
-                                <Setter Property="ToolTip" Value="{x:Static l:LP.MainWindow_Boss_Adds}" />
+                                <Setter Property="ToolTip" Value="{DynamicResource NativeText_MainWindow_Boss_Adds}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -316,8 +316,8 @@
                     <Style BasedOn="{StaticResource FooterButtonHideableStyle}"
                            TargetType="Button">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedEncounter.Info.Name}"
-                                         Value="{x:Static l:LP.TotalEncounter}">
+                            <DataTrigger Binding="{Binding SelectedEncounter}"
+                                         Value="{x:Static ui:MainViewModel.TotalEncounter}">
                                 <Setter Property="IsEnabled" Value="False" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -329,11 +329,11 @@
             <!--<windows:FooterButton Command="{Binding ShowUploadHistoryCommand}"
                                   Margin="3"
                                   Height="25"
-                                  ToolTip="{x:Static l:LP.SystemTray_Site_export}"
+                                  ToolTip="{DynamicResource NativeText_SystemTray_Site_export}"
                                   Style="{StaticResource ButtonMainStyle}"
                                   SvgIcon="{StaticResource Svg.History}" />-->
             <!--<windows:FooterButton Command="{Binding ShowBossHPBarCommand}"
-                                  ToolTip="{x:Static l:LP.BossHP}"
+                                  ToolTip="{DynamicResource NativeText_BossHP}"
                                   Margin="3"
                                   Height="25"
                                   Style="{StaticResource ButtonMainStyle}"

@@ -161,7 +161,19 @@ namespace DamageMeter.UI.Windows
             }
         }
 
-        public sealed record UiLanguage(string Code, string Label);
+        public sealed class UiLanguage : TSPropertyChanged
+        {
+            private readonly string _label;
+            public string Code { get; }
+            public string Label => Code == "Auto" ? ModernLocalization.Get("Automatic (Windows)") : _label;
+            public UiLanguage(string code, string label)
+            {
+                Code = code; _label = label;
+                if (code == "Auto") System.ComponentModel.PropertyChangedEventManager.AddHandler(ModernLocalization.State, OnLanguageChanged, nameof(LocalizationState.Version));
+            }
+            private void OnLanguageChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) => NotifyPropertyChanged(nameof(Label));
+            public override string ToString() => Label;
+        }
         public System.Collections.Generic.IEnumerable<UiLanguage> UiLanguages => new[] {
             new UiLanguage("Auto", ModernLocalization.Get("Automatic (Windows)")),
             new UiLanguage("en", "English"), new UiLanguage("ru", "Русский"),
@@ -169,7 +181,19 @@ namespace DamageMeter.UI.Windows
             new UiLanguage("it", "Italiano"), new UiLanguage("pt-BR", "Português (Brasil)"),
             new UiLanguage("ja", "日本語"), new UiLanguage("ko", "한국어"),
             new UiLanguage("zh-CN", "简体中文"), new UiLanguage("zh-TW", "繁體中文") };
-        public string InterfaceLanguage { get => Data.UILanguage; set { if (string.IsNullOrWhiteSpace(value) || Data.UILanguage == value) return; Data.UILanguage = value; NotifyPropertyChanged(); } }
+        public string InterfaceLanguage
+        {
+            get => Data.UILanguage;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || Data.UILanguage == value) return;
+                var culture = ModernLocalization.Resolve(value, ModernLocalization.WindowsCulture);
+                Data.UILanguage = value;
+                ModernLocalization.Apply(culture);
+                Data.Save();
+                NotifyPropertyChanged();
+            }
+        }
 
         public bool CanChangeCaptureMode => !Environment.GetCommandLineArgs().Contains("--toolbox");
 

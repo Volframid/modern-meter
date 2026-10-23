@@ -1226,14 +1226,14 @@
                    HorizontalAlignment="Center"
                    Foreground="LightCoral"
                    Style="{StaticResource MetricTextBlockStyle}"
-                   Text="{Binding CritRate, Converter={StaticResource ModernCritLabel}}" />
+                   Text="{ui:LocalizedValue Path=CritRate, Converter={StaticResource ModernCritLabel}}" />
     </DataTemplate>
     <DataTemplate x:Key="HealCritRateDT"
                   DataType="ui:IPlayerViewModel">
         <TextBlock Margin="2 0"
                    Foreground="MediumSeaGreen"
                    Style="{StaticResource MetricTextBlockStyle}"
-                   Text="{Binding HealCritRate, Converter={StaticResource ModernHealCritLabel}}" />
+                   Text="{ui:LocalizedValue Path=HealCritRate, Converter={StaticResource ModernHealCritLabel}}" />
     </DataTemplate>
     <DataTemplate x:Key="DamageFromCritsDT"
                   DataType="ui:IPlayerViewModel">

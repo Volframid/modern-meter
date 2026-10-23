@@ -21,7 +21,12 @@ public sealed class ModernFightClock : INotifyPropertyChanged
     public ModernFightClock() : this(() => DateTime.UtcNow,
         () => (long)(Stopwatch.GetTimestamp() * (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency)) { }
     public ModernFightClock(Func<DateTime> now) : this(now, () => now().Ticks) { }
-    public ModernFightClock(Func<DateTime> now, Func<long> elapsed) { _now = now; _elapsed = elapsed; }
+    public ModernFightClock(Func<DateTime> now, Func<long> elapsed)
+    {
+        _now = now; _elapsed = elapsed;
+        PropertyChangedEventManager.AddHandler(ModernLocalization.State, OnLanguageChanged, nameof(LocalizationState.Version));
+    }
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e) => PropertyChanged?.Invoke(this, new(nameof(StatusText)));
     public void Start()
     {
         if (_started) return;

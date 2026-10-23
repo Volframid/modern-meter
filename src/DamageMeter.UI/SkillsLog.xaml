@@ -51,13 +51,13 @@
                 <ColumnDefinition MinWidth="80" Width="Auto"/>
                 <ColumnDefinition MinWidth="80" Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ui:MaterialSwitch Grid.Column="0" Status="True" Foreground="{StaticResource DamageText}" SwitchColor="{StaticResource DamageText}" Content="{x:Static l:LP.Dps}" Height="30" x:Name="Damage"
+            <ui:MaterialSwitch Grid.Column="0" Status="True" Foreground="{StaticResource DamageText}" SwitchColor="{StaticResource DamageText}" Content="{DynamicResource NativeText_Dps}" Height="30" x:Name="Damage"
                       On="ValueChanged" Off="ValueChanged" Margin="20,5"/>
-            <ui:MaterialSwitch Grid.Column="1" Status="True" Foreground="{StaticResource HealText}" SwitchColor="{StaticResource HealText}" Content="{x:Static l:LP.Heal}" Height="30" x:Name="Heal"
+            <ui:MaterialSwitch Grid.Column="1" Status="True" Foreground="{StaticResource HealText}" SwitchColor="{StaticResource HealText}" Content="{DynamicResource NativeText_Heal}" Height="30" x:Name="Heal"
                       On="ValueChanged" Off="ValueChanged" Margin="20,5"/>
-            <ui:MaterialSwitch Grid.Column="2" Status="True" Foreground="{StaticResource ManaText}" SwitchColor="{StaticResource ManaText}" Content="{x:Static l:LP.Mana}" Height="30" x:Name="Mana"
+            <ui:MaterialSwitch Grid.Column="2" Status="True" Foreground="{StaticResource ManaText}" SwitchColor="{StaticResource ManaText}" Content="{DynamicResource NativeText_Mana}" Height="30" x:Name="Mana"
                       On="ValueChanged" Off="ValueChanged" Margin="20,5"/>
-            <ui:MaterialSwitch Grid.Column="3" Status="True" Foreground="{StaticResource CastText}" SwitchColor="{StaticResource CastText}"  Content="{x:Static l:LP.Counter}" Height="30" x:Name="Casts"
+            <ui:MaterialSwitch Grid.Column="3" Status="True" Foreground="{StaticResource CastText}" SwitchColor="{StaticResource CastText}"  Content="{DynamicResource NativeText_Counter}" Height="30" x:Name="Casts"
                       On="ValueChanged" Off="ValueChanged" Margin="20,5"/>
         </Grid>
         <ItemsControl Grid.Row="1" Name="Skills" Background="Transparent" MaxHeight="500" Style="{StaticResource SkillItemsControl}"

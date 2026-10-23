@@ -66,7 +66,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.Reset}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{x:Static lang:LP.Reset}" />
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_Reset}" />
             </Grid>
         </Button>
         <Button Height="Auto" Command="{Binding TogglePauseCommand}">
@@ -90,10 +90,10 @@
                 <TextBlock HorizontalAlignment="Center" Grid.Row="1">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" BasedOn="{StaticResource BigButtonTextStyle}">
-                            <Setter Property="Text" Value="{x:Static lang:LP.Pause}" />
+                            <Setter Property="Text" Value="{DynamicResource NativeText_Pause}" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Paused}" Value="True">
-                                    <Setter Property="Text" Value="{x:Static lang:LP.Resume}" />
+                                    <Setter Property="Text" Value="{DynamicResource NativeText_Resume}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -110,7 +110,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.Export}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{x:Static lang:LP.ExportCurrent}" />
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_ExportCurrent}" />
                 <Path Style="{StaticResource VerticalDotsPathStyle}" />
                 <Grid Margin="-20"
                       IsHitTestVisible="{Binding ExportPopupVisible, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settingsViews:SettingsHomeView}}"
@@ -125,7 +125,7 @@
                             Effect="{StaticResource SwitchShadow-1dp}" />
                     <UniformGrid Columns="1" HorizontalAlignment="Stretch">
                         <Button Style="{StaticResource SubmenuButtonStyle}"
-                                ToolTip="{x:Static lang:LP.SystemTray_Export_current_to_Site}"
+                                ToolTip="{DynamicResource NativeText_SystemTray_Export_current_to_Site}"
                                 Command="{Binding ExportCurrentCommand}"
                                 CommandParameter="site">
                             <Grid>
@@ -136,11 +136,11 @@
                                 <Path Style="{StaticResource SmallButtonPathStyle}"
                                       Data="{StaticResource Svg.ExportSite}" />
                                 <TextBlock Style="{StaticResource SmallButtonTextStyle}"
-                                           Text="{x:Static lang:LP.SystemTray_Export_current_to_Site}" />
+                                           Text="{DynamicResource NativeText_SystemTray_Export_current_to_Site}" />
                             </Grid>
                         </Button>
                         <Button Style="{StaticResource SubmenuButtonStyle}"
-                                ToolTip="{x:Static lang:LP.SystemTray_Export_current_to_Excel}"
+                                ToolTip="{DynamicResource NativeText_SystemTray_Export_current_to_Excel}"
                                 Command="{Binding ExportCurrentCommand}"
                                 CommandParameter="excel">
                             <Grid>
@@ -151,12 +151,12 @@
                                 <Path Style="{StaticResource SmallButtonPathStyle}"
                                       Data="{StaticResource Svg.ExportExcel}" />
                                 <TextBlock Style="{StaticResource SmallButtonTextStyle}"
-                                           Text="{x:Static lang:LP.SystemTray_Export_current_to_Excel}" />
+                                           Text="{DynamicResource NativeText_SystemTray_Export_current_to_Excel}" />
                             </Grid>
 
                         </Button>
                         <Button Style="{StaticResource SubmenuButtonStyle}"
-                                ToolTip="{x:Static lang:LP.SystemTray_Export_current_to_Json}"
+                                ToolTip="{DynamicResource NativeText_SystemTray_Export_current_to_Json}"
                                 Command="{Binding ExportCurrentCommand}"
                                 CommandParameter="json">
                             <Grid>
@@ -166,7 +166,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Path Style="{StaticResource SmallButtonPathStyle}" Data="{StaticResource Svg.Json}" />
                                 <TextBlock Style="{StaticResource SmallButtonTextStyle}"
-                                           Text="{x:Static lang:LP.SystemTray_Export_current_to_Json}" />
+                                           Text="{DynamicResource NativeText_SystemTray_Export_current_to_Json}" />
                             </Grid>
 
                         </Button>
@@ -198,7 +198,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.UploadGlyphs}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{x:Static lang:LP.UploadGlyphBuild}" />
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_UploadGlyphBuild}" />
             </Grid>
         </Button>
 
@@ -209,7 +209,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.ChatBox}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{x:Static lang:LP.OpenChatBox}" />
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_OpenChatBox}" />
             </Grid>
         </Button>
         <Button Height="Auto" Command="{Binding OpenUploadHistoryCommand}">
@@ -219,7 +219,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.History}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{x:Static lang:LP.SystemTray_Site_export}" />
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_SystemTray_Site_export}" />
             </Grid>
         </Button>
         <Button Height="Auto" Command="{Binding BrowseLinkCommand}" CommandParameter="discord">
@@ -229,7 +229,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.Discord}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{x:Static lang:LP.SystemTray_Discord}" />
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_SystemTray_Discord}" />
             </Grid>
         </Button>
         <Grid Height="Auto" MouseEnter="OnGitHubGridMouseEnter" Background="Transparent">
@@ -251,7 +251,7 @@
                             Effect="{StaticResource SwitchShadow-1dp}" />
                     <UniformGrid Margin="0" Columns="1" HorizontalAlignment="Stretch">
                         <Button Style="{StaticResource SubmenuButtonStyle}"
-                                ToolTip="{x:Static lang:LP.SystemTray_Wiki}"
+                                ToolTip="{DynamicResource NativeText_SystemTray_Wiki}"
                                 Command="{Binding BrowseLinkCommand}"
                                 CommandParameter="wiki"
                                 Name="Wiki">
@@ -262,11 +262,11 @@
                                 </Grid.ColumnDefinitions>
                                 <Path Style="{StaticResource SmallButtonPathStyle}" Data="{StaticResource Svg.GitHub}" />
                                 <TextBlock Style="{StaticResource SmallButtonTextStyle}"
-                                           Text="{x:Static lang:LP.SystemTray_Wiki}" />
+                                           Text="{DynamicResource NativeText_SystemTray_Wiki}" />
                             </Grid>
                         </Button>
                         <Button Style="{StaticResource SubmenuButtonStyle}"
-                                ToolTip="{x:Static lang:LP.SystemTray_Patch_note}"
+                                ToolTip="{DynamicResource NativeText_SystemTray_Patch_note}"
                                 Command="{Binding BrowseLinkCommand}"
                                 CommandParameter="patch">
                             <Grid>
@@ -276,12 +276,12 @@
                                 </Grid.ColumnDefinitions>
                                 <Path Style="{StaticResource SmallButtonPathStyle}" Data="{StaticResource Svg.GitHub}" />
                                 <TextBlock Style="{StaticResource SmallButtonTextStyle}"
-                                           Text="{x:Static lang:LP.SystemTray_Patch_note}" />
+                                           Text="{DynamicResource NativeText_SystemTray_Patch_note}" />
                             </Grid>
 
                         </Button>
                         <Button Style="{StaticResource SubmenuButtonStyle}"
-                                ToolTip="{x:Static lang:LP.SystemTray_Report_issue}"
+                                ToolTip="{DynamicResource NativeText_SystemTray_Report_issue}"
                                 Command="{Binding BrowseLinkCommand}"
                                 CommandParameter="issues"
                                 Name="Issues">
@@ -292,7 +292,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Path Style="{StaticResource SmallButtonPathStyle}" Data="{StaticResource Svg.GitHub}" />
                                 <TextBlock Style="{StaticResource SmallButtonTextStyle}"
-                                           Text="{x:Static lang:LP.SystemTray_Report_issue}" />
+                                           Text="{DynamicResource NativeText_SystemTray_Report_issue}" />
                             </Grid>
                         </Button>
                     </UniformGrid>
@@ -330,10 +330,10 @@
                 <TextBlock>
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" BasedOn="{StaticResource BigButtonTextStyle}">
-                            <Setter Property="Text" Value="{x:Static lang:LP.Close}" />
+                            <Setter Property="Text" Value="{DynamicResource NativeText_Close}" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsShiftDown}" Value="True">
-                                    <Setter Property="Text" Value="{x:Static lang:LP.CloseNoConfirm}" />
+                                    <Setter Property="Text" Value="{DynamicResource NativeText_CloseNoConfirm}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

@@ -17,7 +17,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 - Original game class and skill icons, customizable role colors, transparency and scale.
 - A smooth centisecond clock with an indicator for combat status.
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
-- Thirteen settings sections, explicit interface language selection, and automatic Russian on Russian Windows. New interface text supports English and Russian; other existing language packs are retained with English fallback for new text. Restart the meter after changing interface language.
+- Thirteen settings sections, explicit interface language selection, and automatic Russian on Russian Windows. New interface text supports English and Russian; other existing language packs are retained with English fallback for new text. Interface language changes apply immediately to open windows.
 - Chat and notification functions, including whisper popups when the game is in the background, subject to the user's event and sound settings.
 
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.

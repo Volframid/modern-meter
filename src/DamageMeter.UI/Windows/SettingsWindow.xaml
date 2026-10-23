@@ -60,7 +60,7 @@
             <Setter Property="ItemsSource" Value="{Binding AvailableMetrics}"/>
             <Setter Property="MinWidth" Value="90"/><Setter Property="Margin" Value="0,0,6,0"/>
             <Setter Property="ItemTemplate"><Setter.Value><DataTemplate>
-                <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+                <TextBlock Text="{ui:LocalizedValue Converter={StaticResource EnumDescriptionConverter}}" TextTrimming="CharacterEllipsis" ToolTip="{ui:LocalizedValue Converter={StaticResource EnumDescriptionConverter}}"/>
             </DataTemplate></Setter.Value></Setter>
         </Style>
         <DataTemplate x:Key="MockPlayer" DataType="local:MockPlayerViewModel">
@@ -108,7 +108,7 @@
                         VerticalAlignment="Stretch">
                 <!--Home-->
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Home}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_C910D474DCD7}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
-                    <StackPanel><TextBlock Text="{DynamicResource ModernText_15572DD76A17}" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,6"/><ComboBox ItemsSource="{Binding UiLanguages}" DisplayMemberPath="Label" SelectedValuePath="Code" SelectedValue="{Binding InterfaceLanguage, Mode=TwoWay}" Style="{StaticResource ModernCombo}" Margin="0,0,0,6"/><TextBlock Text="{DynamicResource ModernText_1EBAE34C0C33}" TextWrapping="Wrap" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,14"/><settingsViews:SettingsHomeView
+                    <StackPanel><TextBlock Text="{DynamicResource ModernText_15572DD76A17}" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,6"/><ComboBox x:Name="InterfaceLanguageSelector" ItemsSource="{Binding UiLanguages}" SelectedValuePath="Code" SelectedValue="{Binding InterfaceLanguage, Mode=TwoWay}" Style="{StaticResource ModernCombo}" Margin="0,0,0,6"><ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}"/></DataTemplate></ComboBox.ItemTemplate></ComboBox><TextBlock Text="{DynamicResource ModernText_1EBAE34C0C33}" TextWrapping="Wrap" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,14"/><settingsViews:SettingsHomeView
                         MaxWidth="500" /></StackPanel>
                 </ScrollViewer></TabItem>
                 <!--Detection-->
@@ -116,22 +116,22 @@
 
                     <StackPanel MaxWidth="500">
                         <settings:SelectionSetting SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
-                                                   SettingName="{x:Static lang:LP.CaptureMode}"
+                                                   SettingName="{DynamicResource NativeText_CaptureMode}"
                                                    Choices="{x:Static local:SettingsWindowViewModel.CaptureModes}"
                                                    ChoicesType="{x:Type CaptureMode}" 
                                                    IsEnabled="{Binding CanChangeCaptureMode}"/>
                         <settings:CheckboxSetting IsOn="{Binding LowPriority, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_LowPriority}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_LowPriority}" />
                         <settings:CheckboxSetting IsOn="{Binding CountOnlyBosses, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Count_only_bosses}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Count_only_bosses}" />
                         <settings:CheckboxSetting IsOn="{Binding DetectBossesByHpBar, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Detect_bosses_by_HP_bar}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Detect_bosses_by_HP_bar}" />
                         <settings:CheckboxSetting IsOn="{Binding CountOnlyPartyMembers, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Count_only_party_members}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Count_only_party_members}" />
                         <settings:CheckboxSetting IsOn="{Binding IgnorePacketsThreshold, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_IgnorePacketsThreshold}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_IgnorePacketsThreshold}" />
                         <settings:ValueSetting Value="{Binding ResetTimeout, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.IdleResetTimeout}" Min="0" Max="600" />
+                                               SettingName="{DynamicResource NativeText_IdleResetTimeout}" Min="0" Max="600" />
 
                     </StackPanel>
                 </ScrollViewer></TabItem>
@@ -139,35 +139,35 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.UI}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_3907FA7F8072}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding AggroBasedTimer, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.Display_timer_aggro_or_firsthit}" />
+                                                  SettingName="{DynamicResource NativeText_Display_timer_aggro_or_firsthit}" />
                         <settings:CheckboxSetting IsOn="{Binding DisplayOnlyBossHitByMeterUser, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.Display_only_boss_hit_by_meter_user}" />
+                                                  SettingName="{DynamicResource NativeText_Display_only_boss_hit_by_meter_user}" />
                         <settings:CheckboxSetting IsOn="{Binding ClickThru, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Click_throu}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Click_throu}" />
                         <settings:CheckboxSetting IsOn="{Binding InvisibleWhenNoStats, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Invisible_when_no_stats}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Invisible_when_no_stats}" />
                         <settings:CheckboxSetting IsOn="{Binding ShowAlways, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Show_always}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Show_always}" />
                         <settings:CheckboxSetting IsOn="{Binding StayTopmost, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Stay_topmost}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Stay_topmost}" />
                         <settings:CheckboxSetting IsOn="{Binding SnapToBorders, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_SnapToBorders}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_SnapToBorders}" />
                         <settings:CheckboxSetting IsOn="{Binding ShowSelfOnTop, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.ShowSelfOnTop}" />
+                                                  SettingName="{DynamicResource NativeText_ShowSelfOnTop}" />
                         <settings:CheckboxSetting IsOn="{Binding FullscreenOverlay, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.EnableOverlay}" IsEnabled="False" 
+                                                  SettingName="{DynamicResource NativeText_EnableOverlay}" IsEnabled="False" 
                                                   Visibility="Collapsed"/>
                         <settings:ValueSetting Value="{Binding NumberOfPlayersDisplayed, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.NumberPlayersDisplayed}" Min="1" Max="30" />
+                                               SettingName="{DynamicResource NativeText_NumberPlayersDisplayed}" Min="1" Max="30" />
                         <settings:ValueSetting Value="{Binding MainWindowOpacity, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.SystemTray_MainWindowOpacity}"
+                                               SettingName="{DynamicResource NativeText_SystemTray_MainWindowOpacity}"
                                                Min="0" Max="1" />
                         <settings:ValueSetting Value="{Binding OtherWindowsOpacity, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.SystemTray_OtherWindowOpacity}"
+                                               SettingName="{DynamicResource NativeText_SystemTray_OtherWindowOpacity}"
                                                Min="0.1" Max="1" />
                         <settings:ValueSetting Value="{Binding Scale, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0.5" Max="5" />
                         <!--<settings:ValueSetting Value="{Binding UpdatesPerSecond, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.UpdatesPerSecond}" Min="1" Max="20" />-->
+                                               SettingName="{DynamicResource NativeText_UpdatesPerSecond}" Min="1" Max="20" />-->
 
                         <Grid Margin="35 10 0 10">
                             <Grid.ColumnDefinitions>
@@ -213,9 +213,9 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.TTS}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_3565FCC6C17D}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding TtsMessagesTruncate, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.TTSSizeExceededTruncate}" />
+                                                  SettingName="{DynamicResource NativeText_TTSSizeExceededTruncate}" />
                         <settings:ValueSetting Value="{Binding TtsMaxSize, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.MaxTTSSize}"
+                                               SettingName="{DynamicResource NativeText_MaxTTSSize}"
                                                Min="10" Max="200"
                                                IsEnabled="{Binding TtsMessagesTruncate}" />
                     </StackPanel>
@@ -224,9 +224,9 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.HPBar}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_A2D238439AC5}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding BossGageVisible, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.ShowBossGage}" />
+                                                  SettingName="{DynamicResource NativeText_ShowBossGage}" />
                         <settings:CheckboxSetting IsOn="{Binding BossGageAbnormalsDisabled, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.NoAbnormalsInHUD}"
+                                                  SettingName="{DynamicResource NativeText_NoAbnormalsInHUD}"
                                                   IsEnabled="{Binding BossGageVisible}" />
                     </StackPanel>
                 </ScrollViewer></TabItem>
@@ -234,19 +234,19 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Graph}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_32AB018FD38A}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding RealtimeGraphEnabled, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.EnableRealtimeGraph}" />
+                                                  SettingName="{DynamicResource NativeText_EnableRealtimeGraph}" />
                         <settings:SelectionSetting SelectedItem="{Binding GraphMode, Mode=TwoWay}"
-                                                   SettingName="{x:Static lang:LP.RealtimeGraphMode}"
+                                                   SettingName="{DynamicResource NativeText_RealtimeGraphMode}"
                                                    Choices="{x:Static local:SettingsWindowViewModel.GraphModes}"
                                                    ChoicesType="{x:Type data:GraphMode}"
                                                    IsEnabled="{Binding RealtimeGraphEnabled}" />
 
                         <settings:ValueSetting Value="{Binding RealtimeGraphDisplayedInterval, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.RealtimeGraphDisplayedInterval}" Min="0"
+                                               SettingName="{DynamicResource NativeText_RealtimeGraphDisplayedInterval}" Min="0"
                                                Max="600"
                                                IsEnabled="{Binding RealtimeGraphEnabled}" />
                         <settings:ValueSetting Value="{Binding RealtimeGraphCMAseconds, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.RealtimeGraphCmaSeconds}" Min="1"
+                                               SettingName="{DynamicResource NativeText_RealtimeGraphCmaSeconds}" Min="1"
                                                Max="60">
                             <settings:ValueSetting.Style>
                                 <Style TargetType="settings:ValueSetting"
@@ -264,7 +264,7 @@
 
                         </settings:ValueSetting>
                         <settings:CheckboxSetting IsOn="{Binding RealtimeGraphAnimated, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.RealtimeGraphAnimated}"
+                                                  SettingName="{DynamicResource NativeText_RealtimeGraphAnimated}"
                                                   IsEnabled="{Binding RealtimeGraphEnabled}" />
 
                     </StackPanel>
@@ -326,7 +326,7 @@
                                 <Path Fill="White" Stretch="Uniform" Width="16" Height="16"
                                       Margin="8 0"
                                       Data="{StaticResource Svg.AddServer}" />
-                                <TextBlock Grid.Column="1" Text="{x:Static lang:LP.SystemTray_AddServer}"
+                                <TextBlock Grid.Column="1" Text="{DynamicResource NativeText_SystemTray_AddServer}"
                                            VerticalAlignment="Center" />
                             </Grid>
                         </Button>
@@ -336,22 +336,22 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Events}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_8D14F6E72DE8}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding EnableChatAndNotif, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.EnableChat}" />
+                                                  SettingName="{DynamicResource NativeText_EnableChat}" />
                         <settings:CheckboxSetting IsOn="{Binding AutoDisableChatWhenOverloaded, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.AutoDisableChatWhenOverloaded}"
+                                                  SettingName="{DynamicResource NativeText_AutoDisableChatWhenOverloaded}"
                                                   IsEnabled="{Binding EnableChatAndNotif}" />
                         <settings:CheckboxSetting IsOn="{Binding MuteSound, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.MuteSound}"
+                                                  SettingName="{DynamicResource NativeText_MuteSound}"
                                                   IsEnabled="{Binding EnableChatAndNotif}" />
                         <settings:CheckboxSetting IsOn="{Binding CopyInspectOnApply, Mode=TwoWay}"
                                                   IsEnabled="{Binding EnableChatAndNotif}"
-                                                  SettingName="{x:Static lang:LP.CopyInspect}" />
+                                                  SettingName="{DynamicResource NativeText_CopyInspect}" />
                         <settings:CheckboxSetting IsOn="{Binding DisablePartyEvents, Mode=TwoWay}"
                                                   IsEnabled="{Binding EnableChatAndNotif}"
-                                                  SettingName="{x:Static lang:LP.DisablePartyEvents}" />
+                                                  SettingName="{DynamicResource NativeText_DisablePartyEvents}" />
                         <settings:CheckboxSetting IsOn="{Binding ShowAfkEventsIngame, Mode=TwoWay}"
                                                   IsEnabled="{Binding EnableChatAndNotif}"
-                                                  SettingName="{x:Static lang:LP.ShowAfkEventsIngame}" />
+                                                  SettingName="{DynamicResource NativeText_ShowAfkEventsIngame}" />
                         <!--<Button Content="{DynamicResource ModernText_B3E227CECFE3}" VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 VerticalContentAlignment="Center"
@@ -363,19 +363,19 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Discord}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_053BC65874AD}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding RichPresenceEnable, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.EnableRp}" />
+                                                  SettingName="{DynamicResource NativeText_EnableRp}" />
                         <settings:CheckboxSetting IsOn="{Binding RichPresenceShowLocation, Mode=TwoWay}"
                                                   IsEnabled="{Binding RichPresenceEnable}"
-                                                  SettingName="{x:Static lang:LP.RichPresenceShowLocation}" />
+                                                  SettingName="{DynamicResource NativeText_RichPresenceShowLocation}" />
                         <settings:CheckboxSetting IsOn="{Binding RichPresenceShowCharacter, Mode=TwoWay}"
                                                   IsEnabled="{Binding RichPresenceEnable}"
-                                                  SettingName="{x:Static lang:LP.RichPresenceShowCharacter}" />
+                                                  SettingName="{DynamicResource NativeText_RichPresenceShowCharacter}" />
                         <settings:CheckboxSetting IsOn="{Binding RichPresenceShowStatus, Mode=TwoWay}"
                                                   IsEnabled="{Binding RichPresenceEnable}"
-                                                  SettingName="{x:Static lang:LP.RichPresenceShowStatus}" />
+                                                  SettingName="{DynamicResource NativeText_RichPresenceShowStatus}" />
                         <settings:CheckboxSetting IsOn="{Binding RichPresenceShowParty, Mode=TwoWay}"
                                                   IsEnabled="{Binding RichPresenceEnable}"
-                                                  SettingName="{x:Static lang:LP.RichPresenceShowParty}" />
+                                                  SettingName="{DynamicResource NativeText_RichPresenceShowParty}" />
 
                     </StackPanel>
                 </ScrollViewer></TabItem>
@@ -393,7 +393,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="SayColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.SayColor}" />
+                                       Text="{DynamicResource NativeText_SayColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="SayColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -409,7 +409,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="EmotesColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.EmotesColor}" />
+                                       Text="{DynamicResource NativeText_EmotesColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="EmotesColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -426,7 +426,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="GeneralColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.GeneralColor}" />
+                                       Text="{DynamicResource NativeText_GeneralColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="GeneralColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -442,7 +442,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="TradingColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.TradingColor}" />
+                                       Text="{DynamicResource NativeText_TradingColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="TradingColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -459,7 +459,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="GroupColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.GroupColor}" />
+                                       Text="{DynamicResource NativeText_GroupColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="GroupColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -475,7 +475,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="RaidColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.RaidColor}" />
+                                       Text="{DynamicResource NativeText_RaidColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="RaidColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -492,7 +492,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="GuildColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.GuildColor}" />
+                                       Text="{DynamicResource NativeText_GuildColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="GuildColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -508,7 +508,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="WhisperColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.WhisperColor}" />
+                                       Text="{DynamicResource NativeText_WhisperColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="WhisperColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -524,7 +524,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="AreaColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.AreaColor}" />
+                                       Text="{DynamicResource NativeText_AreaColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False" Name="AreaColorSelecter"
                                               Margin="5" Grid.Column="0"
@@ -540,7 +540,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="PrivateChannelColor" VerticalAlignment="Center"
                                        Style="{StaticResource DefaultTextStyle}"
-                                       Text="{x:Static lang:LP.PrivateChannelColor}" />
+                                       Text="{DynamicResource NativeText_PrivateChannelColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                               DisplayColorAndName="False"
                                               Name="PrivateChannelColorSelecter" Margin="5"
@@ -557,7 +557,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="1" Name="AllianceColor" VerticalAlignment="Center"
                                    Style="{StaticResource DefaultTextStyle}"
-                                   Text="{x:Static lang:LP.AllianceColor}" />
+                                   Text="{DynamicResource NativeText_AllianceColor}" />
                             <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
                                           DisplayColorAndName="False" Name="AllianceColorSelecter"
                                           Margin="5" Grid.Column="0"
@@ -577,13 +577,13 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Misc}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_9F088DBEBD6C}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding ExportPacketLogs, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.ExportPacketLogs}" />
+                                                  SettingName="{DynamicResource NativeText_ExportPacketLogs}" />
                         <settings:CheckboxSetting IsOn="{Binding ExcelAutoExport, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Autoexport_to_Excel}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Autoexport_to_Excel}" />
                         <settings:CheckboxSetting IsOn="{Binding JsonAutoExport, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.SystemTray_Autoexport_to_Json}" />
+                                                  SettingName="{DynamicResource NativeText_SystemTray_Autoexport_to_Json}" />
                         <settings:ValueSetting Value="{Binding ExcelCmaSeconds, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.SystemTray_ExcelCMADPSSeconds}"
+                                               SettingName="{DynamicResource NativeText_SystemTray_ExcelCMADPSSeconds}"
                                                Min="1"
                                                Max="60" />
                     </StackPanel>
@@ -592,13 +592,13 @@
                 <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Hotkeys}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_C15F1530D219}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
                     <StackPanel MaxWidth="500">
                         <settings:CheckboxSetting IsOn="{Binding RemoveAltEnter, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.RemoveTeraAltEnterHotkey}" />
+                                                  SettingName="{DynamicResource NativeText_RemoveTeraAltEnterHotkey}" />
                         <settings:CheckboxSetting IsOn="{Binding FormatPasteString, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.FormatPasteString}" />
+                                                  SettingName="{DynamicResource NativeText_FormatPasteString}" />
                         <settings:CheckboxSetting IsOn="{Binding DisableIngameChatPaste, Mode=TwoWay}"
-                                                  SettingName="{x:Static lang:LP.NoPaste}" />
+                                                  SettingName="{DynamicResource NativeText_NoPaste}" />
                         <settings:ValueSetting Value="{Binding PasteDelay, Mode=TwoWay}"
-                                               SettingName="{x:Static lang:LP.DelayToWaitPasting}" Min="0" Max="600" />
+                                               SettingName="{DynamicResource NativeText_DelayToWaitPasting}" Min="0" Max="600" />
                         <Separator Opacity=".2" />
 
                         <settings:HotkeySetting SettingName="{DynamicResource ModernText_73EC388AA484}"

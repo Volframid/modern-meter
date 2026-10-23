@@ -87,7 +87,7 @@
     <sys:String x:Key="ModernText_59ADB3BA2C4F">Change map or relog after resuming meter</sys:String>
     <sys:String x:Key="ModernText_15572DD76A17">UI language</sys:String>
     <sys:String x:Key="ModernText_23CF5192CE0A">Automatic (Windows)</sys:String>
-    <sys:String x:Key="ModernText_1EBAE34C0C33">Restart Modern Meter to apply the interface language.</sys:String>
+    <sys:String x:Key="ModernText_1EBAE34C0C33">Language changes apply immediately.</sys:String>
     <sys:String x:Key="ModernText_1634BAF6D348">In combat</sys:String>
     <sys:String x:Key="ModernText_501CB5EE5DE2">Out of combat</sys:String>
     <sys:String x:Key="ModernText_131D201B9380">Party </sys:String>
