@@ -22,6 +22,32 @@ For module-manager installation, use the module descriptor at https://raw.github
 
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.
 
+## Screenshots
+
+The actual Modern Meter 1.0.0 interface, shown with fictional player names and example combat data.
+
+### Compact overlay
+
+![Compact Modern Meter overlay with player DPS, critical rates, deaths and combat timer](docs/screenshots/compact-meter.png)
+
+### Encounter overview
+
+![Modern Meter encounter overview with party DPS and player statistics](docs/screenshots/encounter-overview.png)
+
+<details>
+<summary>Appearance and color settings</summary>
+
+![Appearance settings with opacity, scale, visibility controls and labeled color pickers](docs/screenshots/appearance-settings.png)
+
+</details>
+
+<details>
+<summary>Metric layout for damage dealers, tanks and healers</summary>
+
+![Configurable metric slots, role previews and separate role colors](docs/screenshots/metric-layout.png)
+
+</details>
+
 ## Uploads and personal settings
 
 Fresh installations have empty upload username and authentication-token fields, with uploading disabled. The Asura upload, whitelist and glyph service addresses are prefilled. Enter your own credentials to enable uploads.
