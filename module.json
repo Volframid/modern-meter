@@ -1,0 +1,21 @@
+{
+  "name": "modern-meter",
+  "version": "1.0.0",
+  "author": "Modern Meter contributors; based on Shinra Meter",
+  "description": "Modern combat meter with compact DPS, encounter analysis and notifications.",
+  "servers": [
+    "https://raw.githubusercontent.com/Volframid/modern-meter/main/"
+  ],
+  "supportUrl": "https://github.com/Volframid/modern-meter/issues",
+  "disableAutoUpdate": false,
+  "keywords": [
+    "client"
+  ],
+  "options": {
+    "cliName": "modern-meter",
+    "guiName": "Modern Meter"
+  },
+  "dependencies": {
+    "external-interface": "https://raw.githubusercontent.com/Foglio1024/external-interface/master/module.json"
+  }
+}

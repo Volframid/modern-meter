@@ -1,0 +1,21 @@
+<UserControl x:Class="DamageMeter.UI.Windows.ColorSetting"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="clr-namespace:DamageMeter.UI.Windows" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+ <UserControl.Resources><ResourceDictionary Source="../Controls/ColorPickerStyle.xaml"/></UserControl.Resources>
+ <Border Background="{DynamicResource ModernCard}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,8,8" MinWidth="140">
+  <StackPanel>
+   <TextBlock x:Name="DpsColor" Text="{Binding SettingName, RelativeSource={RelativeSource AncestorType=local:ColorSetting}}" Foreground="{DynamicResource ModernText}" FontWeight="SemiBold" Margin="0,0,0,10"/>
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="44"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <Border Width="38" Height="38" CornerRadius="6" BorderBrush="#607D879B" BorderThickness="1" HorizontalAlignment="Left">
+     <Border.Background><SolidColorBrush Color="{Binding SelectedColor, RelativeSource={RelativeSource AncestorType=local:ColorSetting}}"/></Border.Background>
+     <xctk:ColorPicker x:Name="DpsColorSelecter" DisplayColorAndName="False" ShowDropDownButton="False" Background="Transparent" BorderThickness="0" ColorMode="ColorCanvas" ToolTip="{DynamicResource ModernText_AC64B397D6DC}" SelectedColor="{Binding SelectedColor, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=local:ColorSetting}}"/>
+    </Border>
+    <TextBlock Grid.Column="1" x:Name="ColorCode" Text="{Binding SelectedColor, RelativeSource={RelativeSource AncestorType=local:ColorSetting}}" Foreground="{DynamicResource ModernMuted}" FontFamily="Consolas" FontSize="11" VerticalAlignment="Center"/>
+   </Grid>
+   <Grid Margin="0,10,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="30"/></Grid.ColumnDefinitions>
+    <Button x:Name="ChooseColorButton" Click="ChooseColor" Content="{DynamicResource ModernText_AC64B397D6DC}" Style="{StaticResource ModernButton}" Padding="4,6" FontSize="11"/>
+    <Button Grid.Column="1" x:Name="ResetButton" ToolTip="{DynamicResource ModernText_DAEE7606B339}" Style="{StaticResource ModernButton}" Margin="4,0,0,0" Padding="4" Command="{Binding ResetCommand, RelativeSource={RelativeSource AncestorType=local:ColorSetting}}"><Path Data="{StaticResource Svg.Reset}" Width="13" Height="13" Stretch="Uniform" Fill="{DynamicResource ModernMuted}"/></Button>
+   </Grid>
+  </StackPanel>
+ </Border>
+</UserControl>

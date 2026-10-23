@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window>
+  <scale>1</scale><ui_language>Auto</ui_language><language>Auto</language>
+  <capture_mode>Toolbox</capture_mode><autoupdate>false</autoupdate>
+  <allow_transparency>true</allow_transparency><topmost>true</topmost>
+  <number_of_players_displayed>5</number_of_players_displayed><updates_per_second>4</updates_per_second>
+  <opacity><mainWindow>55</mainWindow><otherWindow>100</otherWindow></opacity>
+  <enable_chat_and_notifications>true</enable_chat_and_notifications>
+  <realtime_graph><enabled>false</enabled><animated>false</animated><displayed_interval>0</displayed_interval><cma_seconds>10</cma_seconds><graph_mode>CMA</graph_mode></realtime_graph>
+  <metrics>
+    <dps_metrics><metric>Dps</metric><metric>DamagePerc</metric><metric>CritRate</metric><metric>Deaths</metric><metric>None</metric></dps_metrics>
+    <tank_metrics><metric>Dps</metric><metric>DamagePerc</metric><metric>CritRate</metric><metric>Deaths</metric><metric>None</metric></tank_metrics>
+    <healer_metrics><metric>Dps</metric><metric>DamagePerc</metric><metric>HealCritRate</metric><metric>Deaths</metric><metric>None</metric></healer_metrics>
+  </metrics>
+  <dps_servers><server>
+    <username></username><token></token><enabled>false</enabled>
+    <dps_url>https://api.teralogs.com/v2/asura/upload</dps_url>
+    <allowed_area_url>https://api.teralogs.com/v2/asura/whitelist</allowed_area_url>
+    <glyph_url>https://api.teralogs.com/v2/asura/glyphs</glyph_url>
+  </server><blacklist /></dps_servers>
+</window>

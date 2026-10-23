@@ -1,0 +1,861 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MainWindow_Do_you_want_to_close_the_application" xml:space="preserve">
+    <value>Вы хотите закрыть приложение?</value>
+  </data>
+  <data name="MainWindow_Close_Shinra_Meter_V" xml:space="preserve">
+    <value>Закрыть Shinra Meter V</value>
+  </data>
+  <data name="MainWindow_Only_boss" xml:space="preserve">
+    <value>Только босс</value>
+  </data>
+  <data name="MainWindow_Fatal_error" xml:space="preserve">
+    <value>Фатальная ошибка, подробности в файле error.log.</value>
+  </data>
+  <data name="MainWindow_Boss_Adds" xml:space="preserve">
+    <value>Босс + мобы</value>
+  </data>
+  <data name="SystemTray_before_crash" xml:space="preserve">
+    <value>до вылета</value>
+  </data>
+  <data name="SystemTray_Packet_waiting" xml:space="preserve">
+    <value>Пакеты, ожидающие обработки</value>
+  </data>
+  <data name="SystemTray_Export_current_to_Excel" xml:space="preserve">
+    <value>Сохранить в Excel</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Сброс</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="SystemTray_Wiki" xml:space="preserve">
+    <value>Wiki</value>
+  </data>
+  <data name="SystemTray_Patch_note" xml:space="preserve">
+    <value>История изменений</value>
+  </data>
+  <data name="SystemTray_Report_issue" xml:space="preserve">
+    <value>Сообщить об ошибке</value>
+  </data>
+  <data name="SystemTray_Discord" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="SystemTray_Autoexport_to_Excel" xml:space="preserve">
+    <value>Автоэкспорт в Excel</value>
+  </data>
+  <data name="SystemTray_Count_only_bosses" xml:space="preserve">
+    <value>Считать только боссов</value>
+  </data>
+  <data name="SystemTray_Detect_bosses_by_HP_bar" xml:space="preserve">
+    <value>Определять боссов по полоске здоровья (игнорировать базу)</value>
+  </data>
+  <data name="SystemTray_Site_export" xml:space="preserve">
+    <value>Выгрузка на сайт</value>
+  </data>
+  <data name="SystemTray_Count_only_party_members" xml:space="preserve">
+    <value>Считать только членов пати</value>
+  </data>
+  <data name="SystemTray_Stay_topmost" xml:space="preserve">
+    <value>Поверх всех окон</value>
+  </data>
+  <data name="SystemTray_Click_throu" xml:space="preserve">
+    <value>Пропускать клик мышки сквозь окна</value>
+  </data>
+  <data name="SystemTray_Invisible_when_no_stats" xml:space="preserve">
+    <value>Прятать окно когда нет статистики</value>
+  </data>
+  <data name="SystemTray_Show_always" xml:space="preserve">
+    <value>Показывать при неактивной тере</value>
+  </data>
+  <data name="SystemTray_Links" xml:space="preserve">
+    <value>Ссылки</value>
+  </data>
+  <data name="SystemTray_Config" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SystemTray_Action" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="SystemTray_Performance_information" xml:space="preserve">
+    <value>Очередь сообщений</value>
+  </data>
+  <data name="App_Unable_to_contact_update_server" xml:space="preserve">
+    <value>Ошибка доступа к серверу обновлений, попробуйте позже, подробная информация в error.log</value>
+  </data>
+  <data name="App_Update_Available" xml:space="preserve">
+    <value>Доступно обновление</value>
+  </data>
+  <data name="App_Do_you_want_to_update" xml:space="preserve">
+    <value>Обновить приложение?</value>
+  </data>
+  <data name="PerSecond" xml:space="preserve">
+    <value>/с</value>
+  </data>
+  <data name="Individual_dps" xml:space="preserve">
+    <value>Персональный dps</value>
+  </data>
+  <data name="Fight_Duration" xml:space="preserve">
+    <value>Время боя</value>
+  </data>
+  <data name="Damage_done" xml:space="preserve">
+    <value>Нанесено урона</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>с</value>
+  </data>
+  <data name="Dot" xml:space="preserve">
+    <value>ДОТ</value>
+  </data>
+  <data name="Chained" xml:space="preserve">
+    <value>в цепочке</value>
+  </data>
+  <data name="Critical" xml:space="preserve">
+    <value>Крит</value>
+  </data>
+  <data name="White" xml:space="preserve">
+    <value>Некрит</value>
+  </data>
+  <data name="Archer" xml:space="preserve">
+    <value>Лучник</value>
+  </data>
+  <data name="Berserker" xml:space="preserve">
+    <value>Берсерк</value>
+  </data>
+  <data name="Brawler" xml:space="preserve">
+    <value>Крушитель</value>
+  </data>
+  <data name="Gunner" xml:space="preserve">
+    <value>Инженер</value>
+  </data>
+  <data name="Lancer" xml:space="preserve">
+    <value>Рыцарь</value>
+  </data>
+  <data name="Mystic" xml:space="preserve">
+    <value>Мистик</value>
+  </data>
+  <data name="Ninja" xml:space="preserve">
+    <value>Шиноби</value>
+  </data>
+  <data name="Priest" xml:space="preserve">
+    <value>Жрец</value>
+  </data>
+  <data name="Reaper" xml:space="preserve">
+    <value>Жнец</value>
+  </data>
+  <data name="Slayer" xml:space="preserve">
+    <value>Убийца</value>
+  </data>
+  <data name="Sorcerer" xml:space="preserve">
+    <value>Маг</value>
+  </data>
+  <data name="Warrior" xml:space="preserve">
+    <value>Воин</value>
+  </data>
+  <data name="Common" xml:space="preserve">
+    <value>Общее</value>
+  </data>
+  <data name="Your_computer_is_too_slow" xml:space="preserve">
+    <value>Ваш компьютер слишком медленный для этого дпсметра,
+не успеваю анализировать пакеты с достаточной скоростью.
+Сброс и приостановка сбора статистики до перехода на другую карту или релога.</value>
+  </data>
+  <data name="Your_hotkeys_xml_file_is_invalid" xml:space="preserve">
+    <value>Файл hotkeys.xml некоректен.</value>
+  </data>
+  <data name="Unable_to_get_key_from_string" xml:space="preserve">
+    <value>Не получается получить клавишу по названию</value>
+  </data>
+  <data name="RegisterHotKeyError" xml:space="preserve">
+    <value>Не получилось зарегистрировать горячую клавишу.</value>
+  </data>
+  <data name="AlreadyInUse" xml:space="preserve">
+    <value> скорее всего уже занята.</value>
+  </data>
+  <data name="TeraDpsIoApiError" xml:space="preserve">
+    <value>Ошибка сервера или превышено время ожидания.</value>
+  </data>
+  <data name="TotalEncounter" xml:space="preserve">
+    <value>Всего</value>
+  </data>
+  <data name="SystemTray_No_server" xml:space="preserve">
+    <value>Нет подключения к серверу</value>
+  </data>
+  <data name="Deaths" xml:space="preserve">
+    <value>Смерти</value>
+  </data>
+  <data name="Deaths_Tooltip" xml:space="preserve">
+    <value>Количество смертей</value>
+  </data>
+  <data name="Death_Time" xml:space="preserve">
+    <value>Время смерти</value>
+  </data>
+  <data name="Death_Time_Tooltip" xml:space="preserve">
+    <value>Время проведенное трупом</value>
+  </data>
+  <data name="Aggro" xml:space="preserve">
+    <value>Аггро</value>
+  </data>
+  <data name="Aggro_Tooltip" xml:space="preserve">
+    <value>Количество перехватов агрессии</value>
+  </data>
+  <data name="Aggro_Time" xml:space="preserve">
+    <value>Время аггро</value>
+  </data>
+  <data name="Aggro_Time_Tooltip" xml:space="preserve">
+    <value>Время удержания агрессии босса</value>
+  </data>
+  <data name="Dps" xml:space="preserve">
+    <value>ДПС</value>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Хил</value>
+  </data>
+  <data name="Mana" xml:space="preserve">
+    <value>Мана</value>
+  </data>
+  <data name="Buff" xml:space="preserve">
+    <value>Баффы</value>
+  </data>
+  <data name="SkillDealt" xml:space="preserve">
+    <value>Исходящие умения</value>
+  </data>
+  <data name="SkillReceived" xml:space="preserve">
+    <value>Полученные умения</value>
+  </data>
+  <data name="SkillName" xml:space="preserve">
+    <value>Название скила</value>
+  </data>
+  <data name="CritPercent" xml:space="preserve">
+    <value>% Крита</value>
+  </data>
+  <data name="Damage" xml:space="preserve">
+    <value>Урон</value>
+  </data>
+  <data name="DamagePercent" xml:space="preserve">
+    <value>% Урона</value>
+  </data>
+  <data name="AverageCrit" xml:space="preserve">
+    <value>Сред крит</value>
+  </data>
+  <data name="MaxCrit" xml:space="preserve">
+    <value>Макс крит</value>
+  </data>
+  <data name="AvgWhite" xml:space="preserve">
+    <value>Сред некрит</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Средний</value>
+  </data>
+  <data name="Hits" xml:space="preserve">
+    <value>Ударов</value>
+  </data>
+  <data name="Crits" xml:space="preserve">
+    <value>Критов</value>
+  </data>
+  <data name="MaxWhite" xml:space="preserve">
+    <value>Макс некрит</value>
+  </data>
+  <data name="Class" xml:space="preserve">
+    <value>Класс</value>
+  </data>
+  <data name="EffectTime" xml:space="preserve">
+    <value>Время эфф.</value>
+  </data>
+  <data name="Fight" xml:space="preserve">
+    <value>Бой</value>
+  </data>
+  <data name="FightPercent" xml:space="preserve">
+    <value>% Боя</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Boss" xml:space="preserve">
+    <value>Босс</value>
+  </data>
+  <data name="HealCritPercent" xml:space="preserve">
+    <value>% Крита хила</value>
+  </data>
+  <data name="HitsTaken" xml:space="preserve">
+    <value>Ударов получено</value>
+  </data>
+  <data name="DamgeTaken" xml:space="preserve">
+    <value>Урона получено</value>
+  </data>
+  <data name="BossHP" xml:space="preserve">
+    <value>HP Босса</value>
+  </data>
+  <data name="AvgDPS" xml:space="preserve">
+    <value>Сред ДПС</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="MinCrit" xml:space="preserve">
+    <value>Мин крит</value>
+  </data>
+  <data name="Enrage" xml:space="preserve">
+    <value>Ярость</value>
+  </data>
+  <data name="Slaying" xml:space="preserve">
+    <value>Истребление</value>
+  </data>
+  <data name="SlayingTooltip" xml:space="preserve">
+    <value>Если одет кристалл 'истребления' - он работает пока активен этот статус.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Сзади</value>
+  </data>
+  <data name="Side" xml:space="preserve">
+    <value>Сбоку</value>
+  </data>
+  <data name="Front" xml:space="preserve">
+    <value>Спереди</value>
+  </data>
+  <data name="Pet" xml:space="preserve">
+    <value>Помошник</value>
+  </data>
+  <data name="Hot" xml:space="preserve">
+    <value>ХОТ</value>
+  </data>
+  <data name="NumberPlayersDisplayed" xml:space="preserve">
+    <value>Количество отображаемых игроков</value>
+  </data>
+  <data name="Chat" xml:space="preserve">
+    <value>Чат</value>
+  </data>
+  <data name="ApplyToYourParty" xml:space="preserve">
+    <value>просится в пати</value>
+  </data>
+  <data name="Lvl" xml:space="preserve">
+    <value>ур.</value>
+  </data>
+  <data name="OfferedPrice" xml:space="preserve">
+    <value>Предложенная цена</value>
+  </data>
+  <data name="PartyMatchingSuccess" xml:space="preserve">
+    <value>Завершен подбор подземелья</value>
+  </data>
+  <data name="SellerPrice" xml:space="preserve">
+    <value>Цена продавца</value>
+  </data>
+  <data name="Trading" xml:space="preserve">
+    <value>Торговля</value>
+  </data>
+  <data name="Whisper" xml:space="preserve">
+    <value>Личное сообщение</value>
+  </data>
+  <data name="DelayToWaitPasting" xml:space="preserve">
+    <value>Задержка нажатия при вставке</value>
+  </data>
+  <data name="PopupStayActiveForXms" xml:space="preserve">
+    <value>Время показа оповещения (мс)</value>
+  </data>
+  <data name="SoundFilename" xml:space="preserve">
+    <value>Имя файла оповещения</value>
+  </data>
+  <data name="SoundStayActiveForXms" xml:space="preserve">
+    <value>Время звукового оповещения (мс)</value>
+  </data>
+  <data name="SoundVolume" xml:space="preserve">
+    <value>Громкость</value>
+  </data>
+  <data name="TestSound" xml:space="preserve">
+    <value>Проверка звука</value>
+  </data>
+  <data name="WhisperColor" xml:space="preserve">
+    <value>Цвет личного сообщения</value>
+  </data>
+  <data name="AllianceColor" xml:space="preserve">
+    <value>Цвет чата альянса</value>
+  </data>
+  <data name="AreaColor" xml:space="preserve">
+    <value>Цвет чата локации</value>
+  </data>
+  <data name="GeneralColor" xml:space="preserve">
+    <value>Цвет общего чата</value>
+  </data>
+  <data name="GroupColor" xml:space="preserve">
+    <value>Цвет чата группы</value>
+  </data>
+  <data name="GuildColor" xml:space="preserve">
+    <value>Цвет чата гильдии</value>
+  </data>
+  <data name="RaidColor" xml:space="preserve">
+    <value>Цвет чата рейда</value>
+  </data>
+  <data name="SayColor" xml:space="preserve">
+    <value>Цвет чата рядом</value>
+  </data>
+  <data name="TradingColor" xml:space="preserve">
+    <value>Цвет торгового чата</value>
+  </data>
+  <data name="EmotesColor" xml:space="preserve">
+    <value>Цвет чата эмоций</value>
+  </data>
+  <data name="PrivateChannelColor" xml:space="preserve">
+    <value>Цвет приватного канала чата</value>
+  </data>
+  <data name="RemoveTeraAltEnterHotkey" xml:space="preserve">
+    <value>Отключить комбинацию Alt+Enter в Tera</value>
+  </data>
+  <data name="ContactTry" xml:space="preserve">
+    <value>Что-то требует вашего внимания</value>
+  </data>
+  <data name="PartyInvite" xml:space="preserve">
+    <value>Приглашение в группу</value>
+  </data>
+  <data name="EnableChat" xml:space="preserve">
+    <value>Включить функции чата и оповещения</value>
+  </data>
+  <data name="CopyInspect" xml:space="preserve">
+    <value>Копировать "/inspect Имя" при запросе вступления в пати</value>
+  </data>
+  <data name="UploadGlyphBuild" xml:space="preserve">
+    <value>Загрузить глиф билд</value>
+  </data>
+  <data name="No_active_quest" xml:space="preserve">
+    <value>Нет активных заданий.</value>
+  </data>
+  <data name="Quests_status" xml:space="preserve">
+    <value>Статус выполнения заданий: </value>
+  </data>
+  <data name="NoCrystalBind" xml:space="preserve">
+    <value>Отсутствует хранитель кристалла.</value>
+  </data>
+  <data name="NotifyCB" xml:space="preserve">
+    <value>Оповещение о хранителях кристаллов</value>
+  </data>
+  <data name="CombatReadyCheck" xml:space="preserve">
+    <value>Проверка готовности команды</value>
+  </data>
+  <data name="JoyOfPartying" xml:space="preserve">
+    <value>Сила в единстве 100%</value>
+  </data>
+  <data name="ServerOverrides" xml:space="preserve">
+    <value>###########################################################
+# Добавьте дополнительные адреса серверов в этот файл
+# (нужно только для тех VPN/proxy, которые
+#  не поддерживаются "из коробки")
+#
+# Формат строки файла:IP Регион Имя сервера
+#
+# Например:
+# 111.22.33.44 NA VPN Server 1
+#
+# Список возможных регионов: EU, NA, RU, KR, KR-PTS, TW, THA, JP, JP-C
+#
+# Строки, начинающиеся с '#' игнорируются
+# Пропишите сервера ниже следующей линии
+###########################################################</value>
+  </data>
+  <data name="SystemTray_Export_current_to_Site" xml:space="preserve">
+    <value>Выгрузить на сайт</value>
+  </data>
+  <data name="FormatPasteString" xml:space="preserve">
+    <value>Форматировать таблицу для вставки в чат</value>
+  </data>
+  <data name="SoundConsoleBeepFallback" xml:space="preserve">
+    <value>Использовать пищалку вместо MP3</value>
+  </data>
+  <data name="CMADPS" xml:space="preserve">
+    <value>c скольз.сред. ДПС</value>
+  </data>
+  <data name="SystemTray_ExcelCMADPSSeconds" xml:space="preserve">
+    <value>Скользящее среднее в Excel расчитывать для X сек.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="events_common" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ru\events-common.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_archer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-archer.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_berserker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-berserker.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_brawler" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-brawler.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_gunner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-gunner.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_lancer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-lancer.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_mystic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ru\events-mystic.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_ninja" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-ninja.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_priest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-priest.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_reaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-reaper.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_slayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-slayer.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_sorcerer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-sorcerer.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="events_warrior" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ru\events-warrior.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="DisablePartyEvents" xml:space="preserve">
+    <value>Отключить оповещения про группу</value>
+  </data>
+  <data name="ShowAfkEventsIngame" xml:space="preserve">
+    <value>Показывать общие оповещения при активной игре</value>
+  </data>
+  <data name="VanguardCredits" xml:space="preserve">
+    <value>Репутация Авангарда близка к максимуму:</value>
+  </data>
+  <data name="OpenChatBox" xml:space="preserve">
+    <value>Открыть окно чата</value>
+  </data>
+  <data name="MuteSound" xml:space="preserve">
+    <value>Выключить звук</value>
+  </data>
+  <data name="ShowSelfOnTop" xml:space="preserve">
+    <value>Показывать себя в верхней строчке</value>
+  </data>
+  <data name="IdleResetTimeout" xml:space="preserve">
+    <value>Сброс если вне боя больше X сек (0=не сбрасывать)</value>
+  </data>
+  <data name="CritDamagePercent" xml:space="preserve">
+    <value>% Урона критами</value>
+  </data>
+  <data name="Valkyrie" xml:space="preserve">
+    <value>Валькирия</value>
+  </data>
+  <data name="ShowBossGage" xml:space="preserve">
+    <value>Показать HP босса</value>
+  </data>
+  <data name="Counter" xml:space="preserve">
+    <value>Использ. умения</value>
+  </data>
+  <data name="NoPaste" xml:space="preserve">
+    <value>Отключить вставку в игровой чат</value>
+  </data>
+  <data name="NoAbnormalsInHUD" xml:space="preserve">
+    <value>Отключить иконки под полоской HP</value>
+  </data>
+  <data name="EnableOverlay" xml:space="preserve">
+    <value>Включить оверлей</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="DpsUploadUrl" xml:space="preserve">
+    <value>Адрес загрузки DPS</value>
+  </data>
+  <data name="AllowedAreaUrl" xml:space="preserve">
+    <value>Адрес списка боссов</value>
+  </data>
+  <data name="GlyphUploadURL" xml:space="preserve">
+    <value>Адрес загруки глифбилда</value>
+  </data>
+  <data name="Bad_server_url" xml:space="preserve">
+    <value>Неправильный адрес сервера</value>
+  </data>
+  <data name="RemoveDpsServer" xml:space="preserve">
+    <value>Удалить сервер статистики</value>
+  </data>
+  <data name="AddDpsServer" xml:space="preserve">
+    <value>Добавить сервер статистики</value>
+  </data>
+  <data name="Display_only_boss_hit_by_meter_user" xml:space="preserve">
+    <value>Переключать боссов только при атаке пользователем метра</value>
+  </data>
+  <data name="Unknown_client_version" xml:space="preserve">
+    <value>Неизвестная версия клиента, для продолжения работы необходимо обновление: </value>
+  </data>
+  <data name="Blur_player_names" xml:space="preserve">
+    <value>Скрыть имена игроков</value>
+  </data>
+  <data name="HPM" xml:space="preserve">
+    <value>Удар/мин</value>
+  </data>
+  <data name="EnableRp" xml:space="preserve">
+    <value>Включить Discord Rich Presence</value>
+  </data>
+  <data name="RichPresenceShowLocation" xml:space="preserve">
+    <value>Показывать локацию</value>
+  </data>
+  <data name="RichPresenceShowCharacter" xml:space="preserve">
+    <value>Показывать персонажа</value>
+  </data>
+  <data name="RichPresenceShowStatus" xml:space="preserve">
+    <value>Показывать статус</value>
+  </data>
+  <data name="RichPresenceShowParty" xml:space="preserve">
+    <value>Показывать группу</value>
+  </data>
+  <data name="RpStatusPlaying" xml:space="preserve">
+    <value>Играет</value>
+  </data>
+  <data name="RpStatusIdle" xml:space="preserve">
+    <value>Бездействует</value>
+  </data>
+  <data name="RpStatusFight" xml:space="preserve">
+    <value>Дерётся</value>
+  </data>
+  <data name="RpStatusLfg" xml:space="preserve">
+    <value>Ищет группу</value>
+  </data>
+  <data name="RpStatusCharSelect" xml:space="preserve">
+    <value>Выбор персонажа</value>
+  </data>
+  <data name="RpStatusDungeonMatch" xml:space="preserve">
+    <value>Ищет данж</value>
+  </data>
+  <data name="RpStatusBattlegroundMatch" xml:space="preserve">
+    <value>Ищет арену</value>
+  </data>
+  <data name="RpPartySolo" xml:space="preserve">
+    <value>Соло</value>
+  </data>
+  <data name="RpPartyParty" xml:space="preserve">
+    <value>В группе</value>
+  </data>
+  <data name="RpPartyRaid" xml:space="preserve">
+    <value>В рейде</value>
+  </data>
+  <data name="RpPartyBg" xml:space="preserve">
+    <value>Ожидает BG</value>
+  </data>
+  <data name="RpPartyQueue" xml:space="preserve">
+    <value>IMS</value>
+  </data>
+  <data name="RpLevel" xml:space="preserve">
+    <value>Ур</value>
+  </data>
+  <data name="RpMultipleEnemies" xml:space="preserve">
+    <value>Разные</value>
+  </data>
+  <data name="Display_timer_aggro_or_firsthit" xml:space="preserve">
+    <value>Таймер на основе агрессии монстра</value>
+  </data>
+  <data name="SystemTray_Use_Npcap" xml:space="preserve">
+    <value>Использовать Npcap (необходим перезапуск)</value>
+  </data>
+  <data name="SystemTray_Export_current_to_Json" xml:space="preserve">
+    <value>Сохранить в JSON</value>
+  </data>
+  <data name="SystemTray_Autoexport_to_Json" xml:space="preserve">
+    <value>Автоэкспорт в JSON</value>
+  </data>
+  <data name="ExportCurrent" xml:space="preserve">
+    <value>Текущий бой</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Пауза</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Продолжить</value>
+  </data>
+  <data name="SettingsTab_ChatColors" xml:space="preserve">
+    <value>Цвета чата</value>
+  </data>
+  <data name="SettingsTab_Detection" xml:space="preserve">
+    <value>Настройки распознавания</value>
+  </data>
+  <data name="SettingsTab_DiscordRP" xml:space="preserve">
+    <value>Интеграция с Discord</value>
+  </data>
+  <data name="SettingsTab_Events" xml:space="preserve">
+    <value>Оповещения</value>
+  </data>
+  <data name="SettingsTab_Graph" xml:space="preserve">
+    <value>График ДПС</value>
+  </data>
+  <data name="SettingsTab_Home" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="SettingsTab_HPBar" xml:space="preserve">
+    <value>Полоска HP</value>
+  </data>
+  <data name="SettingsTab_Input" xml:space="preserve">
+    <value>Горячие клавиши и ввод</value>
+  </data>
+  <data name="SettingsTab_Misc" xml:space="preserve">
+    <value>Прочие настройки</value>
+  </data>
+  <data name="SettingsTab_Servers" xml:space="preserve">
+    <value>Настройки серверов</value>
+  </data>
+  <data name="SettingsTab_TTS" xml:space="preserve">
+    <value>Голосовые сообщения</value>
+  </data>
+  <data name="SettingsTab_UI" xml:space="preserve">
+    <value>Интерфейс</value>
+  </data>
+  <data name="SystemTray_AddServer" xml:space="preserve">
+    <value>Добавить сервер</value>
+  </data>
+  <data name="SystemTray_IgnorePacketsThreshold" xml:space="preserve">
+    <value>Не останавливать анализ при перегрузке.</value>
+  </data>
+  <data name="SystemTray_LowPriority" xml:space="preserve">
+    <value>Пониженный приоритет процесса</value>
+  </data>
+  <data name="SystemTray_MainWindowOpacity" xml:space="preserve">
+    <value>Прозрачность основного окна</value>
+  </data>
+  <data name="SystemTray_OtherWindowOpacity" xml:space="preserve">
+    <value>Прозрачность остальных окон</value>
+  </data>
+  <data name="AutoDisableChatWhenOverloaded" xml:space="preserve">
+    <value>Автоматически выключать при высокой нагрузке</value>
+  </data>
+  <data name="CloseNoConfirm" xml:space="preserve">
+    <value>Закрыть (без подтверждения)</value>
+  </data>
+  <data name="Mot" xml:space="preserve"><value>MOT</value></data>
+  <data name="AuthToken" xml:space="preserve"><value>Ключ авторизации</value></data>
+  <data name="ExportPacketLogs" xml:space="preserve"><value>Экспорт журнала пакетов</value></data>
+  <data name="Time_sync_error" xml:space="preserve"><value>Ошибка синхронизации времени</value></data>
+  <data name="MaxTTSSize" xml:space="preserve"><value>Максимальная длина озвучиваемого текста</value></data>
+  <data name="TTSSizeExceededTruncate" xml:space="preserve"><value>Сокращать текст при превышении лимита</value></data>
+  <data name="UserPaused" xml:space="preserve"><value>Приостановлено пользователем</value></data>
+  <data name="WaitingMapChange" xml:space="preserve"><value>Ожидание смены локации или повторного входа</value></data>
+  <data name="SystemTray_ShowGraph" xml:space="preserve"><value>Показать график в реальном времени</value></data>
+  <data name="EnableRealtimeGraph" xml:space="preserve"><value>Собирать данные графика</value></data>
+  <data name="RealtimeGraphCmaSeconds" xml:space="preserve"><value>Период скользящего среднего (сек.)</value></data>
+  <data name="RealtimeGraphDisplayedInterval" xml:space="preserve"><value>Отображаемый интервал</value></data>
+  <data name="CaptureMode" xml:space="preserve"><value>Способ сбора данных</value></data>
+  <data name="ConnectedTo" xml:space="preserve"><value>Подключено к</value></data>
+  <data name="RealtimeGraphMode" xml:space="preserve"><value>Режим графика</value></data>
+  <data name="RealtimeGraphAnimated" xml:space="preserve"><value>Анимация</value></data>
+  <data name="SettingsTab_Layout" xml:space="preserve"><value>Расположение показателей</value></data>
+  <data name="SystemTray_SnapToBorders" xml:space="preserve"><value>Привязка окон к краям</value></data>
+  <data name="UpdatesPerSecond" xml:space="preserve"><value>Обновлений интерфейса в секунду (влияет на нагрузку)</value></data>
+<data name="events_valkyrie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\en\events-valkyrie.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+</root>

@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:modern="clr-namespace:DamageMeter.UI"
+                    xmlns:converters="clr-namespace:DamageMeter.UI.HUD.Converters"
+                    xmlns:nostrumConv="clr-namespace:Nostrum.Converters;assembly=Nostrum">
+
+    <converters:PlayersDisplayedCountToSizeConverter x:Key="PlayersCountToSize" />
+    <converters:ClassToSvgConverter x:Key="ClassToSvg" />
+    <converters:LoadToColor x:Key="LoadToColor" />
+    <converters:LoadToSvg x:Key="LoadToSvg" 
+                          Ok="{StaticResource Svg.Check}"
+                          Warn="{StaticResource Svg.Exclamation}"
+                          Critical="{StaticResource Svg.Close}"/>
+    <converters:LoadToAngle x:Key="LoadToAngle" />
+    <converters:TransparencyToMarginConverter x:Key="BoolToMargin" />
+    <nostrumConv:RoundedClipConverter x:Key="RoundedClipConverter"/>
+    <modern:ModernEnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+    <modern:ModernMetricLabelConverter x:Key="ModernCritLabel" Prefix="Crit"/>
+    <modern:ModernMetricLabelConverter x:Key="ModernHealCritLabel" Prefix="Heal crit"/>
+
+</ResourceDictionary>

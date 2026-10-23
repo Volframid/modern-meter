@@ -1,0 +1,11 @@
+LOCAL_UPDATES.md
+module.config.json
+resources/config/
+logs/
+*.log
+.modern-ui-pending/
+**/obj*/
+**/bin*/
+*.pdb
+*.user
+.vs/

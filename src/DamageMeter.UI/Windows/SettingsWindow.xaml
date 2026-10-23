@@ -1,0 +1,632 @@
+<Window x:Class="DamageMeter.UI.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DamageMeter.UI.Windows"
+        xmlns:lang="clr-namespace:Lang;assembly=Lang"
+        xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:teraDpsApi="clr-namespace:DamageMeter.TeraDpsApi;assembly=DamageMeter"
+        xmlns:ui="clr-namespace:DamageMeter.UI"
+        xmlns:settingsViews="clr-namespace:DamageMeter.UI.Windows.SettingsViews"
+        xmlns:data="clr-namespace:Data;assembly=Data"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:converters="clr-namespace:DamageMeter.UI.HUD.Converters"
+        Background="{StaticResource DarkBackgroundColor}"
+        WindowStyle="None"
+        UseLayoutRounding="True"
+        WindowStartupLocation="CenterScreen"
+        Closing="OnClosing" KeyDown="OnKeyDown"
+        KeyUp="OnKeyUp"
+        mc:Ignorable="d"
+        FontFamily="Segoe UI" Title="{DynamicResource ModernText_073CE67DF610}" Height="720" Width="960" MinWidth="800" MinHeight="600"
+        d:DataContext="{d:DesignInstance local:SettingsWindowViewModel}">
+    <shell:WindowChrome.WindowChrome><shell:WindowChrome CaptionHeight="32" ResizeBorderThickness="5" GlassFrameThickness="0" CornerRadius="12"/></shell:WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Height" Value="40" />
+        </Style>
+        <Style TargetType="settings:CheckboxSetting" BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
+            <Setter Property="CheckboxSize" Value="14" />
+            <Setter Property="Margin" Value="32 0 0 0" />
+            <Setter Property="CheckBoxColor">
+                <Setter.Value>
+                    <SolidColorBrush x:Name="cb" Color="{Binding SelfColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="settings:ValueSetting">
+            <Setter Property="Height" Value="32" />
+            <Setter Property="SliderColor1">
+                <Setter.Value>
+                    <SolidColorBrush x:Name="c1" Color="{Binding SelfColor}" Opacity=".8" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SliderColor2">
+                <Setter.Value>
+                    <SolidColorBrush x:Name="c2" Color="{Binding SelfColor}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="MetricComboBox" TargetType="ComboBox" BasedOn="{StaticResource ModernCombo}">
+            <Setter Property="ItemsSource" Value="{Binding AvailableMetrics}"/>
+            <Setter Property="MinWidth" Value="90"/><Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="ItemTemplate"><Setter.Value><DataTemplate>
+                <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Converter={StaticResource EnumDescriptionConverter}}"/>
+            </DataTemplate></Setter.Value></Setter>
+        </Style>
+        <DataTemplate x:Key="MockPlayer" DataType="local:MockPlayerViewModel">
+            <Border Background="{DynamicResource ModernCard}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12">
+                <StackPanel>
+                    <Border Width="280" HorizontalAlignment="Left" CornerRadius="6" BorderThickness="1" Margin="0,0,0,12">
+                        <Border.Background><SolidColorBrush Color="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource AncestorType=Window}}"/></Border.Background>
+                        <Border.BorderBrush><SolidColorBrush Color="{Binding DataContext.BorderColor, RelativeSource={RelativeSource AncestorType=Window}}"/></Border.BorderBrush>
+                        <ui:PlayerStatsControl/>
+                    </Border>
+                    <UniformGrid Columns="5">
+                        <StackPanel><TextBlock Text="{DynamicResource ModernText_EBF2B9CF2880}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric1, Mode=TwoWay}"/></StackPanel>
+                        <StackPanel><TextBlock Text="{DynamicResource ModernText_BC23E19E7189}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric2, Mode=TwoWay}"/></StackPanel>
+                        <StackPanel><TextBlock Text="{DynamicResource ModernText_BDCCC708D9B8}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric3, Mode=TwoWay}"/></StackPanel>
+                        <StackPanel><TextBlock Text="{DynamicResource ModernText_EB93D06BC33F}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric4, Mode=TwoWay}"/></StackPanel>
+                        <StackPanel><TextBlock Text="{DynamicResource ModernText_0351452F253E}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric5, Mode=TwoWay}"/></StackPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+    </Window.Resources>
+    <Border CornerRadius="12" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1">
+    <Grid><Grid.RowDefinitions><RowDefinition Height="32"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <Grid Margin="14,0,5,0"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Text="{DynamicResource ModernText_20D54C595F51}" FontSize="10" Foreground="{DynamicResource ModernMuted}" VerticalAlignment="Center"/>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+        <Button Content="−" Click="MinimizeWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_D72E311C4DDA}"/>
+        <Button Content="□" Click="MaximizeWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_AB9616C1C81C}"/>
+        <Button Content="×" Click="CloseWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_6E3EF7DE9A4F}"/>
+      </StackPanel>
+    </Grid><Grid Grid.Row="1">
+
+ <Grid Background="{DynamicResource ModernSurface}" Margin="16">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <DockPanel Margin="8,4,4,22"><StackPanel><TextBlock Text="{DynamicResource ModernText_20D54C595F51}" Style="{StaticResource ModernCaption}" Foreground="{DynamicResource ModernAccent}"/><TextBlock Text="{DynamicResource ModernText_DDD1F0A0EAE4}" Style="{StaticResource ModernHeading}" Margin="0,6,0,0"/></StackPanel><Button Content="{DynamicResource ModernText_F42D8E075820}" Click="CloseWindow" Style="{StaticResource ModernButton}" HorizontalAlignment="Right" VerticalAlignment="Center"/></DockPanel>
+  <Grid Grid.Row="1"><TabControl Style="{StaticResource ModernSidebar}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" SelectedIndex="{Binding SelectedIndex}"
+                        TabStripPlacement="Left" ItemContainerStyle="{StaticResource ModernNavigation}" Padding="20,0,0,0"
+                        Background="Transparent"
+                        Foreground="White"
+                        BorderThickness="0"
+                        
+                        Margin="0"
+                        Visibility="Visible"
+                        VerticalAlignment="Stretch">
+                <!--Home-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Home}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_C910D474DCD7}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel><TextBlock Text="{DynamicResource ModernText_15572DD76A17}" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,6"/><ComboBox ItemsSource="{Binding UiLanguages}" DisplayMemberPath="Label" SelectedValuePath="Code" SelectedValue="{Binding InterfaceLanguage, Mode=TwoWay}" Style="{StaticResource ModernCombo}" Margin="0,0,0,6"/><TextBlock Text="{DynamicResource ModernText_1EBAE34C0C33}" TextWrapping="Wrap" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,14"/><settingsViews:SettingsHomeView
+                        MaxWidth="500" /></StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Detection-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Detection}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_1900B478A586}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+
+                    <StackPanel MaxWidth="500">
+                        <settings:SelectionSetting SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
+                                                   SettingName="{x:Static lang:LP.CaptureMode}"
+                                                   Choices="{x:Static local:SettingsWindowViewModel.CaptureModes}"
+                                                   ChoicesType="{x:Type CaptureMode}" 
+                                                   IsEnabled="{Binding CanChangeCaptureMode}"/>
+                        <settings:CheckboxSetting IsOn="{Binding LowPriority, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_LowPriority}" />
+                        <settings:CheckboxSetting IsOn="{Binding CountOnlyBosses, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Count_only_bosses}" />
+                        <settings:CheckboxSetting IsOn="{Binding DetectBossesByHpBar, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Detect_bosses_by_HP_bar}" />
+                        <settings:CheckboxSetting IsOn="{Binding CountOnlyPartyMembers, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Count_only_party_members}" />
+                        <settings:CheckboxSetting IsOn="{Binding IgnorePacketsThreshold, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_IgnorePacketsThreshold}" />
+                        <settings:ValueSetting Value="{Binding ResetTimeout, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.IdleResetTimeout}" Min="0" Max="600" />
+
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--UI-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.UI}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_3907FA7F8072}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding AggroBasedTimer, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.Display_timer_aggro_or_firsthit}" />
+                        <settings:CheckboxSetting IsOn="{Binding DisplayOnlyBossHitByMeterUser, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.Display_only_boss_hit_by_meter_user}" />
+                        <settings:CheckboxSetting IsOn="{Binding ClickThru, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Click_throu}" />
+                        <settings:CheckboxSetting IsOn="{Binding InvisibleWhenNoStats, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Invisible_when_no_stats}" />
+                        <settings:CheckboxSetting IsOn="{Binding ShowAlways, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Show_always}" />
+                        <settings:CheckboxSetting IsOn="{Binding StayTopmost, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Stay_topmost}" />
+                        <settings:CheckboxSetting IsOn="{Binding SnapToBorders, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_SnapToBorders}" />
+                        <settings:CheckboxSetting IsOn="{Binding ShowSelfOnTop, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.ShowSelfOnTop}" />
+                        <settings:CheckboxSetting IsOn="{Binding FullscreenOverlay, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.EnableOverlay}" IsEnabled="False" 
+                                                  Visibility="Collapsed"/>
+                        <settings:ValueSetting Value="{Binding NumberOfPlayersDisplayed, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.NumberPlayersDisplayed}" Min="1" Max="30" />
+                        <settings:ValueSetting Value="{Binding MainWindowOpacity, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.SystemTray_MainWindowOpacity}"
+                                               Min="0" Max="1" />
+                        <settings:ValueSetting Value="{Binding OtherWindowsOpacity, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.SystemTray_OtherWindowOpacity}"
+                                               Min="0.1" Max="1" />
+                        <settings:ValueSetting Value="{Binding Scale, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0.5" Max="5" />
+                        <!--<settings:ValueSetting Value="{Binding UpdatesPerSecond, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.UpdatesPerSecond}" Min="1" Max="20" />-->
+
+                        <Grid Margin="35 10 0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Separator Grid.Column="0" Opacity=".2" />
+                            <TextBlock Grid.Column="1" Text="{DynamicResource ModernText_88C45D9E526C}" Margin="10 0" Foreground="#3fff" />
+                            <Separator Grid.Column="2" Opacity=".2" />
+                        </Grid>
+                        <UniformGrid Rows="1" Margin="28 0 0 0">
+                            <local:ColorSetting SettingName="{DynamicResource ModernText_EA2B8A878841}"
+                                                SelectedColor="{Binding BackgroundColor, Mode=TwoWay}"
+                                                DefaultColor="{x:Static data:WindowData.DefaultBackgroundColor}" />
+                            <local:ColorSetting SettingName="{DynamicResource ModernText_3B4BDFF339E9}" SelectedColor="{Binding BorderColor, Mode=TwoWay}"
+                                                DefaultColor="{x:Static data:WindowData.DefaultBorderColor}" />
+                            <local:ColorSetting SettingName="{DynamicResource ModernText_64AEE8C6CBD0}" SelectedColor="{Binding SelfColor, Mode=TwoWay}"
+                                                DefaultColor="{x:Static data:WindowData.DefaultPlayerColor}" />
+                        </UniformGrid>
+
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Layout-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Layout}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_A58DA793C725}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel Grid.IsSharedSizeScope="True">
+                        <TextBlock Text="{DynamicResource ModernText_F978CD477527}" Style="{StaticResource ModernHeading}" Margin="0,0,0,6"/>
+                        <TextBlock Text="{DynamicResource ModernText_5937BF91AA5A}" TextWrapping="Wrap" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,18"/>
+                        <TextBlock Text="{DynamicResource ModernText_552833E2E06F}" Style="{StaticResource ModernCaption}" Margin="0,0,0,6"/>
+                        <ContentControl Content="{Binding MockParty[0]}" ContentTemplate="{StaticResource MockPlayer}"/>
+                        <TextBlock Text="{DynamicResource ModernText_CA604D552D44}" Style="{StaticResource ModernCaption}" Margin="0,0,0,6"/>
+                        <ContentControl Content="{Binding MockParty[1]}" ContentTemplate="{StaticResource MockPlayer}"/>
+                        <TextBlock Text="{DynamicResource ModernText_7AD6D8D0CE8E}" Style="{StaticResource ModernCaption}" Margin="0,0,0,6"/>
+                        <ContentControl Content="{Binding MockParty[2]}" ContentTemplate="{StaticResource MockPlayer}"/>
+                        <UniformGrid Rows="1" Margin="0,6,0,0">
+                            <local:ColorSetting SettingName="{DynamicResource ModernText_CAECE7F58FCE}" SelectedColor="{Binding DpsColor, Mode=TwoWay}" DefaultColor="{x:Static data:WindowData.DefaultDpsColor}"/>
+                            <local:ColorSetting SettingName="{DynamicResource ModernText_C0B21FB164DE}" SelectedColor="{Binding TankColor, Mode=TwoWay}" DefaultColor="{x:Static data:WindowData.DefaultTankColor}"/>
+                            <local:ColorSetting SettingName="{DynamicResource ModernText_A491A33C72CD}" SelectedColor="{Binding HealerColor, Mode=TwoWay}" DefaultColor="{x:Static data:WindowData.DefaultHealerColor}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--TTS-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.TTS}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_3565FCC6C17D}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding TtsMessagesTruncate, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.TTSSizeExceededTruncate}" />
+                        <settings:ValueSetting Value="{Binding TtsMaxSize, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.MaxTTSSize}"
+                                               Min="10" Max="200"
+                                               IsEnabled="{Binding TtsMessagesTruncate}" />
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--HP bar-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.HPBar}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_A2D238439AC5}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding BossGageVisible, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.ShowBossGage}" />
+                        <settings:CheckboxSetting IsOn="{Binding BossGageAbnormalsDisabled, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.NoAbnormalsInHUD}"
+                                                  IsEnabled="{Binding BossGageVisible}" />
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Graph-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Graph}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_32AB018FD38A}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding RealtimeGraphEnabled, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.EnableRealtimeGraph}" />
+                        <settings:SelectionSetting SelectedItem="{Binding GraphMode, Mode=TwoWay}"
+                                                   SettingName="{x:Static lang:LP.RealtimeGraphMode}"
+                                                   Choices="{x:Static local:SettingsWindowViewModel.GraphModes}"
+                                                   ChoicesType="{x:Type data:GraphMode}"
+                                                   IsEnabled="{Binding RealtimeGraphEnabled}" />
+
+                        <settings:ValueSetting Value="{Binding RealtimeGraphDisplayedInterval, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.RealtimeGraphDisplayedInterval}" Min="0"
+                                               Max="600"
+                                               IsEnabled="{Binding RealtimeGraphEnabled}" />
+                        <settings:ValueSetting Value="{Binding RealtimeGraphCMAseconds, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.RealtimeGraphCmaSeconds}" Min="1"
+                                               Max="60">
+                            <settings:ValueSetting.Style>
+                                <Style TargetType="settings:ValueSetting"
+                                       BasedOn="{StaticResource {x:Type settings:ValueSetting}}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding GraphMode}" Value="DPS">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RealtimeGraphEnabled}" Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </settings:ValueSetting.Style>
+
+                        </settings:ValueSetting>
+                        <settings:CheckboxSetting IsOn="{Binding RealtimeGraphAnimated, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.RealtimeGraphAnimated}"
+                                                  IsEnabled="{Binding RealtimeGraphEnabled}" />
+
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Servers-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Servers}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_D084236CBCC7}" VerticalAlignment="Center"/></StackPanel></TabItem.Header>
+                    <TabItem.Resources>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="Padding" Value="0 0 0 2" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                        <Grid Background="Transparent" Margin="{TemplateBinding Padding}">
+
+                                            <Rectangle x:Name="hl" Fill="#1fff" Opacity="0" IsHitTestVisible="False" />
+                                            <Rectangle x:Name="alt" Fill="#1779" Opacity="0" IsHitTestVisible="False" />
+                                            <ContentPresenter Margin="0" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <!--<Setter Property="Opacity" TargetName="hl" Value="1" />-->
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Opacity" TargetName="alt" Value="0" />
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Opacity" TargetName="alt" Value="1" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabItem.Resources><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <Grid MaxWidth="500">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListBox ScrollViewer.CanContentScroll="False" ItemsSource="{Binding DpsServers}"
+                                 Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="teraDpsApi:DpsServer">
+                                    <ui:DpsServer />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+                        <Separator Grid.Row="1" VerticalAlignment="Top" Margin="-20 2" Opacity=".2" />
+                        <Button Grid.Row="1" Command="{Binding AddServerCommand}" VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Margin="0 8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Path Fill="White" Stretch="Uniform" Width="16" Height="16"
+                                      Margin="8 0"
+                                      Data="{StaticResource Svg.AddServer}" />
+                                <TextBlock Grid.Column="1" Text="{x:Static lang:LP.SystemTray_AddServer}"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </ScrollViewer></TabItem>
+                <!--Events-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Events}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_8D14F6E72DE8}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding EnableChatAndNotif, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.EnableChat}" />
+                        <settings:CheckboxSetting IsOn="{Binding AutoDisableChatWhenOverloaded, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.AutoDisableChatWhenOverloaded}"
+                                                  IsEnabled="{Binding EnableChatAndNotif}" />
+                        <settings:CheckboxSetting IsOn="{Binding MuteSound, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.MuteSound}"
+                                                  IsEnabled="{Binding EnableChatAndNotif}" />
+                        <settings:CheckboxSetting IsOn="{Binding CopyInspectOnApply, Mode=TwoWay}"
+                                                  IsEnabled="{Binding EnableChatAndNotif}"
+                                                  SettingName="{x:Static lang:LP.CopyInspect}" />
+                        <settings:CheckboxSetting IsOn="{Binding DisablePartyEvents, Mode=TwoWay}"
+                                                  IsEnabled="{Binding EnableChatAndNotif}"
+                                                  SettingName="{x:Static lang:LP.DisablePartyEvents}" />
+                        <settings:CheckboxSetting IsOn="{Binding ShowAfkEventsIngame, Mode=TwoWay}"
+                                                  IsEnabled="{Binding EnableChatAndNotif}"
+                                                  SettingName="{x:Static lang:LP.ShowAfkEventsIngame}" />
+                        <!--<Button Content="{DynamicResource ModernText_B3E227CECFE3}" VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Padding="10 0" Command="{Binding OpenEventEditorCommand}"/>-->
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Rich presence-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Discord}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_053BC65874AD}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding RichPresenceEnable, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.EnableRp}" />
+                        <settings:CheckboxSetting IsOn="{Binding RichPresenceShowLocation, Mode=TwoWay}"
+                                                  IsEnabled="{Binding RichPresenceEnable}"
+                                                  SettingName="{x:Static lang:LP.RichPresenceShowLocation}" />
+                        <settings:CheckboxSetting IsOn="{Binding RichPresenceShowCharacter, Mode=TwoWay}"
+                                                  IsEnabled="{Binding RichPresenceEnable}"
+                                                  SettingName="{x:Static lang:LP.RichPresenceShowCharacter}" />
+                        <settings:CheckboxSetting IsOn="{Binding RichPresenceShowStatus, Mode=TwoWay}"
+                                                  IsEnabled="{Binding RichPresenceEnable}"
+                                                  SettingName="{x:Static lang:LP.RichPresenceShowStatus}" />
+                        <settings:CheckboxSetting IsOn="{Binding RichPresenceShowParty, Mode=TwoWay}"
+                                                  IsEnabled="{Binding RichPresenceEnable}"
+                                                  SettingName="{x:Static lang:LP.RichPresenceShowParty}" />
+
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Chat colors-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.ChatColors}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_CF4A1961814C}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <UniformGrid Columns="2" Margin="23 3 3 3" x:Name="ColorSettingsContainer" VerticalAlignment="Top" MaxWidth="500">
+                        <UniformGrid.Resources>
+                            <ResourceDictionary Source="../Controls/ColorPickerStyle.xaml" />
+                        </UniformGrid.Resources>
+
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="SayColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.SayColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="SayColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatSay}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="EmotesColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.EmotesColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="EmotesColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatEmotes}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="GeneralColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.GeneralColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="GeneralColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatGeneral}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="TradingColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.TradingColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="TradingColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatTrade}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="GroupColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.GroupColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="GroupColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatGroup}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="RaidColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.RaidColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="RaidColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatRaid}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="GuildColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.GuildColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="GuildColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatGuild}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="WhisperColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.WhisperColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="WhisperColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatWhisper}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="AreaColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.AreaColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False" Name="AreaColorSelecter"
+                                              Margin="5" Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatArea}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="PrivateChannelColor" VerticalAlignment="Center"
+                                       Style="{StaticResource DefaultTextStyle}"
+                                       Text="{x:Static lang:LP.PrivateChannelColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                              DisplayColorAndName="False"
+                                              Name="PrivateChannelColorSelecter" Margin="5"
+                                              Grid.Column="0"
+                                              BorderBrush="Transparent" BorderThickness="0"
+                                              Background="Transparent" ShowDropDownButton="False"
+                                              SelectedColor="{Binding ChatPrivate}"
+                                              ColorMode="ColorCanvas" />
+                        </Grid>
+                        <!--<Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1" Name="AllianceColor" VerticalAlignment="Center"
+                                   Style="{StaticResource DefaultTextStyle}"
+                                   Text="{x:Static lang:LP.AllianceColor}" />
+                            <xctk:ColorPicker HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center"
+                                          DisplayColorAndName="False" Name="AllianceColorSelecter"
+                                          Margin="5" Grid.Column="0"
+                                          BorderBrush="Transparent" BorderThickness="0"
+                                          Background="Transparent" ShowDropDownButton="False"
+                                          SelectedColor="{Binding ChatAlliance}"
+                                          ColorMode="ColorCanvas" />
+                        </Grid>-->
+
+                        <UniformGrid.LayoutTransform>
+                            <ScaleTransform ScaleY="1" />
+                        </UniformGrid.LayoutTransform>
+                    </UniformGrid>
+
+                </ScrollViewer></TabItem>
+                <!--Misc-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Misc}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_9F088DBEBD6C}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding ExportPacketLogs, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.ExportPacketLogs}" />
+                        <settings:CheckboxSetting IsOn="{Binding ExcelAutoExport, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Autoexport_to_Excel}" />
+                        <settings:CheckboxSetting IsOn="{Binding JsonAutoExport, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.SystemTray_Autoexport_to_Json}" />
+                        <settings:ValueSetting Value="{Binding ExcelCmaSeconds, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.SystemTray_ExcelCMADPSSeconds}"
+                                               Min="1"
+                                               Max="60" />
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+                <!--Hotkeys-->
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Hotkeys}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_C15F1530D219}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                    <StackPanel MaxWidth="500">
+                        <settings:CheckboxSetting IsOn="{Binding RemoveAltEnter, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.RemoveTeraAltEnterHotkey}" />
+                        <settings:CheckboxSetting IsOn="{Binding FormatPasteString, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.FormatPasteString}" />
+                        <settings:CheckboxSetting IsOn="{Binding DisableIngameChatPaste, Mode=TwoWay}"
+                                                  SettingName="{x:Static lang:LP.NoPaste}" />
+                        <settings:ValueSetting Value="{Binding PasteDelay, Mode=TwoWay}"
+                                               SettingName="{x:Static lang:LP.DelayToWaitPasting}" Min="0" Max="600" />
+                        <Separator Opacity=".2" />
+
+                        <settings:HotkeySetting SettingName="{DynamicResource ModernText_73EC388AA484}"
+                                                Value="{Binding TopmostHotkey, Mode=TwoWay}" />
+                        <settings:HotkeySetting SettingName="{DynamicResource ModernText_2B9FFF840CDD}"
+                                                Value="{Binding ClickThrouHotkey, Mode=TwoWay}" />
+                        <settings:HotkeySetting SettingName="{DynamicResource ModernText_F3380F7B44BD}"
+                                                Value="{Binding PasteHotkey, Mode=TwoWay}" />
+                        <settings:HotkeySetting SettingName="{DynamicResource ModernText_971377354BEE}"
+                                                Value="{Binding ExcelSaveHotkey, Mode=TwoWay}" />
+                        <settings:HotkeySetting SettingName="{DynamicResource ModernText_DAEE7606B339}"
+                                                Value="{Binding ResetHotkey, Mode=TwoWay}" />
+                        <settings:HotkeySetting SettingName="{DynamicResource ModernText_0BB17E6A0EAA}"
+                                                Value="{Binding ResetCurrentHotkey, Mode=TwoWay}" />
+                        <Separator Opacity=".2" />
+                        <ItemsControl ItemsSource="{Binding CopyKeys}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="local:CopyKeyVM">
+                                    <settings:HotkeySetting SettingName="{Binding Name}"
+                                                            Value="{Binding HotKey, Mode=TwoWay}"
+                                                            ToolTip="{Binding Preview}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer></TabItem>
+            </TabControl></Grid>
+  <TextBlock Grid.Row="2" Text="{DynamicResource ModernText_C982EFEADAA4}" Style="{StaticResource ModernCaption}" Margin="10,18,0,2"/>
+ </Grid>
+</Grid></Grid></Border>
+</Window>

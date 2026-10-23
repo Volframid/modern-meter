@@ -1,0 +1,60 @@
+<UserControl x:Class="DamageMeter.UI.PlayerStatsControl"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:l="clr-namespace:DamageMeter.UI" xmlns:data="clr-namespace:Data;assembly=Data" xmlns:palette="clr-namespace:DamageMeter.UI.HUD.Converters" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+ Focusable="False" Height="34" Background="Transparent" MouseLeftButtonDown="DragWindow" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave">
+ <UserControl.Resources>
+  <Style TargetType="l:CompactMetricCell">
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="l:CompactMetricCell">
+    <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+ </UserControl.Resources>
+ <i:Interaction.Triggers><i:EventTrigger EventName="MouseRightButtonDown"><i:InvokeCommandAction Command="{Binding ShowSkillDetailsCommand}" /></i:EventTrigger></i:Interaction.Triggers>
+ <Border BorderBrush="#25343B4C" BorderThickness="0,0,0,1" Padding="6,2">
+  <Grid x:Name="GridStats">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="20"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+   <Grid.RowDefinitions><RowDefinition Height="14"/><RowDefinition Height="2"/><RowDefinition Height="14"/></Grid.RowDefinitions>
+   <Path x:Name="Class" Grid.RowSpan="3" Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Fill="{Binding Role, Converter={palette:RoleToColorConverter}}" Stretch="Uniform" Width="16" Height="16" Margin="0,0,4,0" />
+   <TextBlock x:Name="LabelName"
+                       ToolTip="{Binding FullName}"
+                       Grid.Column="1"
+                       TextTrimming="CharacterEllipsis"
+                       Margin="0 0 10 0"
+                       HorizontalAlignment="Left"
+                       Foreground="{DynamicResource ModernText}">
+                <Run Text="{Binding Name, Mode=OneWay}" />
+                <Run Text="{Binding Level, Mode=OneWay}"
+                     Foreground="#888"
+                     FontSize="11" />
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MetricTextBlockStyle}">
+                        <Setter Property="Effect" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding  Path=DataContext.(l:MainViewModel.BlurPlayerNames), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type l:MainWindow}}}"
+                                Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <BlurEffect x:Name="blurEffect" Radius="7" KernelType="Box" />
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+   <TextBlock x:Name="ExactDps" Grid.Column="2" Text="{Binding GlobalDps}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" HorizontalAlignment="Right" ToolTip="{Binding IndividualDps}" />
+   <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Height="2" Background="#30343B4C" CornerRadius="2"/>
+   <Border x:Name="DpsIndicator" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Height="2" HorizontalAlignment="Left" Background="{Binding Role, Converter={palette:RoleToColorConverter}}" CornerRadius="2">
+    <Border x:Name="IndicatorGovernor" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=l:PlayerStatsControl}, Converter={x:Static l:ModernRowWidthConverter.Instance}}"><Border.LayoutTransform><ScaleTransform ScaleX="{Binding DamageFactor, Mode=OneWay}"/></Border.LayoutTransform></Border>
+   </Border>
+   <l:CompactMetricsPanel x:Name="SecondaryMetrics" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center">
+    <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric1}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>
+    <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric2}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>
+    <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric3}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>
+    <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric4}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>
+    <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric5}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>
+   </l:CompactMetricsPanel>
+  </Grid>
+ </Border>
+</UserControl>

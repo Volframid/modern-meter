@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="DamageMeter.UI.NotificationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:DamageMeter.UI.HUD.Converters"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <converters:IconConverter x:Key="iconConv" />
+        <VisualBrush x:Key="IconOpacityBrush" >
+            <VisualBrush.Visual>
+                <Rectangle Fill="White" Width="60" Height="60">
+                    <Rectangle.RenderTransform>
+                        <RotateTransform Angle="45"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+    </UserControl.Resources>
+    <Grid Margin="5 10 5 5" Width="Auto" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>-->
+
+        <Border Grid.RowSpan="3" Name="b" Grid.ColumnSpan="3"/>
+        <Grid Grid.RowSpan="3" Opacity=".7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="66"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="0 2 0 2" Margin="0 25 0 0" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1 0">
+                        <GradientStop Color="{StaticResource KrBgColorBase}" Offset="1" />
+                        <GradientStop Color="{StaticResource KrBgColorBaseTransp}" Offset="0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1 0">
+                        <GradientStop Color="{StaticResource KrBorderColorBase}" Offset="1" />
+                        <GradientStop Color="{StaticResource KrBorderColorBaseTransp}" Offset="0" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+
+            </Border>
+            <Border BorderThickness="0 2 0 2"  Margin="0 25 0 0" Grid.Column="2">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1 0">
+                        <GradientStop Color="{StaticResource KrBgColorBase}" Offset="0" />
+                        <GradientStop Color="{StaticResource KrBgColorBaseTransp}" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1 0">
+                        <GradientStop Color="{StaticResource KrBorderColorBase}" Offset="0" />
+                        <GradientStop Color="{StaticResource KrBorderColorBaseTransp}" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            <Polygon Points="0 25  33 58  66 25  66 66  0 66" Margin="0 0 0 0" Fill="{StaticResource KrBgColor}"/>
+                <Border Grid.Row="1" Background="{StaticResource KrBgColor}" />
+            </Grid>
+            <Border Grid.Column="1" BorderBrush="{StaticResource KrBorderColor}" BorderThickness="0 0 0 2" />
+            <Path Grid.Column="1" Data="M -4 25  0 25  33 58  66 25  70 25" Margin="0 1 0 0" StrokeThickness="2"
+                  Stroke="{StaticResource KrBorderColor}" />
+        </Grid>
+        <Grid>
+            <Rectangle Width="50" Height="50"  VerticalAlignment="Top" Fill="{StaticResource KrBgColor}" Margin="0" OpacityMask="{StaticResource IconOpacityBrush}"/>
+            <Image Width="50" Height="50" x:Name="img" VerticalAlignment="Top"
+                   Visibility="Hidden"  Margin="0" OpacityMask="{StaticResource IconOpacityBrush}"/>
+            <Rectangle x:Name="ell" OpacityMask="{StaticResource IconOpacityBrush}" Width="50" Height="50" 
+                   Margin="0" Grid.RowSpan="2" Grid.Column="1" StrokeThickness="0" Stroke="#555" VerticalAlignment="Top">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="ellImgBrush" ImageSource="{Binding Icon, Converter={StaticResource iconConv}}"/>
+                </Rectangle.Fill>
+                <Rectangle.Effect>
+                    <DropShadowEffect Opacity=".7" ShadowDepth="2"/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Rectangle Stroke="#dfff" StrokeThickness="2" Width="40" Height="40" 
+                       VerticalAlignment="Top" Grid.RowSpan="3" Margin="5" Name="rect"
+                       RenderTransformOrigin=".5 .5">
+                <Rectangle.RenderTransform>
+                    <RotateTransform Angle="45"/>
+                </Rectangle.RenderTransform>
+                <Rectangle.Effect>
+                    <DropShadowEffect Opacity="1" BlurRadius="15" ShadowDepth="0" Color="#fff"/>
+                </Rectangle.Effect>
+
+            </Rectangle>
+        </Grid>
+        <TextBlock Name="TitleLabel" 
+               Margin="5 8 5 0" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Grid.Row="1" 
+               FontSize="16" 
+                   FontWeight="DemiBold"
+               Foreground="{Binding ElementName=rect, Path=Stroke}"
+               Background="Transparent" 
+               MaxWidth="500" 
+               MinWidth="100" 
+               TextAlignment="Center"
+               Text="{Binding TitleText}"
+               TextWrapping="Wrap"/>
+        <TextBlock Margin="70 5" HorizontalAlignment="Center" Text="{Binding BodyText}" Name="TextBlock" 
+                   Background="Transparent" Foreground="White" FontSize="14" 
+                   Grid.Row="2" MaxWidth="500" TextWrapping="Wrap" TextAlignment="Center" />
+    </Grid>
+</UserControl>

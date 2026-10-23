@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework><AssemblyName>Lang</AssemblyName><RootNamespace>Lang</RootNamespace>
+    <Version>1.0.0</Version><EnableDefaultItems>false</EnableDefaultItems><GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <BaseIntermediateOutputPath>obj-ru/</BaseIntermediateOutputPath><OutputPath>bin-ru/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup><EmbeddedResource Include="LP.ru.resx" /></ItemGroup>
+</Project>

@@ -1,0 +1,93 @@
+<UserControl x:Class="TCC.UI.Controls.Settings.CheckboxSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
+             xmlns:controls="clr-namespace:DamageMeter.UI.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="35" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type CheckBox}" >
+            <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisual}" />
+            <Setter Property="controls:CheckBoxExtensions.Size" Value="{Binding CheckboxSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+ <Border x:Name="Track" Width="36" Height="20" CornerRadius="10" Background="#394256" BorderBrush="#59647B" BorderThickness="1" Cursor="Hand">
+  <Ellipse x:Name="Knob" Width="14" Height="14" Fill="#ECF0FA" Margin="2" HorizontalAlignment="Left"/>
+ </Border>
+ <ControlTemplate.Triggers>
+  <Trigger Property="IsChecked" Value="True"><Setter TargetName="Track" Property="Background" Value="#9B79E8"/><Setter TargetName="Track" Property="BorderBrush" Value="#C9B0FF"/><Setter TargetName="Knob" Property="HorizontalAlignment" Value="Right"/></Trigger>
+  <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Track" Property="Opacity" Value="0.4"/></Trigger>
+  <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Track" Property="BorderBrush" Value="#CAB5FF"/></Trigger>
+ </ControlTemplate.Triggers>
+</ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SwapCheckboxPosition, RelativeSource={RelativeSource AncestorType=settings:CheckboxSetting}}" Value="False">
+                    <Setter Property="Grid.Column" Value="2"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Stretch" Cursor="Hand"
+          MouseLeftButtonDown="OnMouseButtonDown"
+          Style="{StaticResource GlowHoverGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Path Data="{Binding SvgIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              Opacity=".7" >
+            <Path.Style>
+                <Style TargetType="Path">
+                            <Setter Property="Margin" Value="7 0"></Setter>
+                            <Setter Property="Width" Value="18"></Setter>
+                            <Setter Property="Height" Value="18"></Setter>
+<Style.Triggers>
+                        <DataTrigger Binding="{Binding SvgIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}" Value="{x:Null}">
+                            <Setter Property="Height" Value="0"></Setter>
+                            <Setter Property="Width" Value="0"></Setter>
+                            <Setter Property="Margin" Value="0"></Setter>
+                        </DataTrigger>
+</Style.Triggers>
+                </Style>
+            </Path.Style>
+        </Path>
+        <!--Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"-->
+        <TextBlock Grid.Column="1"
+                   Text="{Binding SettingName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"
+                   VerticalAlignment="Center"
+                   Padding="0"
+                   TextAlignment="Left"
+                   Opacity=".9" >
+            <TextBlock.Style>
+                <Style BasedOn="{StaticResource DefaultTextStyle}" TargetType="TextBlock">
+                    <Setter Property="Margin" Value="5 0 5 0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding SwapCheckboxPosition, RelativeSource={RelativeSource AncestorType=settings:CheckboxSetting}}" Value="True">
+
+                    <Setter Property="Margin" Value="0 0 0 0"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <CheckBox x:Name="CheckBox"
+                  IsChecked="{Binding IsOn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"
+                  BorderBrush="{Binding CheckBoxColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  controls:CheckBoxExtensions.Size="{Binding CheckboxSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"
+                  Margin="7 0" />
+    </Grid>
+</UserControl>

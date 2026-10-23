@@ -1,0 +1,23 @@
+<UserControl x:Class="DamageMeter.UI.HUD.Controls.MainView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="clr-namespace:DamageMeter.UI">
+ <UserControl.Resources>
+  <DataTemplate x:Key="ModernEncounter"><StackPanel><TextBlock Text="{Binding Info.Name}" FontWeight="Normal" FontSize="11" Foreground="{DynamicResource ModernText}"/></StackPanel></DataTemplate>
+  <Style TargetType="ComboBoxItem"><Setter Property="Foreground" Value="{DynamicResource ModernText}"/><Setter Property="Background" Value="{DynamicResource ModernCard}"/><Setter Property="Padding" Value="10,6"/></Style>
+ </UserControl.Resources>
+ <Grid MinWidth="265">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <ComboBox x:Name="ListEncounter" Grid.Row="0" Style="{StaticResource ModernCombo}" Padding="8,3" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" ToolTip="{Binding SelectedEncounter.Info.Area}" ItemsSource="{Binding Encounters}" SelectedItem="{Binding SelectedEncounter}" ItemTemplate="{StaticResource ModernEncounter}" SelectionChanged="ListEncounter_OnSelectionChanged" DropDownOpened="ListEncounter_OnDropDownOpened" DropDownClosed="ListEncounter_OnDropDownClosed" PreviewKeyDown="ListEncounterOnPreviewKeyDown"/>
+  <Grid x:Name="PlayersContainer" Grid.Row="1" Margin="1,0" Grid.IsSharedSizeScope="True">
+   <ScrollViewer x:Name="Scroller" MaxHeight="{Binding NumberOfPlayersDisplayed, Converter={StaticResource PlayersCountToSize}}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <ItemsControl x:Name="PlayersIC" ItemsSource="{Binding PlayersView}" HorizontalContentAlignment="Stretch"><ItemsControl.ItemTemplate><DataTemplate><ui:PlayerStatsControl/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+   </ScrollViewer>
+  </Grid>
+  <Grid Grid.Row="2" Margin="8,4">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+   <TextBlock FontSize="11" Foreground="{DynamicResource ModernText}"><Run Text="{DynamicResource ModernText_131D201B9380}"/><Run Text="{Binding TotalDpsText, Mode=OneWay}" FontWeight="SemiBold"/></TextBlock>
+   <TextBlock Grid.Column="1" Text="{Binding TotalDamageText}" FontSize="10" Foreground="{DynamicResource ModernMuted}" VerticalAlignment="Center" ToolTip="{DynamicResource ModernText_75AB6617F398}"/>
+  </Grid>
+  <!-- Graph samples remain available in Overview; the compact meter has no chart visual. -->
+ </Grid>
+</UserControl>

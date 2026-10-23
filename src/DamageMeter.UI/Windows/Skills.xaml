@@ -1,0 +1,125 @@
+<ui:ClickThrouWindow x:Class="DamageMeter.UI.Skills"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:ui="clr-namespace:DamageMeter.UI" xmlns:palette="clr-namespace:DamageMeter.UI.HUD.Converters"
+                     xmlns:l="clr-namespace:Lang;assembly=Lang"
+                     mc:Ignorable="d" Loaded="ClickThrouWindow_Loaded"
+                     MinHeight="10" MinWidth="10"
+                     Background="Transparent"
+                     FontFamily="Segoe UI" Title="Skills" d:DataContext="{d:DesignInstance ui:PlayerDamageViewModel}">
+    <Window.Resources>
+        <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource ModernNavigation}" />
+    </Window.Resources>
+    <Grid MouseLeftButtonDown="Move"
+          Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=AllowsTransparency, Converter={StaticResource BoolToMargin}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.LayoutTransform>
+            <ScaleTransform CenterX="0" CenterY="0"
+                            ScaleX="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}"
+                            ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}" />
+        </Grid.LayoutTransform>
+        <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2" />
+
+        <Grid Grid.Row="0" Margin="10,8,10,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Path Style="{StaticResource PathBaseStyle}"
+                  Data="{Binding Class, Converter={StaticResource ClassToSvg}}"
+                  Width="38" Height="38" Fill="{Binding Role, Converter={palette:RoleToColorConverter}}"
+                  HorizontalAlignment="Left" />
+            <TextBlock Text="{Binding Name, Mode=OneWay}"
+                       Foreground="{StaticResource LightPrimaryText}"
+                       FontSize="24" FontWeight="SemiBold" Grid.Column="1"
+                       VerticalAlignment="Center" Margin="0 5 5 5" />
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" Height="34"
+                        Margin="20,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="Auto">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="17" />
+                        <Setter Property="Background" Value="{StaticResource DarkBackgroundColor}" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                        <Setter Property="Padding" Value="10,0" />
+                        <Setter Property="Margin" Value="0,0,10,0" />
+                        <Setter Property="MinWidth" Value="34" />
+                        <Setter Property="MaxWidth" Value="100" />
+                    </Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Orientation" Value="Horizontal"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="MinHeight" Value="29"/>
+                        <Setter Property="Height" Value="Auto"/>
+                        <Setter Property="Focusable" Value="False"/>
+                    </Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Margin" Value="0 5 5 5" />
+                    </Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Foreground" Value="{StaticResource LightPrimaryText}" />
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="0 5 5 5" />
+                    </Style>
+                </StackPanel.Resources>
+                <Border>
+                    <StackPanel ToolTip="{x:Static l:LP.Deaths_Tooltip}">
+                        <Image x:Name="DeathIcon" ToolTip="{Binding Source={x:Static l:LP.Deaths}, StringFormat= '\{0\}:'}"/>
+                        <TextBlock x:Name="DeathCounter" />
+                    </StackPanel>
+                </Border>
+                <Border>
+                    <StackPanel ToolTip="{x:Static l:LP.Death_Time_Tooltip}">
+                        <Image x:Name="DeathTimeIcon" ToolTip="{Binding Source={x:Static l:LP.Death_Time}, StringFormat= '\{0\}:'}" />
+                        <TextBlock x:Name="DeathDuration" />
+                    </StackPanel>
+                </Border>
+                <Border>
+                    <StackPanel HorizontalAlignment="Left" ToolTip="{x:Static l:LP.Aggro_Tooltip}">
+                        <Image x:Name="AggroIcon" ToolTip="{Binding Source={x:Static l:LP.Aggro}, StringFormat= '\{0\}:'}" />
+                        <TextBlock x:Name="AggroCounter" />
+                    </StackPanel>
+                </Border>
+                <Border>
+                    <StackPanel HorizontalAlignment="Left" ToolTip="{x:Static l:LP.Aggro_Time_Tooltip}">
+                        <Image x:Name="AggroTimeIcon" ToolTip="{Binding Source={x:Static l:LP.Aggro_Time}, StringFormat= '\{0\}:'}" />
+                        <TextBlock x:Name="AggroDuration" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <Button Grid.Row="0" Grid.Column="3" x:Name="CloseMeter" Style="{StaticResource ButtonMainStyle}"
+                    Background="Transparent"
+                    Command="{Binding CloseSkillDetailsCommand}"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Top" Margin="0">
+                <Path Data="{StaticResource Svg.Close}"
+                      Fill="{StaticResource LightRed}"
+                      Stretch="Uniform"
+                      Width="16"
+                      Margin="8" />
+            </Button>
+        </Grid>
+
+        <TabControl Style="{StaticResource ModernTabs}" Grid.Row="1" Background="{StaticResource DarkBackgroundColor}"
+                    BorderThickness="0" x:Name="TabControl" Padding="8" Margin="8,0,8,8">
+            <TabItem Header="{x:Static l:LP.Dps}" x:Name="DpsPanel" />
+            <TabItem Header="{x:Static l:LP.Heal}" x:Name="HealPanel" />
+            <TabItem Header="{x:Static l:LP.Mana}" x:Name="ManaPanel" />
+            <TabItem Header="{x:Static l:LP.Buff}" x:Name="BuffPanel" />
+            <TabItem Header="{x:Static l:LP.Counter}" x:Name="CounterPanel" />
+            <TabItem Header="{x:Static l:LP.SkillDealt}" x:Name="SkillsDealtPanel" />
+            <TabItem Header="{x:Static l:LP.SkillReceived}" x:Name="SkillsReceivedPanel" />
+        </TabControl>
+    </Grid>
+</ui:ClickThrouWindow>
