@@ -24,27 +24,41 @@ Graph collection is **off by default**. Enable it in Full settings → Graph if 
 
 ## Screenshots
 
-The actual Modern Meter 1.0.0 interface, shown with fictional player names and example combat data.
+The actual Modern Meter 1.0.3 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
 
 ### Compact overlay
 
-![Compact Modern Meter overlay with player DPS, critical rates, deaths and combat timer](docs/screenshots/compact-meter.png)
+![Compact overlay with exact DPS, a combat indicator and deaths in slot 5](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/compact-meter.png)
 
 ### Encounter overview
 
-![Modern Meter encounter overview with party DPS and player statistics](docs/screenshots/encounter-overview.png)
+![Encounter overview and individual player statistics](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/encounter-overview.png)
 
 <details>
-<summary>Appearance and color settings</summary>
+<summary>Appearance controls and refresh information</summary>
 
-![Appearance settings with opacity, scale, visibility controls and labeled color pickers](docs/screenshots/appearance-settings.png)
+![Opacity, scale and the core-managed statistics refresh](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/appearance-controls.png)
 
 </details>
 
 <details>
-<summary>Metric layout for damage dealers, tanks and healers</summary>
+<summary>Appearance and labeled color controls</summary>
 
-![Configurable metric slots, role previews and separate role colors](docs/screenshots/metric-layout.png)
+![Clearly labeled background, border and player color controls](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/appearance-settings.png)
+
+</details>
+
+<details>
+<summary>Five metric slots for DPS, tanks and healers</summary>
+
+![Slot 4 empty and slot 5 set to deaths for every role](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/metric-layout.png)
+
+</details>
+
+<details>
+<summary>Russian interface</summary>
+
+![Localized Russian settings and metric choices](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/russian-settings.png)
 
 </details>
 
@@ -58,7 +72,7 @@ The native runtime keeps its compatible internal ShinraMeter filenames; the modu
 
 Chat and party notification bubbles and audio are shown only while TERA is in the background; combat-specific alerts retain their own event rules. Cyrillic text selects an installed Russian Windows speech voice. If that voice is unavailable, a notification sound is used.
 
-The fifth metric slot is aligned to the right edge and defaults to deaths. Previous slot-four death layouts are migrated once while preserving the other metric. Overlay opacity is retained precisely in the local resources/config/modern-ui.json compatibility settings.
+The fifth metric slot is aligned to the right edge and defaults to deaths. On the first upgrade, legacy slot-four deaths move to slot five and slot four becomes empty, for damage dealers, tanks and healers. A local migration marker makes this a one-time change; later custom slot choices are preserved on restart. Profiles already migrated by 1.0.2 keep their subsequent choices. Overlay opacity is retained precisely in the local resources/config/modern-ui.json compatibility settings.
 
 The legacy 1–20 Hz control is not used by the retained calculation core. The interface shows its approximately one-second statistics refresh instead; combat-timer animation is independent.
 

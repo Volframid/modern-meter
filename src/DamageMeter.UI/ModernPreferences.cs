@@ -38,7 +38,11 @@ public static class ModernPreferences
         {
             foreach (var metrics in new[] { data.DpsMetrics, data.TankMetrics, data.HealerMetrics })
             {
-                if (metrics[3] == Metric.Deaths) (metrics[3], metrics[4]) = (metrics[4], metrics[3]);
+                if (metrics[3] == Metric.Deaths)
+                {
+                    metrics[3] = Metric.None;
+                    metrics[4] = Metric.Deaths;
+                }
                 else if (metrics[4] == Metric.None) metrics[4] = Metric.Deaths;
             }
             state.LayoutVersion = 1;

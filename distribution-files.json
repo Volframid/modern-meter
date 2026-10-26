@@ -217,6 +217,7 @@
     "sv/Xceed.Wpf.AvalonDock.resources.dll",
     "zh-CN/Lang.resources.dll",
     "zh-Hans/Xceed.Wpf.AvalonDock.resources.dll",
-    "zh-TW/Lang.resources.dll"
+    "zh-TW/Lang.resources.dll",
+    "licenses/Lucide-icons.txt"
   ]
 }

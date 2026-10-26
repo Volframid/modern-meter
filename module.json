@@ -1,6 +1,6 @@
 {
   "name": "modern-meter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Modern Meter contributors; based on Shinra Meter",
   "description": "Modern combat meter with compact DPS, encounter analysis and notifications.",
   "servers": [
