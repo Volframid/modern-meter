@@ -15,8 +15,8 @@
   </Grid>
   <Grid Grid.Row="2" Margin="8,4">
    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-   <TextBlock FontSize="11" Foreground="{DynamicResource ModernText}"><Run Text="{DynamicResource ModernText_131D201B9380}"/><Run Text="{Binding TotalDpsText, Mode=OneWay}" FontWeight="SemiBold"/></TextBlock>
-   <TextBlock Grid.Column="1" Text="{Binding TotalDamageText}" FontSize="10" Foreground="{DynamicResource ModernMuted}" VerticalAlignment="Center" ToolTip="{DynamicResource ModernText_75AB6617F398}"/>
+   <StackPanel Orientation="Horizontal"><TextBlock FontSize="11" Foreground="{DynamicResource ModernText}" Text="{DynamicResource ModernText_131D201B9380}"/><TextBlock Margin="4,0,0,0" FontSize="11" Foreground="{DynamicResource ModernText}" Text="{Binding TotalDpsText, Mode=OneWay}" FontWeight="SemiBold"/></StackPanel>
+   <TextBlock Grid.Column="1" Text="{Binding TotalDamageText}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" ToolTip="{DynamicResource ModernText_75AB6617F398}"/>
   </Grid>
   <!-- Graph samples remain available in Overview; the compact meter has no chart visual. -->
  </Grid>

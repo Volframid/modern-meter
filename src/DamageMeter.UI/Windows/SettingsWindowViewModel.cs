@@ -504,6 +504,7 @@ namespace DamageMeter.UI.Windows
             {
                 if (Data.MainWindowOpacity == value) return;
                 Data.MainWindowOpacity = value;
+                ModernPreferences.ScheduleSave();
                 //MainWindowOpacityChanged?.Invoke(value);
                 NotifyPropertyChanged();
                 MainViewModel.Instance.NotifyPropertyChangedEx(nameof(MainViewModel.WindowOpacity));
@@ -1033,6 +1034,7 @@ namespace DamageMeter.UI.Windows
 
         public SettingsWindowViewModel()
         {
+            ModernPreferences.Initialize(Data);
             ToastData = new ToastViewModel();
 
             DataExporter.GlpyhExportStatusUpdated += OnGlyphExportStatusUpdated;

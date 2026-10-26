@@ -1131,7 +1131,7 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="FontSize" Value="11" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="TextAlignment" Value="Right" />
+        <Setter Property="TextAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
@@ -1223,7 +1223,7 @@
     <DataTemplate x:Key="CritRateDT"
                   DataType="ui:IPlayerViewModel">
         <TextBlock Margin="2 0"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    Foreground="LightCoral"
                    Style="{StaticResource MetricTextBlockStyle}"
                    Text="{ui:LocalizedValue Path=CritRate, Converter={StaticResource ModernCritLabel}}" />
@@ -1245,7 +1245,7 @@
     <DataTemplate x:Key="DeathsDT"
                   DataType="ui:IPlayerViewModel">
         <Grid Margin="2 0"
-              HorizontalAlignment="Center">
+              HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
@@ -1262,7 +1262,7 @@
     <DataTemplate x:Key="FloortimeDT"
                   DataType="ui:IPlayerViewModel">
         <Grid Margin="2 0"
-              HorizontalAlignment="Center">
+              HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
@@ -1280,7 +1280,7 @@
     <DataTemplate x:Key="FloortimePercDT"
                   DataType="ui:IPlayerViewModel">
         <Grid Margin="2 0"
-              HorizontalAlignment="Center">
+              HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />

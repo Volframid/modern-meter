@@ -56,6 +56,12 @@ Your settings are created locally on first launch and are not overwritten by mod
 
 The native runtime keeps its compatible internal ShinraMeter filenames; the module and visible interface are named Modern Meter. Updates are delivered through Toolbox rather than the original native updater.
 
+Chat and party notification bubbles and audio are shown only while TERA is in the background; combat-specific alerts retain their own event rules. Cyrillic text selects an installed Russian Windows speech voice. If that voice is unavailable, a notification sound is used.
+
+The fifth metric slot is aligned to the right edge and defaults to deaths. Previous slot-four death layouts are migrated once while preserving the other metric. Overlay opacity is retained precisely in the local resources/config/modern-ui.json compatibility settings.
+
+The legacy 1–20 Hz control is not used by the retained calculation core. The interface shows its approximately one-second statistics refresh instead; combat-timer animation is independent.
+
 ## Source and validation
 
 Modified interface/transport source and the completed Russian satellite resources are in src/. See scripts/build.ps1 to rebuild using the runtime libraries shipped here. The calculation, protocol-data and other original runtime libraries are retained.

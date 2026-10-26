@@ -113,4 +113,8 @@
     <sys:String x:Key="ModernText_C61724CE790E">TERA Toolbox</sys:String>
     <sys:String x:Key="ModernText_AC64B397D6DC">Choose color</sys:String>
     <sys:String x:Key="ModernText_5493FF8E9397">WORKSPACE</sys:String>
+    <sys:String x:Key="ModernText_F67B87241682">Chat and party notifications appear only while TERA is in the background.</sys:String>
+    <sys:String x:Key="ModernText_4F885A7C87DB">Statistics updates per second. 20 Hz = one update every 50 ms. Higher values use more CPU.</sys:String>
+    <sys:String x:Key="ModernText_6ECD7B78E3BD">The current core updates statistics about once per second. Combat timer animation is independent.</sys:String>
+    <sys:String x:Key="ModernText_25F32CC6B1A5">Managed by the meter core</sys:String>
 </ResourceDictionary>

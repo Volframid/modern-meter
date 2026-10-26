@@ -113,4 +113,8 @@
     <sys:String x:Key="ModernText_C61724CE790E">TERA Toolbox</sys:String>
     <sys:String x:Key="ModernText_AC64B397D6DC">Выбрать цвет</sys:String>
     <sys:String x:Key="ModernText_5493FF8E9397">РАЗДЕЛЫ</sys:String>
+    <sys:String x:Key="ModernText_F67B87241682">Уведомления чата и группы показываются только когда окно TERA не активно.</sys:String>
+    <sys:String x:Key="ModernText_4F885A7C87DB">Обновлений статистики в секунду. 20 Гц — раз в 50 мс. Частые обновления увеличивают нагрузку на процессор.</sys:String>
+    <sys:String x:Key="ModernText_6ECD7B78E3BD">Текущее ядро обновляет статистику примерно раз в секунду. Анимация таймера боя работает отдельно.</sys:String>
+    <sys:String x:Key="ModernText_25F32CC6B1A5">Управляется ядром счётчика</sys:String>
 </ResourceDictionary>

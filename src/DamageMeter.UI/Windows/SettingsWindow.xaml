@@ -58,6 +58,8 @@
         
         <Style x:Key="MetricComboBox" TargetType="ComboBox" BasedOn="{StaticResource ModernCombo}">
             <Setter Property="ItemsSource" Value="{Binding AvailableMetrics}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="ItemContainerStyle"><Setter.Value><Style TargetType="ComboBoxItem"><Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="10,5"/><Setter Property="MinWidth" Value="230"/></Style></Setter.Value></Setter>
             <Setter Property="MinWidth" Value="90"/><Setter Property="Margin" Value="0,0,6,0"/>
             <Setter Property="ItemTemplate"><Setter.Value><DataTemplate>
                 <TextBlock Text="{ui:LocalizedValue Converter={StaticResource EnumDescriptionConverter}}" TextTrimming="CharacterEllipsis" ToolTip="{ui:LocalizedValue Converter={StaticResource EnumDescriptionConverter}}"/>
@@ -349,9 +351,7 @@
                         <settings:CheckboxSetting IsOn="{Binding DisablePartyEvents, Mode=TwoWay}"
                                                   IsEnabled="{Binding EnableChatAndNotif}"
                                                   SettingName="{DynamicResource NativeText_DisablePartyEvents}" />
-                        <settings:CheckboxSetting IsOn="{Binding ShowAfkEventsIngame, Mode=TwoWay}"
-                                                  IsEnabled="{Binding EnableChatAndNotif}"
-                                                  SettingName="{DynamicResource NativeText_ShowAfkEventsIngame}" />
+                        <TextBlock Text="{DynamicResource ModernText_F67B87241682}" TextWrapping="Wrap" Style="{StaticResource ModernCaption}" Margin="0,12,0,0"/>
                         <!--<Button Content="{DynamicResource ModernText_B3E227CECFE3}" VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 VerticalContentAlignment="Center"

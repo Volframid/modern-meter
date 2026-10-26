@@ -87,6 +87,7 @@ namespace DamageMeter.UI
                 }
                 DeleteTmp();
                 UpdateManager.ReadDbVersion();
+                ModernPreferences.Initialize(BasicTeraData.Instance.WindowData);
                 if (!BasicTeraData.Instance.WindowData.AllowTransparency) { RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly; }
                 ModernLocalization.Apply(LP.Culture);
                 FormatHelpers.Instance.CultureInfo = LP.Culture;
@@ -232,6 +233,7 @@ namespace DamageMeter.UI
 
         private static void Terminate()
         {
+            ModernPreferences.Flush();
             SystemEvents.PowerModeChanged -= SystemEvents_PowerModeChanged;
             HudContainer.Dispose();
             PacketProcessor.Instance.Exit();

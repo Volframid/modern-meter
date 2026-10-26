@@ -5,6 +5,8 @@ using Data;
 using Data.Actions.Notify;
 using System.Linq;
 using System.Collections.Generic;
+using Data.Actions.Notify.SoundElements;
+using System.Windows.Threading;
 
 namespace DamageMeter.UI
 {
@@ -14,13 +16,21 @@ namespace DamageMeter.UI
     public partial class PopupNotification
     {
         private readonly Action _present;
+        private readonly Func<bool> _gameForeground;
+        private readonly Action<SoundInterface> _playSound;
+        private readonly DispatcherTimer _focusTimer;
 
         public PopupNotification() : this(null) { }
 
         // Allows queue validation without displaying a native window or taking focus.
-        public PopupNotification(Action? present)
+        public PopupNotification(Action? present, Func<bool>? gameForeground = null, Action<SoundInterface>? playSound = null)
         {
             _present = present ?? PresentNotification;
+            _gameForeground = gameForeground ?? ModernNotificationPolicy.IsGameForeground;
+            _playSound = playSound ?? ModernNotificationAudio.Play;
+            _focusTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(200), DispatcherPriority.Background,
+                (_, _) => RemoveFocusedNotifications(), Dispatcher);
+            _focusTimer.Stop();
             InitializeComponent();
             notificationBalloons = new SynchronizedObservableCollection<Balloon>();
             notificationBalloons.CollectionChanged += NotificationBalloons_CollectionChanged;
@@ -47,8 +57,16 @@ namespace DamageMeter.UI
         {
             if(notificationBalloons.Count == 0)
             {
+                _focusTimer.Stop();
                 HideWindow();
             }
+        }
+
+        public void RemoveFocusedNotifications()
+        {
+            if (!_gameForeground()) return;
+            foreach (var balloon in notificationBalloons.ToSyncArray().Where(b => ModernNotificationPolicy.BackgroundOnly(b.EventType)))
+                notificationBalloons.Remove(balloon);
         }
 
         public SynchronizedObservableCollection<Balloon> notificationBalloons;
@@ -68,6 +86,8 @@ namespace DamageMeter.UI
             {
 
                 if (flash == null) { return; }
+                var backgroundOnly = flash.Balloon != null && ModernNotificationPolicy.BackgroundOnly(flash.Balloon.EventType);
+                if (backgroundOnly && _gameForeground()) return;
 
                 if (flash.Balloon != null && flash.Balloon.DisplayTime >= 500)
                 {
@@ -104,9 +124,11 @@ namespace DamageMeter.UI
                     }
 
                     _present();
+                    _focusTimer.Start();
                 }
 
-                if (!BasicTeraData.Instance.WindowData.MuteSound && flash.Sound != null) { Task.Run(() => flash.Sound.Play()); }
+                if (!BasicTeraData.Instance.WindowData.MuteSound && flash.Sound != null)
+                    Task.Run(() => { if (!backgroundOnly || !_gameForeground()) _playSound(flash.Sound); });
             });
         }
 

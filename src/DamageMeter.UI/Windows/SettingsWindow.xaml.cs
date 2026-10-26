@@ -37,7 +37,7 @@ namespace DamageMeter.UI.Windows
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            BasicTeraData.Instance.WindowData.Save();
+            ModernPreferences.Flush();
             BasicTeraData.Instance.HotkeysData.Save();
             Hide();
             _visible = false;

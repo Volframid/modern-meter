@@ -8,7 +8,7 @@ module.exports = function applyLocalUpdate(root, log) {
     const pending = Path.join(root, '.modern-ui-pending');
     const manifestPath = Path.join(pending, 'manifest.json');
     if (!Fs.existsSync(manifestPath)) return true;
-    const allowed = ['ShinraMeter.dll', 'DamageMeter.Sniffing.dll', 'ru/Lang.resources.dll'];
+    const allowed = ['ShinraMeter.dll', 'ShinraMeter.exe', 'resources/img/shinra.ico', 'DamageMeter.Sniffing.dll', 'ru/Lang.resources.dll'];
     let names = [];
     const hash = file => Crypto.createHash('sha256').update(Fs.readFileSync(file)).digest('hex');
     const changed = [];

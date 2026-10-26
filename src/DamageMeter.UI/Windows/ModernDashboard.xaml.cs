@@ -15,7 +15,7 @@ public partial class ModernDashboard : Window
         if (model is MainViewModel)
         {
             AppearancePanel.DataContext = SettingsWindow.GetViewModel();
-            Closed += (_, _) => Data.BasicTeraData.Instance.WindowData.Save();
+            Closed += (_, _) => ModernPreferences.Flush();
         }
     }
 
