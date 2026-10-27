@@ -14,8 +14,8 @@
         xmlns:controls="clr-namespace:DamageMeter.UI.Controls"
         mc:Ignorable="d"
         SizeToContent="Width"
-        Background="{StaticResource MainBgBrush}"
-        Title="EventsEditorWindow" Height="600" Width="800" d:DataContext="{d:DesignInstance ui:EventsEditorViewModel}">
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" FontFamily="Segoe UI" Foreground="{DynamicResource ModernText}"
+        Title="Modern Meter — Events editor" Height="600" Width="800" d:DataContext="{d:DesignInstance ui:EventsEditorViewModel}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
                       ResizeBorderThickness="0"
@@ -28,7 +28,7 @@
             <Setter Property="controls:CheckBoxExtensions.Size"
                     Value="{Binding CheckboxSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Foreground" Value="{DynamicResource ModernText}" />
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -496,13 +496,14 @@
             </Border>
         </DataTemplate>
     </Window.Resources>
+    <Border Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1" CornerRadius="10">
     <Grid>
         <!-- Title bar -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="#1000" MouseDown="Drag">
+        <Grid Background="Transparent" MouseDown="Drag">
             <Path Data="{StaticResource Svg.Events}"
                   Style="{StaticResource SmallButtonPathStyle}"
                   HorizontalAlignment="Left"
@@ -510,8 +511,8 @@
                   Height="14"
                   Margin="13 0" />
             <Rectangle Width="1" Margin="40 5" Fill="#1fff" HorizontalAlignment="Left" />
-            <TextBlock Text="Modern Meter settings - Events editor"
-                       Foreground="#6fff"
+            <TextBlock Text="{DynamicResource ModernText_1009CFD4D50C}" FontWeight="SemiBold"
+                       Foreground="{DynamicResource ModernText}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="50 0" />
@@ -524,7 +525,7 @@
                     Width="30"
                     Click="CloseWindow">
                 <Path Data="{StaticResource Svg.Close}"
-                      Fill="{StaticResource LightRed}"
+                      Fill="{DynamicResource ModernMuted}"
                       Stretch="Uniform"
                       Margin="8" />
             </Button>
@@ -535,4 +536,5 @@
                           ItemTemplate="{StaticResource EventTemplate}"/>
         </ScrollViewer>
     </Grid>
+    </Border>
 </Window>

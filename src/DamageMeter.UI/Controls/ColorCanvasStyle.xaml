@@ -86,74 +86,21 @@
         </Setter>
     </Style>
 
-    <LinearGradientBrush x:Key="ColorPickerDarkBorderBrush"
-                         EndPoint="0.5,1"
-                         StartPoint="0.5,0">
-        <GradientStop Color="#FFA3AEB9"
-                      Offset="0" />
-        <GradientStop Color="#FF8399A9"
-                      Offset="0.375" />
-        <GradientStop Color="#FF718597"
-                      Offset="0.375" />
-        <GradientStop Color="#FF617584"
-                      Offset="1" />
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ColorPickerDarkBorderBrush" Color="#343B4C" />
 
-    <LinearGradientBrush x:Key="ColorCanvasBackgroundBrush"
-                         StartPoint="0,0"
-                         EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0"
-                              Color="#FFffffff" />
-                <GradientStop Offset="1"
-                              Color="#FFE8EBED" />
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ColorCanvasBackgroundBrush" Color="#1B202B" />
 
     <SolidColorBrush x:Key="HorizontalSliderTrackNormalBackground"
-                     Color="#FFE7EAEA" />
+                     Color="#343B4C" />
 
-    <LinearGradientBrush x:Key="HorizontalSliderTrackNormalBorder"
-                         EndPoint="0,1"
-                         StartPoint="0,0">
-        <GradientStop Color="#FFAEB1AF"
-                      Offset="0.1" />
-        <GradientStop Color="White"
-                      Offset=".9" />
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="HorizontalSliderTrackNormalBorder" Color="#343B4C" />
 
-    <LinearGradientBrush x:Key="ThumbStroke"
-                         EndPoint="0.5,1"
-                         StartPoint="0.5,0">
-        <GradientStop Color="#FFA3AEB9"
-                      Offset="0" />
-        <GradientStop Color="#FF8399A9"
-                      Offset="0.375" />
-        <GradientStop Color="#FF718597"
-                      Offset="0.375" />
-        <GradientStop Color="#FF617584"
-                      Offset="1" />
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ThumbStroke" Color="#AD8AFF" />
 
-    <LinearGradientBrush x:Key="ThumbFill"
-                         StartPoint="0,0"
-                         EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0"
-                              Color="#FFfefefe" />
-                <GradientStop Offset="0.5"
-                              Color="#FFeff1f2" />
-                <GradientStop Offset="1"
-                              Color="#FFd0d6db" />
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ThumbFill" Color="#D7C4FF" />
 
     <SolidColorBrush x:Key="ThumbMouseOver"
-                     Color="#FFE5F2F6" />
+                     Color="#AD8AFF" />
 
     <Style x:Key="ColorCanvasTextBoxStyle"
            TargetType="TextBox"
@@ -161,7 +108,7 @@
         <Setter Property="Background"
                 Value="Transparent" />
         <Setter Property="Foreground"
-                Value="#9fff" />
+                Value="{DynamicResource ModernText}" />
         <Style.Triggers>
             <Trigger Property="IsFocused"
                      Value="False">
@@ -375,7 +322,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Border BorderThickness="1"
-                                        BorderBrush="DarkGray"
+                                        BorderBrush="{DynamicResource ModernLine}"
                                         ClipToBounds="True"
                                         Background="{StaticResource CheckerBrush}">
                                     <Canvas x:Name="PART_ColorShadingCanvas"
@@ -443,7 +390,7 @@
                                                 Height="22"
                                                 Margin="2,0,2,0"
                                                 BorderThickness="1"
-                                                BorderBrush="#FFC9CACA">
+                                                BorderBrush="{DynamicResource ModernLine}">
                                             <Rectangle x:Name="SelectedColor"
                                                        Fill="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorToSolidColorBrushConverter}}" />
                                         </Border>

@@ -397,7 +397,7 @@ namespace DamageMeter.UI
 
             App.Setup();
 
-            WindowTitle = "Modern Meter v" + UpdateManager.Version;
+            WindowTitle = ModernBranding.WindowTitle;
             GraphData = new RealtimeChartViewModel();
             ToastData = new ToastViewModel();
             Encounters = [ TotalEncounter ];

@@ -38,7 +38,14 @@ public static class ModernLocalization
         if (native != null)
             foreach (DictionaryEntry item in native)
                 if (item.Key is string key && item.Value is string)
-                    _dictionary["NativeText_" + key] = LP.ResourceManager.GetString(key, culture) ?? item.Value;
+                {
+                    var text = LP.ResourceManager.GetString(key, culture) ?? (string)item.Value;
+                    // Credits and licenses retain the original project attribution.
+                    _dictionary["NativeText_" + key] = key.Contains("License", StringComparison.OrdinalIgnoreCase)
+                        || key.Contains("Author", StringComparison.OrdinalIgnoreCase)
+                        || key.Contains("Credit", StringComparison.OrdinalIgnoreCase)
+                        ? text : ModernBranding.ProductText(text);
+                }
         application.Resources.MergedDictionaries.Add(_dictionary);
         State.Refresh();
     }

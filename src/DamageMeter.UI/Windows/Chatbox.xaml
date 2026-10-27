@@ -8,38 +8,16 @@
                      Height="800"
                      MinHeight="10" MinWidth="10"
                      ResizeMode="CanResizeWithGrip"
-                     Title="Chatbox">
+                     Title="Modern Meter — Chat">
     <Window.Resources>
-        <Style x:Key="ShinraButtonStyle" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border"
-                                BorderThickness="0"
-                                Padding="4,2"
-                                BorderBrush="Transparent"
-                                CornerRadius="0"
-                                Background="Black">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <Style x:Key="ModernAuxButton" TargetType="Button" BasedOn="{StaticResource ModernButton}"><Setter Property="Padding" Value="4"/><Setter Property="Margin" Value="0"/></Style>
     </Window.Resources>
     <Window.Background>
         <SolidColorBrush Color="Transparent" Opacity="0" />
     </Window.Background>
     <Grid MouseLeftButtonDown="Move" Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=AllowsTransparency, Converter={StaticResource BoolToMargin}}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="38" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.LayoutTransform>
@@ -47,10 +25,11 @@
                             ScaleX="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}"
                             ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}" />
         </Grid.LayoutTransform>
-        <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2"/>
+        <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2" CornerRadius="10" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1"/>
+        <TextBlock Grid.Row="0" Margin="14,0,44,0" Text="{DynamicResource ModernText_460B3A7DA007}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" IsHitTestVisible="False"/>
         <Grid Grid.Row="0">
-            <Button x:Name="CloseStats" Style="{StaticResource ShinraButtonStyle}" Background="Transparent"
-                    Opacity="0.5"
+            <Button x:Name="CloseStats" HorizontalAlignment="Right" Width="34" Style="{StaticResource ModernAuxButton}" Background="Transparent"
+                    Opacity="0.85"
                     Foreground="White" Click="Close_OnClick" HorizontalContentAlignment="Stretch"
                     VerticalAlignment="Top" Margin="0">
                 <Image x:Name="CloseWindow"

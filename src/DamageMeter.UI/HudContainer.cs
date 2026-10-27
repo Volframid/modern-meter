@@ -56,7 +56,7 @@ namespace DamageMeter.UI
 
         private void OnConnected(string servername)
         {
-            TrayIcon.Text = $"Modern Meter v{UpdateManager.Version}: {servername}";
+            TrayIcon.Text = $"Modern Meter v{ModernBranding.Version}: {servername}";
         }
 
         private void OnGuildIconChanged(Bitmap icon)

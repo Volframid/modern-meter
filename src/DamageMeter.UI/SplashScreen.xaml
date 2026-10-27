@@ -1,304 +1,73 @@
 ﻿<Window x:Class="DamageMeter.UI.SplashScreen"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="SplashScreen" Height="Auto" Width="Auto" ResizeMode="NoResize" AllowsTransparency="True"
-        SizeToContent="WidthAndHeight" ShowInTaskbar="False"
-        Background="Transparent" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
-    <Grid VerticalAlignment="Top" Margin="10">
-        <Grid.Background>
-            <LinearGradientBrush>
-                <GradientStop Color="{StaticResource KrBgColorBase}" Offset="2" />
-                <GradientStop Color="#b50000" Offset="-1" />
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.Effect>
-            <DropShadowEffect Opacity=".5" ShadowDepth="3" />
-        </Grid.Effect>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <!--<RowDefinition Height="Auto" />-->
-        </Grid.RowDefinitions>
-        <!--<Border Grid.Row="1" Grid.RowSpan="2" Background="#333" />-->
-        <Grid VerticalAlignment="Stretch">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <UniformGrid Rows="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 10 5">
-                <UniformGrid.Resources>
-                    <Style TargetType="Path" x:Key="PathStyle">
-                        <Setter Property="Fill" Value="#afff" />
-                        <Setter Property="Width" Value="28" />
-                        <Setter Property="Height" Value="28" />
-                        <Setter Property="Stretch" Value="Uniform" />
-                        <Setter Property="Margin" Value="14" />
-                        <Setter Property="Opacity" Value="0.2" />
-                    </Style>
-
-                </UniformGrid.Resources>
-                <Image Opacity=".9" Source="shinra.png" Width="40" Height="40" Margin="0" />
-                <Path Data="{StaticResource SvgClassWarrior}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-                </Path>
-                <Path Data="{StaticResource SvgClassSlayer}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:0.5">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassBerserker}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:1">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassSorcerer}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:1.5">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassArcher}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:2.0">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassReaper}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:2.5">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassGunner}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:3.0">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassNinja}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:3.5">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassValkyrie}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:4.0">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassLancer}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:4.5">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassBrawler}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:5.0">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassPriest}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:5.5">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-                <Path Data="{StaticResource SvgClassMystic}" >
-                    <Path.Style>
-                        <Style TargetType="Path" BasedOn="{StaticResource PathStyle}">
-                            <Style.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="Forever" BeginTime="0:0:6.0">
-                                            <DoubleAnimation Duration="0:0:0.5" From="0.2" To="1" BeginTime="0:0:0" Storyboard.TargetProperty="Opacity"/>
-                                            <DoubleAnimation Duration="0:0:6.5" From="1" To="0.2" BeginTime="0:0:0.5" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Path.Style>
-
-                </Path>
-
-            </UniformGrid>
-
-            <Separator Margin="0 2 0 0" Width="50" Background="#3fff" Height="1" Grid.Row="3"/>
-
-            <TextBlock Text="Modern Meter" VerticalAlignment="Center" Grid.Row="2" Foreground="White"
-                       FontSize="12" FontWeight="Normal" Margin="0 0" TextAlignment="Center" />
-
-        </Grid>
-        <TextBlock Name="txt" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 10" TextWrapping="WrapWithOverflow"
-                   HorizontalAlignment="Center" TextAlignment="Center" Foreground="#3fff" FontSize="11">
-            Modern Meter
-        </TextBlock>
-        <!--<ProgressBar Name="bar" Grid.Row="1" Background="Transparent" BorderThickness="0" Foreground="#1fff" />-->
-        <TextBlock Name="ver" Grid.Row="1" 
-                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                   Foreground="#3fff" Margin="3 2" FontSize="10"/>
-        <UniformGrid Grid.Row="2" Rows="1" Name="buttonsGrid" Margin="80,0">
-            <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" Background="Transparent"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center" Click="NoClick">
-                <!--<Path Data="{StaticResource SVG.Close}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
-                <TextBlock Foreground="#90ffffff" FontWeight="Bold">NO</TextBlock>
-
-            </Button>
-            <Button Height="20" Margin="5" Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center" Click="OkClick" Background="Transparent">
-                <!--<Path Data="{StaticResource SVG.Confirm}" Fill="White" Stretch="Uniform" Margin="3"></Path>-->
-                <TextBlock Foreground="#90ffffff" FontWeight="Bold">YES</TextBlock>
-            </Button>
-            <UniformGrid.LayoutTransform>
-                <ScaleTransform ScaleY="0" />
-            </UniformGrid.LayoutTransform>
-        </UniformGrid>
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="Modern Meter" Width="560" SizeToContent="Height" MinHeight="296" MaxHeight="560"
+ ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Background="Transparent"
+ ShowInTaskbar="False" WindowStartupLocation="CenterScreen" UseLayoutRounding="True"
+ FontFamily="Segoe UI" Foreground="#F0F2FA" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+ <Window.Resources>
+  <Style x:Key="SplashButton" TargetType="Button">
+   <Setter Property="Foreground" Value="#F0F2FA"/><Setter Property="Background" Value="#1B202B"/>
+   <Setter Property="BorderBrush" Value="#343B4C"/><Setter Property="BorderThickness" Value="1"/>
+   <Setter Property="Padding" Value="18,9"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="FontSize" Value="12"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+    <Border x:Name="Surface" CornerRadius="7" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Border>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Surface" Property="BorderBrush" Value="#AD8AFF"/></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Surface" Property="BorderBrush" Value="#AD8AFF"/></Trigger>
+     <Trigger Property="IsPressed" Value="True"><Setter TargetName="Surface" Property="Opacity" Value="0.7"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+ </Window.Resources>
+ <Border x:Name="SplashFrame" Margin="12" CornerRadius="16" BorderThickness="1" BorderBrush="#343B4C" Background="#14171F" Padding="30,27,30,24">
+  <Border.Effect><DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.28" Color="#000000"/></Border.Effect>
+  <Grid>
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <TextBlock Text="MODERN METER" FontSize="10" FontWeight="SemiBold" Foreground="#AD8AFF"/>
+    <TextBlock x:Name="ver" Grid.Column="1" FontSize="10" Foreground="#A7AFC4" VerticalAlignment="Center"/>
+   </Grid>
+   <Grid Grid.Row="1" Margin="0,28,0,25">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="70"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <Border Width="56" Height="56" CornerRadius="13" Background="#272238" BorderBrush="#514269" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+     <Viewbox Width="34" Height="34"><Canvas Width="24" Height="24">
+      <Path Data="M19.78,17.78 A9,9 0 1 0 4.22,17.78" Stroke="#AD8AFF" StrokeThickness="1.8" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+      <Path Data="M12,13 L16,9" Stroke="#D9CAFF" StrokeThickness="1.8" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+      <Ellipse Width="3" Height="3" Canvas.Left="10.5" Canvas.Top="11.5" Fill="#D9CAFF"/>
+      <Path Data="M6,17.8 L18,17.8" Stroke="#665280" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+     </Canvas></Viewbox>
+    </Border>
+    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+     <TextBlock Text="Modern Meter" FontSize="32" FontWeight="SemiBold" Margin="0,-3,0,4"/>
+     <TextBlock Text="{DynamicResource ModernText_90E640097904}" FontSize="12" Foreground="#A7AFC4" TextWrapping="Wrap"/>
+    </StackPanel>
+   </Grid>
+   <Border Grid.Row="2" Background="#1B202B" CornerRadius="9" BorderBrush="#2C3342" BorderThickness="1" Padding="14,13">
+    <Grid>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="4"/></Grid.RowDefinitions>
+     <Grid Margin="0,0,0,13"><Grid.ColumnDefinitions><ColumnDefinition Width="14"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <Ellipse Width="5" Height="5" Fill="#AD8AFF" VerticalAlignment="Top" Margin="0,6,0,0" HorizontalAlignment="Left"/>
+      <TextBlock x:Name="txt" Grid.Column="1" Text="{DynamicResource ModernText_652A61C2A7A1}" FontSize="12" Foreground="#D5D9E5" TextWrapping="Wrap" MaxHeight="130"/>
+     </Grid>
+     <Border Grid.Row="1" CornerRadius="2" Background="#303545" ClipToBounds="True">
+      <Rectangle Width="120" HorizontalAlignment="Left" RadiusX="2" RadiusY="2">
+       <Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#006F91D8" Offset="0"/><GradientStop Color="#AD8AFF" Offset="0.55"/><GradientStop Color="#00AD8AFF" Offset="1"/></LinearGradientBrush></Rectangle.Fill>
+       <Rectangle.RenderTransform><TranslateTransform X="-120"/></Rectangle.RenderTransform>
+       <Rectangle.Triggers><EventTrigger RoutedEvent="Loaded"><BeginStoryboard><Storyboard RepeatBehavior="Forever"><DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="-120" To="460" Duration="0:0:1.7"/></Storyboard></BeginStoryboard></EventTrigger></Rectangle.Triggers>
+      </Rectangle>
+     </Border>
     </Grid>
-
+   </Border>
+   <UniformGrid Grid.Row="3" x:Name="buttonsGrid" Rows="1" Columns="2" Margin="0,18,0,0">
+    <UniformGrid.LayoutTransform><ScaleTransform ScaleY="0"/></UniformGrid.LayoutTransform>
+    <Button x:Name="DeclineUpdate" Content="{DynamicResource ModernText_73B6E48A1B55}" Style="{StaticResource SplashButton}" Margin="0,0,6,0" Click="NoClick"/>
+    <Button x:Name="AcceptUpdate" Content="{DynamicResource ModernText_63BF045213CE}" Style="{StaticResource SplashButton}" Margin="6,0,0,0" Background="#352B4B" BorderBrush="#756098" Click="OkClick"/>
+   </UniformGrid>
+  </Grid>
+ </Border>
 </Window>

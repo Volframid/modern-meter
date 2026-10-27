@@ -117,4 +117,26 @@
     <sys:String x:Key="ModernText_4F885A7C87DB">Обновлений статистики в секунду. 20 Гц — раз в 50 мс. Частые обновления увеличивают нагрузку на процессор.</sys:String>
     <sys:String x:Key="ModernText_6ECD7B78E3BD">Текущее ядро обновляет статистику примерно раз в секунду. Анимация таймера боя работает отдельно.</sys:String>
     <sys:String x:Key="ModernText_25F32CC6B1A5">Управляется ядром счётчика</sys:String>
+    <sys:String x:Key="ModernText_90E640097904">Статистика боя с первого взгляда.</sys:String>
+    <sys:String x:Key="ModernText_652A61C2A7A1">Запуск Modern Meter...</sys:String>
+    <sys:String x:Key="ModernText_73B6E48A1B55">Позже</sys:String>
+    <sys:String x:Key="ModernText_63BF045213CE">Обновить</sys:String>
+    <sys:String x:Key="ModernText_79CACD2CD796">Обновления Modern Meter</sys:String>
+    <sys:String x:Key="ModernText_460B3A7DA007">Чат</sys:String>
+    <sys:String x:Key="ModernText_13EF148DD8CD">Эффекты боя</sys:String>
+    <sys:String x:Key="ModernText_7C85D9A08565">История загрузок</sys:String>
+    <sys:String x:Key="ModernText_B99326D3AD04">Статистика игрока</sys:String>
+    <sys:String x:Key="ModernText_6F191FF7F89E">Инициализация...</sys:String>
+    <sys:String x:Key="ModernText_8BCAEE3C780F">Проверка обновлений...</sys:String>
+    <sys:String x:Key="ModernText_4D996EF9110C">Завершение работы...</sys:String>
+    <sys:String x:Key="ModernText_A3B3505AEF08">Загрузка игровых данных...</sys:String>
+    <sys:String x:Key="ModernText_1009CFD4D50C">Редактор событий</sys:String>
+    <sys:String x:Key="ModernText_5C18BBBBC16C">Статус загрузки</sys:String>
+    <sys:String x:Key="ModernText_AEF7DE28D529">Сервер</sys:String>
+    <sys:String x:Key="ModernText_33B93476CF59">Время</sys:String>
+    <sys:String x:Key="ModernText_2F77668A9DFB">Сообщение</sys:String>
+    <sys:String x:Key="ModernText_39FCABC22C85">Босс</sys:String>
+    <sys:String x:Key="ModernText_54A0E8C17EBB">Ошибка</sys:String>
+    <sys:String x:Key="ModernText_EEF92C67F057">Загрузка завершена</sys:String>
+    <sys:String x:Key="ModernText_6EFC5D27F30B">Ошибка загрузки</sys:String>
 </ResourceDictionary>

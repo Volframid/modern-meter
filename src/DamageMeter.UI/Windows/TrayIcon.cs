@@ -25,7 +25,7 @@ namespace DamageMeter.UI
             {
                 Visible = true,
                 Icon = BasicTeraData.Instance.ImageDatabase.Tray,
-                Text = "Modern Meter v" + UpdateManager.Version
+                Text = ModernBranding.WindowTitle
 
             };
 

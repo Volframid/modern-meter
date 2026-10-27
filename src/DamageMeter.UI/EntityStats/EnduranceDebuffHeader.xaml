@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    <StackPanel Background="#09ffffff">
+    <StackPanel Background="{DynamicResource ModernCard}">
         <Grid MouseLeftButtonDown="DragWindow"  Margin="10,2,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="b0" Width="25" />
@@ -15,36 +15,36 @@
                 <ColumnDefinition SharedSizeGroup="b5" MinWidth="70" />
                 <ColumnDefinition SharedSizeGroup="b6" MinWidth="70" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="2" FontSize="14" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+            <Label Grid.Column="2" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" x:Name="LabelName" VerticalAlignment="Center"
-                   MinHeight="40"
+                   MinHeight="32"
                    BorderThickness="0" BorderBrush="Gray"
-                   Foreground="{StaticResource BuffText}" />
+                   Foreground="{DynamicResource ModernMuted}" />
 
-            <Label Grid.Column="3" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+            <Label Grid.Column="3" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="LabelClass"
-                   Foreground="{StaticResource BuffText}"
+                   Foreground="{DynamicResource ModernMuted}"
                    BorderThickness="0" BorderBrush="Gray"
-                   MinHeight="40" />
+                   MinHeight="32" />
 
 
 
 
-            <Label Grid.Column="4" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+            <Label Grid.Column="4" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" x:Name="LabelAbnormalityDuration" VerticalAlignment="Center"
-                   MinHeight="40"
+                   MinHeight="32"
                    BorderThickness="0" BorderBrush="Gray"
-                   Foreground="{StaticResource BuffText}" />
-            <Label Grid.Column="5" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   Foreground="{DynamicResource ModernMuted}" />
+            <Label Grid.Column="5" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" x:Name="LabelInterval" VerticalAlignment="Center"
-                   MinHeight="40"
+                   MinHeight="32"
                    BorderThickness="0" BorderBrush="Gray"
-                   Foreground="{StaticResource BuffText}" />
-            <Label Grid.Column="6" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   Foreground="{DynamicResource ModernMuted}" />
+            <Label Grid.Column="6" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" x:Name="LabelAbnormalityDurationPercentage" VerticalAlignment="Center"
-                   MinHeight="40"
+                   MinHeight="32"
                    BorderThickness="0" BorderBrush="Gray"
-                   Foreground="{StaticResource BuffText}"/>
+                   Foreground="{DynamicResource ModernMuted}"/>
         </Grid>
     </StackPanel>
 </UserControl>

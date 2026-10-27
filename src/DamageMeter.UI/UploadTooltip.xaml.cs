@@ -14,7 +14,7 @@ namespace DamageMeter.UI
         {
             InitializeComponent();
 
-            UpdateStatusTb.Text = data.Success ? "Upload successful" : "Upload failed";
+            UpdateStatusTb.SetResourceReference(TextBlock.TextProperty, ModernLocalization.Key(data.Success ? "Upload successful" : "Upload failed"));
             UpdateStatusTb.Foreground = App.Current.FindResource(data.Success ? "HealText" : "DamageText") as SolidColorBrush;
 
             TimeTb.Text = data.Time.ToShortTimeString() + " " + data.Time.ToShortDateString();

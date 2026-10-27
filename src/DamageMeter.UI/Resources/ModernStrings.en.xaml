@@ -117,4 +117,26 @@
     <sys:String x:Key="ModernText_4F885A7C87DB">Statistics updates per second. 20 Hz = one update every 50 ms. Higher values use more CPU.</sys:String>
     <sys:String x:Key="ModernText_6ECD7B78E3BD">The current core updates statistics about once per second. Combat timer animation is independent.</sys:String>
     <sys:String x:Key="ModernText_25F32CC6B1A5">Managed by the meter core</sys:String>
+    <sys:String x:Key="ModernText_90E640097904">Combat analytics, at a glance.</sys:String>
+    <sys:String x:Key="ModernText_652A61C2A7A1">Starting Modern Meter...</sys:String>
+    <sys:String x:Key="ModernText_73B6E48A1B55">Later</sys:String>
+    <sys:String x:Key="ModernText_63BF045213CE">Update now</sys:String>
+    <sys:String x:Key="ModernText_79CACD2CD796">Modern Meter updates</sys:String>
+    <sys:String x:Key="ModernText_460B3A7DA007">Chat</sys:String>
+    <sys:String x:Key="ModernText_13EF148DD8CD">Combat effects</sys:String>
+    <sys:String x:Key="ModernText_7C85D9A08565">Upload history</sys:String>
+    <sys:String x:Key="ModernText_B99326D3AD04">Player details</sys:String>
+    <sys:String x:Key="ModernText_6F191FF7F89E">Initializing...</sys:String>
+    <sys:String x:Key="ModernText_8BCAEE3C780F">Checking for updates...</sys:String>
+    <sys:String x:Key="ModernText_4D996EF9110C">Shutting down...</sys:String>
+    <sys:String x:Key="ModernText_A3B3505AEF08">Loading combat definitions...</sys:String>
+    <sys:String x:Key="ModernText_1009CFD4D50C">Events editor</sys:String>
+    <sys:String x:Key="ModernText_5C18BBBBC16C">Upload status</sys:String>
+    <sys:String x:Key="ModernText_AEF7DE28D529">Server</sys:String>
+    <sys:String x:Key="ModernText_33B93476CF59">Time</sys:String>
+    <sys:String x:Key="ModernText_2F77668A9DFB">Message</sys:String>
+    <sys:String x:Key="ModernText_39FCABC22C85">Npc</sys:String>
+    <sys:String x:Key="ModernText_54A0E8C17EBB">Error</sys:String>
+    <sys:String x:Key="ModernText_EEF92C67F057">Upload successful</sys:String>
+    <sys:String x:Key="ModernText_6EFC5D27F30B">Upload failed</sys:String>
 </ResourceDictionary>

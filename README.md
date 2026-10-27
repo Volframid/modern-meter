@@ -18,13 +18,25 @@ For module-manager installation, use the module descriptor at https://raw.github
 - A smooth centisecond clock with an indicator for combat status.
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
 - Thirteen settings sections, explicit interface language selection, and automatic Russian on Russian Windows. New interface text supports English and Russian; other existing language packs are retained with English fallback for new text. Interface language changes apply immediately to open windows.
+- A new loading screen with live status, a matching update dialog, notification cards, chat, effects and upload-history windows, event editor and color picker.
 - Chat and notification functions, including whisper popups when the game is in the background, subject to the user's event and sound settings.
 
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.
 
 ## Screenshots
 
-The actual Modern Meter 1.0.3 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+The actual Modern Meter 1.0.4 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+
+### Loading screen
+
+![Modern Meter loading screen with live status](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/loading-screen.png)
+
+<details>
+<summary>Russian loading screen</summary>
+
+![Russian loading status and interface](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/loading-screen-ru.png)
+
+</details>
 
 ### Compact overlay
 
@@ -59,6 +71,13 @@ The actual Modern Meter 1.0.3 interface, rendered with fictional player names an
 <summary>Russian interface</summary>
 
 ![Localized Russian settings and metric choices](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/russian-settings.png)
+
+</details>
+
+<details>
+<summary>Color picker</summary>
+
+![Dark color picker with hex, RGB and alpha controls](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/color-picker.png)
 
 </details>
 

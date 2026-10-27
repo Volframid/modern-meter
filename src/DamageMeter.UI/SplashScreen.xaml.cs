@@ -26,7 +26,7 @@ namespace DamageMeter.UI
         {
             try
             {
-                BeginAnimation(TopProperty, AnimationFactory.CreateDoubleAnimation(500, Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height)).Bounds.Height / 2 + ActualHeight / 2 + 40, easing: true));
+                BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(180)));
             }
             catch { }
 
@@ -39,11 +39,18 @@ namespace DamageMeter.UI
 
         public void SetText(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => txt.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                var key = ModernLocalization.Key(t);
+                if (System.Windows.Application.Current?.TryFindResource(key) is string)
+                    txt.SetResourceReference(System.Windows.Controls.TextBlock.TextProperty, key);
+                else
+                    txt.Text = ModernBranding.ProductText(t);
+            }));
         }
         public void SetVer(string t)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => ver.Text = t));
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => ver.Text = "v" + (string.IsNullOrWhiteSpace(t) ? ModernBranding.Version : t)));
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

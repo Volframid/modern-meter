@@ -71,7 +71,7 @@ namespace DamageMeter.UI
                     SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                     SplashScreen = new SplashScreen();
                     SplashScreen.SetText("Initializing...");
-                    SplashScreen.SetVer(UpdateManager.Version);
+                    SplashScreen.SetVer(ModernBranding.Version);
                     SplashScreen.Show();
                     waiting = false;
                     Dispatcher.Run();
@@ -222,7 +222,7 @@ namespace DamageMeter.UI
         {
             if (!noConfirm)
             {
-                if (MessageBox.Show(LP.MainWindow_Do_you_want_to_close_the_application, LP.MainWindow_Close_Shinra_Meter_V + UpdateManager.Version,
+                if (MessageBox.Show(LP.MainWindow_Do_you_want_to_close_the_application, ModernBranding.WindowTitle,
                     MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) { return; }
             }
 

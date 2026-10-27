@@ -8,7 +8,7 @@
                      mc:Ignorable="d" Loaded="ClickThrouWindow_Loaded"
                      MinHeight="10" MinWidth="10"
                      Background="Transparent"
-                     FontFamily="Segoe UI" Title="Skills" d:DataContext="{d:DesignInstance ui:PlayerDamageViewModel}">
+                     FontFamily="Segoe UI" Title="{DynamicResource ModernText_B99326D3AD04}" d:DataContext="{d:DesignInstance ui:PlayerDamageViewModel}">
     <Window.Resources>
         <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource ModernNavigation}" />
     </Window.Resources>

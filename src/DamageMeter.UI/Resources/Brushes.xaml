@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Colors -->
-    <Color x:Key="KrBgColorBase">#232830</Color>
-    <Color x:Key="KrBgColorDarkBase">#131820</Color>
-    <Color x:Key="KrBorderColorBase">#717b85</Color>
-    <Color x:Key="KrBgColorBaseTransp">#00232830</Color>
-    <Color x:Key="KrBorderColorBaseTransp">#00515b65</Color>
+    <Color x:Key="KrBgColorBase">#14171F</Color>
+    <Color x:Key="KrBgColorDarkBase">#0F121A</Color>
+    <Color x:Key="KrBorderColorBase">#343B4C</Color>
+    <Color x:Key="KrBgColorBaseTransp">#0014171F</Color>
+    <Color x:Key="KrBorderColorBaseTransp">#00343B4C</Color>
 
     <Color x:Key="DpsColor">#ff4466</Color>
     <Color x:Key="HealColor">#3be24b</Color>
@@ -37,8 +37,8 @@
     <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FF212121" />
     <SolidColorBrush x:Key="ShinraColor" Color="#AD8AFF" />
 
-    <SolidColorBrush x:Key="MainBgBrush" Color="#191E29" />
-    <SolidColorBrush x:Key="MainBgDarkBrush" Color="#10131B" />
+    <SolidColorBrush x:Key="MainBgBrush" Color="#14171F" />
+    <SolidColorBrush x:Key="MainBgDarkBrush" Color="#0F121A" />
 
 
     <SolidColorBrush x:Key="KrBgColor" Color="{StaticResource KrBgColorBase}"/>
@@ -46,8 +46,8 @@
     <SolidColorBrush x:Key="KrBorderColor" Color="{StaticResource KrBorderColorBase}"/>
 
     <SolidColorBrush x:Key="DarkBarColor" Color="#14171F"/>
-    <SolidColorBrush x:Key="DarkBackgroundColor" Color="#191D28" />
-    <SolidColorBrush x:Key="DarkCardColor" Color="#232938" />
+    <SolidColorBrush x:Key="DarkBackgroundColor" Color="#14171F" />
+    <SolidColorBrush x:Key="DarkCardColor" Color="#1B202B" />
 
     <SolidColorBrush x:Key="DarkPrimaryText" Color="#DD000000"/>
     <SolidColorBrush x:Key="DarkSecondaryText" Color="#89000000"/>
@@ -61,7 +61,7 @@
     <SolidColorBrush x:Key="LightBackgroundColor" Color="#FAFAFA" />
     <SolidColorBrush x:Key="LightCardColor" Color="#FFFFFF" />
     <SolidColorBrush x:Key="AccentColor" Color="{StaticResource Accent}"/>
-    <SolidColorBrush x:Key="TooltipColor" Color="#232938" Opacity=".9"/>
+    <SolidColorBrush x:Key="TooltipColor" Color="#1B202B" Opacity=".9"/>
 
     <SolidColorBrush x:Key="DamageText" Color="#ef5350"/>
     <SolidColorBrush x:Key="HealText" Color="#66bb6a"/>

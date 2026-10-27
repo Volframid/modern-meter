@@ -22,11 +22,11 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ColorCanvasStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <SolidColorBrush x:Key="ButtonHover" Color="#C2E0FF" />
-    <SolidColorBrush x:Key="ButtonHoverBorder" Color="#3399FF" />
-    <SolidColorBrush x:Key="ButtonChecked" Color="#E6F0FA" />
-    <SolidColorBrush x:Key="ButtonPressed" Color="#99CCFF" />
-    <SolidColorBrush x:Key="ButtonPressedBorder" Color="#3399FF" />
+    <SolidColorBrush x:Key="ButtonHover" Color="#342C48" />
+    <SolidColorBrush x:Key="ButtonHoverBorder" Color="#AD8AFF" />
+    <SolidColorBrush x:Key="ButtonChecked" Color="#342C48" />
+    <SolidColorBrush x:Key="ButtonPressed" Color="#292336" />
+    <SolidColorBrush x:Key="ButtonPressedBorder" Color="#AD8AFF" />
     <SolidColorBrush x:Key="CheckerBrush" Color="Transparent"/>
     
     <!-- =============================================================================== -->
@@ -37,21 +37,9 @@
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
     <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
 
-    <LinearGradientBrush x:Key="ColorPickerDarkBorderBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFA3AEB9" Offset="0" />
-        <GradientStop Color="#FF8399A9" Offset="0.375" />
-        <GradientStop Color="#FF718597" Offset="0.375" />
-        <GradientStop Color="#FF617584" Offset="1" />
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ColorPickerDarkBorderBrush" Color="#343B4C" />
 
-    <LinearGradientBrush x:Key="PopupBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="#FFffffff" />
-                <GradientStop Offset="1" Color="#FFE8EBED" />
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="PopupBackgroundBrush" Color="#1B202B" />
 
     <Style x:Key="ColorItemContainerStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="ToolTip" Value="{Binding Name}" />
@@ -78,12 +66,12 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="_outerBorder" Property="BorderBrush" Value="#FFFFFFFF" />
-                            <Setter TargetName="_innerBorder" Property="BorderBrush" Value="#FF000000" />
+                            <Setter TargetName="_outerBorder" Property="BorderBrush" Value="{DynamicResource ModernMuted}" />
+                            <Setter TargetName="_innerBorder" Property="BorderBrush" Value="Transparent" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="_outerBorder" Property="BorderBrush" Value="#FFFF0000" />
-                            <Setter TargetName="_innerBorder" Property="BorderBrush" Value="#FFFFFF00" />
+                            <Setter TargetName="_outerBorder" Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
+                            <Setter TargetName="_innerBorder" Property="BorderBrush" Value="Transparent" />
                         </Trigger>
                         <DataTrigger Binding="{Binding DisplayColorAndName, RelativeSource={RelativeSource AncestorType={x:Type xctk:ColorPicker}}}"
                                Value="False">
@@ -227,9 +215,9 @@
                             <Grid Margin="2">
                                 <ContentControl x:Name="ColorOnly" Style="{StaticResource ColorDisplayStyle}" />
 
-                                <Border x:Name="ColorAndName" Background="White" Visibility="Collapsed">
+                                <Border x:Name="ColorAndName" Background="{DynamicResource ModernCard}" Visibility="Collapsed">
                                     <StackPanel Orientation="Horizontal">
-                                        <ContentControl HorizontalAlignment="Left" Width="20" Margin="2,1,4,1" Style="{StaticResource ColorDisplayStyle}" BorderThickness="1" BorderBrush="#FFC9CACA" />
+                                        <ContentControl HorizontalAlignment="Left" Width="20" Margin="2,1,4,1" Style="{StaticResource ColorDisplayStyle}" BorderThickness="1" BorderBrush="{DynamicResource ModernLine}" />
                                         <TextBlock Text="{Binding SelectedColorText, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Border>
@@ -257,13 +245,13 @@
                                     </Style.Triggers>
                                 </Style>
                             </Popup.Resources>
-                                <Grid Margin="16">
+                                <Grid Margin="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                <Border BorderThickness="0" Background="{StaticResource DarkCardColor}" Padding="3" Effect="{StaticResource MenuShadow-8dp}" Grid.RowSpan="3"/>
+                                <Border x:Name="ModernPaletteFrame" BorderThickness="1" BorderBrush="{DynamicResource ModernLine}" CornerRadius="10" Background="{DynamicResource ModernCard}" Padding="8" Grid.RowSpan="3"/>
 
 
                                 <Grid x:Name="_colorPaletteHost" Visibility="Collapsed" Margin="4">
@@ -281,7 +269,7 @@
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition />
                                                 </Grid.RowDefinitions>
-                                                <TextBlock Text="{TemplateBinding AvailableColorsHeader}" Foreground="#7fff" Background="Transparent" Padding="2" Margin="0,0,0,1" />
+                                                <TextBlock Text="{TemplateBinding AvailableColorsHeader}" Foreground="{DynamicResource ModernMuted}" Background="Transparent" Padding="2" Margin="0,0,0,1" />
                                                 <ListBox x:Name="PART_AvailableColors"
                                              Grid.Row="1"
                                              ItemsSource="{Binding AvailableColors, RelativeSource={RelativeSource TemplatedParent}}"
@@ -296,7 +284,7 @@
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
-                                                <TextBlock Text="{TemplateBinding StandardColorsHeader}" Background="Transparent" Foreground="#7fff" Padding="2" Margin="0,1,0,1" />
+                                                <TextBlock Text="{TemplateBinding StandardColorsHeader}" Background="Transparent" Foreground="{DynamicResource ModernMuted}" Padding="2" Margin="0,1,0,1" />
                                                 <ListBox x:Name="PART_StandardColors"
                                              Grid.Row="1"
                                              ItemsSource="{Binding StandardColors, RelativeSource={RelativeSource TemplatedParent}}"                                                      
@@ -311,7 +299,7 @@
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="22" />
                                                 </Grid.RowDefinitions>
-                                                <TextBlock Text="{TemplateBinding RecentColorsHeader}" Background="Transparent" Foreground="#7fff" Padding="2" Margin="0,1,0,1" />
+                                                <TextBlock Text="{TemplateBinding RecentColorsHeader}" Background="Transparent" Foreground="{DynamicResource ModernMuted}" Padding="2" Margin="0,1,0,1" />
                                                 <ListBox x:Name="PART_RecentColors"
                                              Grid.Row="1"
                                              ItemsSource="{Binding RecentColors, RelativeSource={RelativeSource TemplatedParent}}"
@@ -321,10 +309,10 @@
                                     </Grid>
 
                                     <!-- ColorCanvas -->
-                                    <Grid x:Name="_colorCanvasHost" Visibility="Collapsed">
+                                    <Grid x:Name="_colorCanvasHost" Visibility="Collapsed" Margin="8">
                                     <xctk:ColorCanvas Background="Transparent"
                                                  BorderThickness="0"
-                                                          Foreground="#9fff"
+                                                          Foreground="{DynamicResource ModernText}"
                                                  UsingAlphaChannel="{Binding UsingAlphaChannel, RelativeSource={RelativeSource TemplatedParent}}"
                                                  SelectedColor="{Binding SelectedColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </Grid>

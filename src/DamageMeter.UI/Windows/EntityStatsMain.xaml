@@ -5,39 +5,17 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:ui="clr-namespace:DamageMeter.UI"
                      mc:Ignorable="d"
-                     MinHeight="30" MinWidth="645"
-                     Title="EntityStats">
+                     MinHeight="38" MinWidth="645"
+                     Title="Modern Meter — Combat effects">
     <Window.Resources>
-        <Style x:Key="ShinraButtonStyle" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border"
-                                BorderThickness="0"
-                                Padding="4,2"
-                                BorderBrush="Transparent"
-                                CornerRadius="0"
-                                Background="Black">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <Style x:Key="ModernAuxButton" TargetType="Button" BasedOn="{StaticResource ModernButton}"><Setter Property="Padding" Value="4"/><Setter Property="Margin" Value="0"/></Style>
     </Window.Resources>
     <Window.Background>
         <SolidColorBrush Color="Transparent" Opacity="0" />
     </Window.Background>
     <Grid MouseLeftButtonDown="Move" Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=AllowsTransparency, Converter={StaticResource BoolToMargin}}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="38" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.LayoutTransform>
@@ -45,9 +23,10 @@
                             ScaleX="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}"
                             ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}" />
         </Grid.LayoutTransform>
-        <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2"/>
-        <Button Grid.Row="0" x:Name="CloseStats" Style="{StaticResource ButtonMainStyle}" Background="Black"
-                Opacity="0.5"
+        <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2" CornerRadius="10" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1"/>
+        <TextBlock Grid.Row="0" Margin="14,0,44,0" Text="{DynamicResource ModernText_13EF148DD8CD}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+        <Button Grid.Row="0" x:Name="CloseStats" HorizontalAlignment="Right" Width="34" Style="{StaticResource ButtonMainStyle}" Background="Transparent"
+                Opacity="0.85"
                 Foreground="White" Click="CloseStats_OnClick" HorizontalContentAlignment="Right"
                 VerticalAlignment="Top" Margin="0">
             <Image x:Name="CloseWindow"
