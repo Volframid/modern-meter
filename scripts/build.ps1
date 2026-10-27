@@ -3,7 +3,8 @@ $root = Split-Path $PSScriptRoot -Parent
 dotnet build (Join-Path $root 'src/DamageMeter.Sniffing/Transport.csproj') -c Release
 if ($LASTEXITCODE -ne 0) { throw 'Transport build failed.' }
 Copy-Item -LiteralPath (Join-Path $root 'src/DamageMeter.Sniffing/bin-transport/net7.0-windows/DamageMeter.Sniffing.dll') -Destination $root
-dotnet build (Join-Path $root 'src/DamageMeter.UI/ModernMeter.csproj') -c Release
+# Refresh native EXE icon resources even when only the ICO asset changed.
+dotnet build (Join-Path $root 'src/DamageMeter.UI/ModernMeter.csproj') -t:Rebuild -c Release
 if ($LASTEXITCODE -ne 0) { throw 'Interface build failed.' }
 dotnet build (Join-Path $root 'src/Lang/Ru.Local.csproj') -c Release
 if ($LASTEXITCODE -ne 0) { throw 'Russian resource build failed.' }

@@ -139,4 +139,5 @@
     <sys:String x:Key="ModernText_54A0E8C17EBB">Error</sys:String>
     <sys:String x:Key="ModernText_EEF92C67F057">Upload successful</sys:String>
     <sys:String x:Key="ModernText_6EFC5D27F30B">Upload failed</sys:String>
+    <sys:String x:Key="ModernText_A8501D872521">Notification pop-up opacity (%)</sys:String>
 </ResourceDictionary>

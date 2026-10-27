@@ -80,17 +80,25 @@ namespace DamageMeter.UI
             WindowStartupLocation = WindowStartupLocation.Manual;
             ResizeMode = ResizeMode.NoResize;
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _opacity = GetType().Name == nameof(MainWindow) ? 1 : BasicTeraData.Instance.WindowData.OtherWindowOpacity;
+            _opacity = this is PopupNotification
+                ? ModernPreferences.GetNotificationOpacity(BasicTeraData.Instance.WindowData)
+                : GetType().Name == nameof(MainWindow) ? 1 : BasicTeraData.Instance.WindowData.OtherWindowOpacity;
             Scale = BasicTeraData.Instance.WindowData.Scale;
 
-            if (GetType().Name != nameof(MainWindow)) 
+            if (this is PopupNotification)
+            {
+                Opacity = _opacity;
+                SettingsWindowViewModel.NotificationOpacityChanged += OnOpacityChanged;
+            }
+            else if (GetType().Name != nameof(MainWindow))
                 SettingsWindowViewModel.OtherWindowsOpacityChanged += OnOpacityChanged;
         }
 
         private void OnOpacityChanged(double val)
         {
             _opacity = val;
-            Dispatcher.InvokeIfRequired(() => OpacityAnimation(val), DispatcherPriority.DataBind);
+            if (AllowsTransparency)
+                Dispatcher.InvokeIfRequired(() => BeginAnimation(OpacityProperty, OpacityAnimation(val)), DispatcherPriority.DataBind);
         }
         public void SnapToScreen()
         {
@@ -181,10 +189,12 @@ namespace DamageMeter.UI
                 return;
             }
             Closing -= ClickThrouWindow_Closing;
-            if(GetType().Name != nameof(MainWindow))
+            if (this is PopupNotification)
+                SettingsWindowViewModel.NotificationOpacityChanged -= OnOpacityChanged;
+            else if(GetType().Name != nameof(MainWindow))
                 SettingsWindowViewModel.OtherWindowsOpacityChanged -= OnOpacityChanged;
             
-            if (BasicTeraData.Instance.WindowData.AllowTransparency)
+            if (AllowsTransparency)
             {
                 _dispatcher.BeginInvoke(new Action(() =>
                 {
@@ -199,7 +209,7 @@ namespace DamageMeter.UI
         public void HideWindow(bool set = false)
         {
             Visible = set;
-            if (BasicTeraData.Instance.WindowData.AllowTransparency)
+            if (AllowsTransparency)
             {
                 _dispatcher.Invoke(() =>
                 {
@@ -221,7 +231,7 @@ namespace DamageMeter.UI
             if (!Empty)
             {
                 Visibility = Visibility.Visible;
-                if (BasicTeraData.Instance.WindowData.AllowTransparency)
+                if (AllowsTransparency)
                 {
                     _dispatcher.Invoke(() =>
                     {

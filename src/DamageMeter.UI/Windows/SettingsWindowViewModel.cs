@@ -521,6 +521,16 @@ namespace DamageMeter.UI.Windows
                 NotifyPropertyChanged();
             }
         }
+        public double NotificationOpacityPercent
+        {
+            get => ModernPreferences.GetNotificationOpacity(Data) * 100;
+            set
+            {
+                if (!ModernPreferences.SetNotificationOpacity(Data, value / 100)) return;
+                NotificationOpacityChanged?.Invoke(ModernPreferences.GetNotificationOpacity(Data));
+                NotifyPropertyChanged();
+            }
+        }
         public double Scale
         {
             get => Data.Scale;
@@ -998,6 +1008,7 @@ namespace DamageMeter.UI.Windows
         public static event Action<int>? NumberOfPlayersDisplayedChanged;
         public static event Action? WindowColorsChanged;
         public static event Action<double>? OtherWindowsOpacityChanged;
+        public static event Action<double>? NotificationOpacityChanged;
         public static event Action? PauseChanged;
 
         public ICommand AddServerCommand { get; }

@@ -139,4 +139,5 @@
     <sys:String x:Key="ModernText_54A0E8C17EBB">Ошибка</sys:String>
     <sys:String x:Key="ModernText_EEF92C67F057">Загрузка завершена</sys:String>
     <sys:String x:Key="ModernText_6EFC5D27F30B">Ошибка загрузки</sys:String>
+    <sys:String x:Key="ModernText_A8501D872521">Непрозрачность уведомлений (%)</sys:String>
 </ResourceDictionary>

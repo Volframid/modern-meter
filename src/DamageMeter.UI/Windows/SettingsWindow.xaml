@@ -167,6 +167,7 @@
                         <settings:ValueSetting Value="{Binding OtherWindowsOpacity, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_SystemTray_OtherWindowOpacity}"
                                                Min="0.1" Max="1" />
+                        <settings:ValueSetting x:Name="NotificationOpacitySetting" Value="{Binding NotificationOpacityPercent, Mode=TwoWay}" SettingName="{DynamicResource ModernText_A8501D872521}" Min="10" Max="100" />
                         <settings:ValueSetting Value="{Binding Scale, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0.5" Max="5" />
                         <!--<settings:ValueSetting Value="{Binding UpdatesPerSecond, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_UpdatesPerSecond}" Min="1" Max="20" />-->

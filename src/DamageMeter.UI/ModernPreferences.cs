@@ -14,7 +14,12 @@ namespace DamageMeter.UI;
 // integer percentage. The small UI sidecar also makes slot migration one-time.
 public static class ModernPreferences
 {
-    public sealed class State { public int LayoutVersion { get; set; } public double? OverlayOpacity { get; set; } }
+    public sealed class State
+    {
+        public int LayoutVersion { get; set; }
+        public double? OverlayOpacity { get; set; }
+        public double? NotificationOpacity { get; set; }
+    }
     private static readonly ConditionalWeakTable<WindowData, State> States = new();
     private static DispatcherTimer? _saveTimer;
     private static string FileName => Path.Combine(BasicTeraData.Instance.ResourceDirectory, "config", "modern-ui.json");
@@ -34,6 +39,10 @@ public static class ModernPreferences
             if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var percent) && double.IsFinite(percent))
                 data.MainWindowOpacity = Math.Clamp(percent / 100, .05, 1);
         }
+        // Inherit the existing look once; later changes to other windows are independent.
+        state.NotificationOpacity = state.NotificationOpacity is double notification && double.IsFinite(notification)
+            ? Math.Clamp(notification, .1, 1)
+            : double.IsFinite(data.OtherWindowOpacity) ? Math.Clamp(data.OtherWindowOpacity, .1, 1) : 1;
         if (state.LayoutVersion < 1)
         {
             foreach (var metrics in new[] { data.DpsMetrics, data.TankMetrics, data.HealerMetrics })
@@ -50,6 +59,24 @@ public static class ModernPreferences
         }
         States.Add(data, state);
         SaveUi(data, state);
+    }
+
+    public static double GetNotificationOpacity(WindowData data)
+    {
+        Initialize(data);
+        return States.GetValue(data, _ => new State()).NotificationOpacity ?? 1;
+    }
+
+    public static bool SetNotificationOpacity(WindowData data, double value)
+    {
+        if (!double.IsFinite(value)) return false;
+        Initialize(data);
+        value = Math.Clamp(value, .1, 1);
+        var state = States.GetValue(data, _ => new State());
+        if (state.NotificationOpacity == value) return false;
+        state.NotificationOpacity = value;
+        ScheduleSave();
+        return true;
     }
 
     public static void ScheduleSave()
