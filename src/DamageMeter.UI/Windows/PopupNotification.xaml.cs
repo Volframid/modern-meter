@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Data.Actions.Notify.SoundElements;
 using System.Windows.Threading;
+using DamageMeter.UI.Windows;
 
 namespace DamageMeter.UI
 {
@@ -20,6 +21,14 @@ namespace DamageMeter.UI
         private readonly Action<SoundInterface> _playSound;
         private readonly DispatcherTimer _focusTimer;
 
+        public double NotificationBackgroundOpacity
+        {
+            get => (double)GetValue(NotificationBackgroundOpacityProperty);
+            private set => SetValue(NotificationBackgroundOpacityProperty, value);
+        }
+        public static readonly DependencyProperty NotificationBackgroundOpacityProperty = DependencyProperty.Register(
+            nameof(NotificationBackgroundOpacity), typeof(double), typeof(PopupNotification), new PropertyMetadata(1d));
+
         public PopupNotification() : this(null) { }
 
         // Allows queue validation without displaying a native window or taking focus.
@@ -32,6 +41,8 @@ namespace DamageMeter.UI
                 (_, _) => RemoveFocusedNotifications(), Dispatcher);
             _focusTimer.Stop();
             InitializeComponent();
+            NotificationBackgroundOpacity = ModernPreferences.GetNotificationOpacity(BasicTeraData.Instance.WindowData);
+            SettingsWindowViewModel.NotificationOpacityChanged += OnNotificationOpacityChanged;
             notificationBalloons = new SynchronizedObservableCollection<Balloon>();
             notificationBalloons.CollectionChanged += NotificationBalloons_CollectionChanged;
             content.ItemsSource = notificationBalloons;
@@ -40,6 +51,19 @@ namespace DamageMeter.UI
             this.Left = this.LastSnappedPoint?.X ?? 0;
             this.Top = this.LastSnappedPoint?.Y ?? 0;
 
+        }
+
+        private void OnNotificationOpacityChanged(double value)
+        {
+            if (Dispatcher.HasShutdownStarted) return;
+            Dispatcher.Invoke(() => NotificationBackgroundOpacity = value);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            SettingsWindowViewModel.NotificationOpacityChanged -= OnNotificationOpacityChanged;
+            _focusTimer.Stop();
+            base.OnClosed(e);
         }
 
         private void PresentNotification()

@@ -21,7 +21,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
 - Thirteen settings sections, explicit interface language selection, and automatic Russian on Russian Windows. New interface text supports English and Russian; other existing language packs are retained with English fallback for new text. Interface language changes apply immediately to open windows.
 - An original damage-strike icon shared by the application, tray and loading screen.
-- Independent notification pop-up opacity (10–100%) in Full settings → Appearance, applied immediately and retained after restart.
+- Independent notification background opacity (10–100%) in Full settings → Appearance, applied immediately and retained after restart.
 - A new loading screen with live status, a matching update dialog, notification cards, chat, effects and upload-history windows, event editor and color picker.
 - Chat and notification functions, including whisper popups when the game is in the background, subject to the user's event and sound settings.
 
@@ -29,7 +29,7 @@ Graph collection is **off by default**. Enable it in Full settings → Graph if 
 
 ## Screenshots
 
-The actual Modern Meter 1.0.5 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+The actual Modern Meter 1.0.6 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
 
 ### Loading screen
 
@@ -93,7 +93,7 @@ Your settings are created locally on first launch and are not overwritten by mod
 
 The native runtime keeps its compatible internal ShinraMeter filenames; the module and visible interface are named Modern Meter. Updates are delivered through Toolbox rather than the original native updater.
 
-Notification opacity changes the entire notification card, including its text and icon. A lower percentage is more transparent. On the first upgrade, it inherits the previous other-window opacity; afterward the controls are independent.
+Notification opacity changes only the card background and decorative icon backing. Text and icons keep their normal visibility. A lower percentage makes the background more transparent. On the first upgrade, it inherits the previous other-window opacity; afterward the controls are independent.
 
 Chat and party notification bubbles and audio are shown only while TERA is in the background; combat-specific alerts retain their own event rules. Cyrillic text selects an installed Russian Windows speech voice. If that voice is unavailable, a notification sound is used.
 

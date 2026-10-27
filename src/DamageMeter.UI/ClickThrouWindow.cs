@@ -80,17 +80,11 @@ namespace DamageMeter.UI
             WindowStartupLocation = WindowStartupLocation.Manual;
             ResizeMode = ResizeMode.NoResize;
             _dispatcher = Dispatcher.CurrentDispatcher;
-            _opacity = this is PopupNotification
-                ? ModernPreferences.GetNotificationOpacity(BasicTeraData.Instance.WindowData)
-                : GetType().Name == nameof(MainWindow) ? 1 : BasicTeraData.Instance.WindowData.OtherWindowOpacity;
+            _opacity = this is PopupNotification || GetType().Name == nameof(MainWindow)
+                ? 1 : BasicTeraData.Instance.WindowData.OtherWindowOpacity;
             Scale = BasicTeraData.Instance.WindowData.Scale;
 
-            if (this is PopupNotification)
-            {
-                Opacity = _opacity;
-                SettingsWindowViewModel.NotificationOpacityChanged += OnOpacityChanged;
-            }
-            else if (GetType().Name != nameof(MainWindow))
+            if (this is not PopupNotification && GetType().Name != nameof(MainWindow))
                 SettingsWindowViewModel.OtherWindowsOpacityChanged += OnOpacityChanged;
         }
 
@@ -189,9 +183,7 @@ namespace DamageMeter.UI
                 return;
             }
             Closing -= ClickThrouWindow_Closing;
-            if (this is PopupNotification)
-                SettingsWindowViewModel.NotificationOpacityChanged -= OnOpacityChanged;
-            else if(GetType().Name != nameof(MainWindow))
+            if (this is not PopupNotification && GetType().Name != nameof(MainWindow))
                 SettingsWindowViewModel.OtherWindowsOpacityChanged -= OnOpacityChanged;
             
             if (AllowsTransparency)
