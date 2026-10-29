@@ -4,7 +4,8 @@
  Title="Modern Meter" Width="560" SizeToContent="Height" MinHeight="296" MaxHeight="560"
  ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Background="Transparent"
  ShowInTaskbar="False" WindowStartupLocation="CenterScreen" UseLayoutRounding="True"
- FontFamily="Segoe UI" Foreground="#F0F2FA" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+ FontFamily="Segoe UI" Foreground="#F0F2FA" MouseLeftButtonDown="Window_MouseLeftButtonDown"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
  <Window.Resources>
   <Style x:Key="SplashButton" TargetType="Button">
    <Setter Property="Foreground" Value="#F0F2FA"/><Setter Property="Background" Value="#1B202B"/>

@@ -63,14 +63,16 @@ namespace DamageMeter.UI
         {
             App.MainDispatcher.Invoke(() =>
             {
-                TrayIcon.Icon = icon?.GetIcon() ?? BasicTeraData.Instance.ImageDatabase.Tray;
-                MainWindow.Icon = icon?.ToImageSource() ?? BasicTeraData.Instance.ImageDatabase.Icon;
+                // Guild image updates must not replace the application identity.
+                TrayIcon.Icon = BasicTeraData.Instance.ImageDatabase.Tray;
+                MainWindow.Icon = ModernDamageMark.ApplicationImage;
             });
 
         }
 
         private void Update(UiUpdateMessage message)
         {
+            ModernPrimalAlerts.Observe(message);
             EntityStats.Update(message.StatsSummary.EntityInformation, message.Abnormals);
             UploadHistory.Update(message.BossHistory);
             Notifications.AddNotification(message.Flash);
@@ -158,6 +160,8 @@ namespace DamageMeter.UI
                 }
                 foreach (Window window in Application.Current.Windows)
                 {
+                    if (window is Broadcast.NativeBroadcastWindow) continue;
+                    if (window is ClickThrouWindow interactive && interactive.IsDragging) continue;
                     window.Topmost = false;
                     window.Topmost = true;
                 }

@@ -5,7 +5,8 @@
  xmlns:markdig="clr-namespace:Markdig.Wpf;assembly=Markdig.Wpf"
  Title="{DynamicResource ModernText_79CACD2CD796}" Height="480" Width="780" MinHeight="280" MinWidth="440"
  FontFamily="Segoe UI" Foreground="{DynamicResource ModernText}" Background="Transparent"
- WindowStartupLocation="CenterScreen" Icon="/ShinraMeter;component/shinra.ico" ResizeMode="CanResize" Loaded="ClickThrouWindow_Loaded">
+ WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Loaded="ClickThrouWindow_Loaded"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
  <Window.Resources>
   <Style x:Key="{x:Static markdig:Styles.Heading1StyleKey}" TargetType="{x:Type Paragraph}"><Setter Property="Foreground" Value="{DynamicResource ModernText}"/><Setter Property="FontSize" Value="28"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Margin" Value="0,10,0,12"/></Style>
   <Style x:Key="{x:Static markdig:Styles.Heading2StyleKey}" TargetType="{x:Type Paragraph}"><Setter Property="Foreground" Value="{DynamicResource ModernText}"/><Setter Property="FontSize" Value="22"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Margin" Value="0,10,0,12"/></Style>
@@ -26,6 +27,7 @@
    <Grid.RowDefinitions><RowDefinition Height="40"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <Image x:Name="ChromeBrandIcon" Style="{StaticResource ModernCaptionIcon}" Margin="0,0,12,0"/>
      <TextBlock Text="MODERN METER" Foreground="{DynamicResource ModernAccent}" FontSize="11" FontWeight="SemiBold" Margin="0,0,16,0"/>
      <TextBlock Text="{DynamicResource NativeText_App_Update_Available}" FontSize="13" Foreground="{DynamicResource ModernText}"/>
     </StackPanel>

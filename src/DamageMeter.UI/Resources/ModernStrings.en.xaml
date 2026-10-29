@@ -141,4 +141,23 @@
     <sys:String x:Key="ModernText_6EFC5D27F30B">Upload failed</sys:String>
     <sys:String x:Key="ModernText_A8501D872521">Notification pop-up opacity (%)</sys:String>
     <sys:String x:Key="ModernText_5A0D55CCB291">Notification background opacity (%)</sys:String>
+    <sys:String x:Key="ModernText_A951C5945635">Streaming</sys:String>
+    <sys:String x:Key="ModernText_8DC5E7D9D85B">All Meter windows in one source</sys:String>
+    <sys:String x:Key="ModernText_B2A7D304F008">Enable stream overlay</sys:String>
+    <sys:String x:Key="ModernText_958FC6B02A96">Only Modern Meter windows are included. Your desktop and other apps are not captured.</sys:String>
+    <sys:String x:Key="ModernText_5003C604E6E3">Windows from either display appear together in the Meter display area. Drag them normally in Modern Meter.</sys:String>
+    <sys:String x:Key="ModernText_A79A2C74A7F4">Capture window</sys:String>
+    <sys:String x:Key="ModernText_30460E40D4DF">Canvas size</sys:String>
+    <sys:String x:Key="ModernText_2DE5EF2D8ED4">Visible windows</sys:String>
+    <sys:String x:Key="ModernText_574B340FB0C8">In Streamlabs / OBS, use one Window Capture and select Modern Meter — Stream. Choose Windows 10 (1903 and up) as the capture method and fit the full source over the game. Hide the old Browser Source.</sys:String>
+    <sys:String x:Key="ModernText_CDFFF77A47C2">This is a display-only source. Continue using the windows in Modern Meter to control the app.</sys:String>
+    <sys:String x:Key="ModernText_B450FF5595A5">Update rate (FPS)</sys:String>
+    <sys:String x:Key="ModernText_F4DAC7B1DB33">Connection port</sys:String>
+    <sys:String x:Key="ModernText_807A5165098A">Waiting for Streamlabs / OBS</sys:String>
+    <sys:String x:Key="ModernText_22965568D22A">Connected</sys:String>
+    <sys:String x:Key="ModernText_9976902EEBE2">Stream connection unavailable</sys:String>
+    <sys:String x:Key="ModernText_75081B593D15">Disabled</sys:String>
+    <sys:String x:Key="ModernText_19375D0017ED">Native capture source ready</sys:String>
+    <sys:String x:Key="ModernText_DA5C65C680C5">Vanguard credits are maxed out</sys:String>
+    <sys:String x:Key="ModernText_792B125AEF9A">Vanguard credits are close to cap</sys:String>
 </ResourceDictionary>

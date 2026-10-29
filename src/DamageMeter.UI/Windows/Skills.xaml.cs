@@ -6,6 +6,7 @@ using DamageMeter.Database.Structures;
 using Data;
 using Lang;
 using Tera.Game.Abnormality;
+using System.Windows.Threading;
 
 namespace DamageMeter.UI
 {
@@ -20,6 +21,8 @@ namespace DamageMeter.UI
         private SkillsLog _skillReceivedLog;
 
         private Database.Structures.Skills _skills;
+        private bool _initialPlacementPending = true;
+        private bool _centering;
 
 
         public Skills(PlayerDamageViewModel vm)
@@ -28,47 +31,12 @@ namespace DamageMeter.UI
 
             InitializeComponent();
 
-            #region Pasted from VM
-            var main = App.Current.MainWindow;
-
-            var screen = Screen.FromHandle(new WindowInteropHelper(main).Handle);
-            // Transform screen point to WPF device independent point
-            var source = PresentationSource.FromVisual(this);
-            if (source?.CompositionTarget == null)
-            {
-                //if this can't be determined, just use the center screen logic
-                WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            }
-            else
-            {
-                // WindowStartupLocation.CenterScreen sometimes put window out of screen in multi monitor environment
-                WindowStartupLocation = WindowStartupLocation.Manual;
-                var m = source.CompositionTarget.TransformToDevice;
-                var dx = m.M11;
-                var dy = m.M22;
-                ((UIElement)DpsPanel.Content).Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                var maxWidth = (((UIElement)DpsPanel.Content).DesiredSize.Width + 6) * BasicTeraData.Instance.WindowData.Scale;
-                Point locationFromScreen;
-                if (screen.WorkingArea.X + screen.WorkingArea.Width > (main.Left + main.Width + maxWidth) * dx)
-                {
-                    locationFromScreen = new Point((main.Left + main.Width) * dx, main.Top * dy);
-                }
-                else if
-                    (screen.WorkingArea.X + maxWidth * dx < main.Left * dx)
-                {
-                    locationFromScreen = new Point((main.Left - maxWidth) * dx, main.Top * dy);
-                }
-                else
-                {
-                    locationFromScreen = new Point(screen.WorkingArea.X + (screen.WorkingArea.Width - maxWidth * dx) / 2,
-                        screen.WorkingArea.Y + (screen.WorkingArea.Height - 600 * dy) / 2);
-                }
-                var targetPoints = source.CompositionTarget.TransformFromDevice.Transform(locationFromScreen);
-                Left = targetPoints.X;
-                Top = targetPoints.Y;
-            }
-
-            #endregion
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            ContentRendered += (_, _) => CompleteInitialPlacement();
+            SizeChanged += (_, _) => CenterInitialPlacement();
+            // Once the user interacts or drags, later data/layout updates must
+            // never pull the window away from the chosen position.
+            PreviewMouseLeftButtonDown += (_, _) => _initialPlacementPending = false;
 
         }
 
@@ -120,6 +88,43 @@ namespace DamageMeter.UI
             SkillsDealtPanel.Content = _skillDealtLog;
             _skillReceivedLog = new SkillsLog(_skills.GetSkillsReceived(playerDamageDealt.Source.User, timedEncounter), true);
             SkillsReceivedPanel.Content = _skillReceivedLog;
+            CompleteInitialPlacement();
+        }
+
+        private void CompleteInitialPlacement()
+        {
+            if (!_initialPlacementPending) return;
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() =>
+            {
+                if (!_initialPlacementPending || !IsLoaded) return;
+                UpdateLayout();
+                CenterInitialPlacement();
+                if (_skills != null) _initialPlacementPending = false;
+            }));
+        }
+
+        private void CenterInitialPlacement()
+        {
+            if (!_initialPlacementPending || _centering || IsDragging || !IsLoaded) return;
+            var source = PresentationSource.FromVisual(this);
+            if (source?.CompositionTarget == null || ActualWidth < 1 || ActualHeight < 1) return;
+            _centering = true;
+            try
+            {
+                var main = System.Windows.Application.Current?.MainWindow;
+                var handle = main == null ? IntPtr.Zero : new WindowInteropHelper(main).Handle;
+                var screen = handle == IntPtr.Zero ? Screen.PrimaryScreen : Screen.FromHandle(handle);
+                if (screen == null) return;
+                var work = screen.WorkingArea;
+                var physical = new Rect(work.X, work.Y, work.Width, work.Height);
+                var transform = source.CompositionTarget.TransformFromDevice;
+                var logical = Rect.Transform(physical, transform);
+                MaxWidth = logical.Width; MaxHeight = logical.Height;
+                UpdateLayout();
+                var position = ModernWindowPlacement.Center(physical, new Size(ActualWidth, ActualHeight), transform);
+                Left = position.X; Top = position.Y; LastSnappedPoint = position;
+            }
+            finally { _centering = false; }
         }
 
         private void ClickThrouWindow_Loaded(object sender, RoutedEventArgs e)

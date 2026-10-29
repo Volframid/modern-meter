@@ -22,7 +22,8 @@
         KeyUp="OnKeyUp"
         mc:Ignorable="d"
         FontFamily="Segoe UI" Title="{DynamicResource ModernText_073CE67DF610}" Height="720" Width="960" MinWidth="800" MinHeight="600"
-        d:DataContext="{d:DesignInstance local:SettingsWindowViewModel}">
+        d:DataContext="{d:DesignInstance local:SettingsWindowViewModel}"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <shell:WindowChrome.WindowChrome><shell:WindowChrome CaptionHeight="32" ResizeBorderThickness="5" GlassFrameThickness="0" CornerRadius="12"/></shell:WindowChrome.WindowChrome>
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
@@ -88,7 +89,7 @@
     <Border CornerRadius="12" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1">
     <Grid><Grid.RowDefinitions><RowDefinition Height="32"/><RowDefinition Height="*"/></Grid.RowDefinitions>
     <Grid Margin="14,0,5,0"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-      <TextBlock Text="{DynamicResource ModernText_20D54C595F51}" FontSize="10" Foreground="{DynamicResource ModernMuted}" VerticalAlignment="Center"/>
+      <Image x:Name="ChromeBrandIcon" Style="{StaticResource ModernCaptionIcon}"/>
       <StackPanel Grid.Column="1" Orientation="Horizontal" shell:WindowChrome.IsHitTestVisibleInChrome="True">
         <Button Content="−" Click="MinimizeWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_D72E311C4DDA}"/>
         <Button Content="□" Click="MaximizeWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_AB9616C1C81C}"/>
@@ -161,14 +162,14 @@
                                                   Visibility="Collapsed"/>
                         <settings:ValueSetting Value="{Binding NumberOfPlayersDisplayed, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_NumberPlayersDisplayed}" Min="1" Max="30" />
-                        <settings:ValueSetting Value="{Binding MainWindowOpacity, Mode=TwoWay}"
+                        <settings:ValueSetting x:Name="MainOpacitySetting" Value="{Binding MainWindowOpacityPercent, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_SystemTray_MainWindowOpacity}"
-                                               Min="0" Max="1" />
-                        <settings:ValueSetting Value="{Binding OtherWindowsOpacity, Mode=TwoWay}"
+                                               Min="0" Max="100" />
+                        <settings:ValueSetting x:Name="OtherOpacitySetting" Value="{Binding OtherWindowsOpacityPercent, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_SystemTray_OtherWindowOpacity}"
-                                               Min="0.1" Max="1" />
+                                               Min="0" Max="100" />
                         <settings:ValueSetting x:Name="NotificationOpacitySetting" Value="{Binding NotificationOpacityPercent, Mode=TwoWay}" SettingName="{DynamicResource ModernText_5A0D55CCB291}" Min="10" Max="100" />
-                        <settings:ValueSetting Value="{Binding Scale, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0.5" Max="5" />
+                        <settings:ValueSetting x:Name="ScaleLevelSetting" Value="{Binding ScaleLevel, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0" Max="100" />
                         <!--<settings:ValueSetting Value="{Binding UpdatesPerSecond, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_UpdatesPerSecond}" Min="1" Max="20" />-->
 
@@ -625,6 +626,25 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
+                </ScrollViewer></TabItem>
+
+                <!--Streaming: appended so existing section indices stay stable-->
+                <TabItem x:Name="StreamingTab"><TabItem.Header><StackPanel Orientation="Horizontal"><Image Source="{x:Static ui:ModernDamageMark.Glyph}" Width="15" Height="15" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_A951C5945635}" VerticalAlignment="Center"/></StackPanel></TabItem.Header>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="6,6,16,12">
+                 <StackPanel MaxWidth="680" HorizontalAlignment="Left">
+                  <TextBlock Text="{DynamicResource ModernText_8DC5E7D9D85B}" Style="{StaticResource ModernHeading}" TextWrapping="Wrap"/>
+                  <TextBlock Text="{DynamicResource ModernText_958FC6B02A96}" Style="{StaticResource ModernCaption}" TextWrapping="Wrap" Margin="0,10,0,8"/>
+                  <TextBlock Text="{DynamicResource ModernText_5003C604E6E3}" Style="{StaticResource ModernCaption}" TextWrapping="Wrap" Margin="0,0,0,18"/>
+                  <settings:CheckboxSetting x:Name="BroadcastEnabledSetting" IsOn="{Binding BroadcastEnabled, Mode=TwoWay}" SettingName="{DynamicResource ModernText_B2A7D304F008}" Margin="0,0,0,12"/>
+                  <TextBlock Text="{Binding BroadcastStatusText, Mode=OneWay}" Foreground="{DynamicResource ModernAccent}" Margin="0,0,0,18"/>
+                  <Border Style="{StaticResource ModernCardStyle}"><StackPanel>
+                   <TextBlock Text="{DynamicResource ModernText_A79A2C74A7F4}" Style="{StaticResource ModernCaption}"/>
+                   <TextBlock x:Name="BroadcastAddress" Text="{Binding BroadcastSourceName, Mode=OneWay}" TextWrapping="Wrap" Foreground="{DynamicResource ModernText}" Margin="0,8,0,0" HorizontalAlignment="Left" Focusable="False" IsHitTestVisible="False"/>
+                   <WrapPanel Margin="0,18,0,0"><TextBlock Text="{DynamicResource ModernText_30460E40D4DF}" Style="{StaticResource ModernCaption}" Margin="0,0,10,0"/><TextBlock Text="{Binding BroadcastCanvasSize, Mode=OneWay}" Foreground="{DynamicResource ModernText}" Margin="0,0,24,0"/><TextBlock Text="{DynamicResource ModernText_2DE5EF2D8ED4}" Style="{StaticResource ModernCaption}" Margin="0,0,10,0"/><TextBlock Text="{Binding BroadcastWindowCount, Mode=OneWay}" Foreground="{DynamicResource ModernText}"/></WrapPanel>
+                  </StackPanel></Border>
+                  <TextBlock Text="{DynamicResource ModernText_574B340FB0C8}" TextWrapping="Wrap" Foreground="{DynamicResource ModernText}" Margin="0,18,0,8"/>
+                  <TextBlock Text="{DynamicResource ModernText_CDFFF77A47C2}" TextWrapping="Wrap" Style="{StaticResource ModernCaption}" Margin="0,0,0,20"/>
+                 </StackPanel>
                 </ScrollViewer></TabItem>
             </TabControl></Grid>
   <TextBlock Grid.Row="2" Text="{DynamicResource ModernText_C982EFEADAA4}" Style="{StaticResource ModernCaption}" Margin="10,18,0,2"/>

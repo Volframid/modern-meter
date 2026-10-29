@@ -15,7 +15,8 @@
         mc:Ignorable="d"
         SizeToContent="Width"
         Background="Transparent" WindowStyle="None" AllowsTransparency="True" FontFamily="Segoe UI" Foreground="{DynamicResource ModernText}"
-        Title="Modern Meter — Events editor" Height="600" Width="800" d:DataContext="{d:DesignInstance ui:EventsEditorViewModel}">
+        Title="Modern Meter — Events editor" Height="600" Width="800" d:DataContext="{d:DesignInstance ui:EventsEditorViewModel}"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
                       ResizeBorderThickness="0"
@@ -504,12 +505,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Background="Transparent" MouseDown="Drag">
-            <Path Data="{StaticResource Svg.Events}"
-                  Style="{StaticResource SmallButtonPathStyle}"
-                  HorizontalAlignment="Left"
-                  Opacity=".3"
-                  Height="14"
-                  Margin="13 0" />
+            <Image x:Name="ChromeBrandIcon" Style="{StaticResource ModernCaptionIcon}" Margin="13,0,0,0"/>
             <Rectangle Width="1" Margin="40 5" Fill="#1fff" HorizontalAlignment="Left" />
             <TextBlock Text="{DynamicResource ModernText_1009CFD4D50C}" FontWeight="SemiBold"
                        Foreground="{DynamicResource ModernText}"

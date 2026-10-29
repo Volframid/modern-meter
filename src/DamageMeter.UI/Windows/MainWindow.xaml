@@ -23,12 +23,13 @@
                      d:DataContext="{d:DesignInstance ui:MainViewModel}"
                      Background="#01000000"
                      Closed="MainWindow_OnClosed"
-                     Icon="{Binding WindowIcon}"
+
                      Loaded="MainWindow_OnLoaded"
                      MouseEnter="MainWindow_OnMouseEnter"
                      MouseLeave="MainWindow_OnMouseLeave"
                      SizeToContent="WidthAndHeight"
-                     mc:Ignorable="d">
+                     mc:Ignorable="d"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <Window.Resources>
         <Style x:Key="EmptyModeButtonPathStyle"
                BasedOn="{StaticResource PathBaseStyle}"
@@ -169,7 +170,11 @@
 
         <Border x:Name="FooterBorder"
                 Grid.Row="3"
-                Style="{StaticResource BottomBorderStyle}" />
+                Height="{Binding ActualHeight, ElementName=Footer}">
+            <Border.Style><Style TargetType="Border" BasedOn="{StaticResource TopmostBorderStyle}">
+                <Style.Triggers><DataTrigger Binding="{Binding ActualHeight, ElementName=Footer}" Value="0"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers>
+            </Style></Border.Style>
+        </Border>
 
         <Border x:Name="MessageBorder"
                 Grid.Row="2"
@@ -184,15 +189,17 @@
         <Grid x:Name="CompactHeader" Grid.Row="0" Height="24" Margin="8,0,6,0">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="{DynamicResource ModernText_27D16A1330E7}" FontSize="10" FontWeight="SemiBold" Foreground="#CAB4FF" VerticalAlignment="Center"/>
+                <Image x:Name="CompactBrandIcon" Source="{x:Static ui:ModernDamageMark.Glyph}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" ToolTip="Modern Meter" AutomationProperties.Name="Modern Meter"/>
             </StackPanel>
-            <Border Grid.Column="1" Background="#302E384B" CornerRadius="6" Padding="6,2" Margin="4,1,6,1" VerticalAlignment="Center" ToolTip="{Binding FightClock.StatusText}">
+            <Border x:Name="TimerSurface" Grid.Column="1" Background="Transparent" CornerRadius="6" Padding="6,2" Margin="4,1,6,1" VerticalAlignment="Center" ToolTip="{Binding FightClock.StatusText}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Ellipse Width="6" Height="6" Fill="{Binding FightClock.StateBrush}" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <Ellipse x:Name="CombatStateIndicator" Width="6" Height="6" Fill="{Binding FightClock.StateBrush}" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding TimerText}" Foreground="#F0F2FA" FontFamily="Consolas" FontSize="11" FontWeight="SemiBold" VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
-            <Button Grid.Column="2" Content="{DynamicResource ModernText_D4B1EA5708DD}" Click="OpenModernDashboard" Style="{StaticResource ModernButton}" Padding="6,2" FontSize="10" VerticalAlignment="Center"/>
+            <Button x:Name="CompactOverviewButton" Grid.Column="2" Background="Transparent" Content="{DynamicResource ModernText_D4B1EA5708DD}" Click="OpenModernDashboard" Style="{StaticResource ModernButton}" Padding="6,2" FontSize="10" VerticalAlignment="Center">
+                <Button.BorderBrush><SolidColorBrush Color="{Binding BorderColor}" Opacity="{Binding WindowOpacity}"/></Button.BorderBrush>
+            </Button>
         </Grid>
 
         <StackPanel x:Name="Messages"

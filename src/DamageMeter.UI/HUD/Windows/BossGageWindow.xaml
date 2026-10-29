@@ -15,7 +15,8 @@
                      WindowStyle="None"
                      Background="Transparent"
                      MouseRightButtonDown="Window_MouseRightButtonDown"
-                     ResizeMode="NoResize" d:DataContext="{d:DesignInstance ui:MainViewModel}">
+                     ResizeMode="NoResize" d:DataContext="{d:DesignInstance ui:MainViewModel}"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <Window.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Hide" 

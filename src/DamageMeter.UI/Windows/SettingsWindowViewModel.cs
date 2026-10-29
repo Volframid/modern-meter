@@ -508,6 +508,7 @@ namespace DamageMeter.UI.Windows
                 //MainWindowOpacityChanged?.Invoke(value);
                 NotifyPropertyChanged();
                 MainViewModel.Instance.NotifyPropertyChangedEx(nameof(MainViewModel.WindowOpacity));
+                NotifyPropertyChanged(nameof(MainWindowOpacityPercent));
             }
         }
         public double OtherWindowsOpacity
@@ -519,7 +520,18 @@ namespace DamageMeter.UI.Windows
                 Data.OtherWindowOpacity = value;
                 OtherWindowsOpacityChanged?.Invoke(value);
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(OtherWindowsOpacityPercent));
             }
+        }
+        public double MainWindowOpacityPercent
+        {
+            get => Math.Round(MainWindowOpacity * 100, 2);
+            set { if (double.IsFinite(value) && value != MainWindowOpacityPercent) MainWindowOpacity = Math.Clamp(value, 0, 100) / 100; }
+        }
+        public double OtherWindowsOpacityPercent
+        {
+            get => Math.Round(OtherWindowsOpacity * 100, 2);
+            set { if (double.IsFinite(value) && value != OtherWindowsOpacityPercent) OtherWindowsOpacity = Math.Clamp(value, 0, 100) / 100; }
         }
         public double NotificationOpacityPercent
         {
@@ -531,6 +543,26 @@ namespace DamageMeter.UI.Windows
                 NotifyPropertyChanged();
             }
         }
+        public bool BroadcastEnabled
+        {
+            get => ModernBroadcast.Enabled;
+            set { ModernBroadcast.SetEnabled(value); OnBroadcastChanged(); }
+        }
+        public string BroadcastSourceName => ModernBroadcast.SourceName;
+        public string BroadcastCanvasSize => ModernBroadcast.CanvasSize;
+        public int BroadcastWindowCount => ModernBroadcast.WindowCount;
+        public string BroadcastStatusText => ModernLocalization.Get(ModernBroadcast.Status switch
+        {
+            1 => "Native capture source ready", 3 => "Stream connection unavailable", _ => "Disabled"
+        });
+        private void OnBroadcastChanged()
+        {
+            NotifyPropertyChanged(nameof(BroadcastEnabled)); NotifyPropertyChanged(nameof(BroadcastSourceName));
+            NotifyPropertyChanged(nameof(BroadcastCanvasSize)); NotifyPropertyChanged(nameof(BroadcastWindowCount));
+            NotifyPropertyChanged(nameof(BroadcastStatusText));
+        }
+        private void OnBroadcastLanguageChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs args) =>
+            NotifyPropertyChanged(nameof(BroadcastStatusText));
         public double Scale
         {
             get => Data.Scale;
@@ -540,7 +572,15 @@ namespace DamageMeter.UI.Windows
                 Data.Scale = value;
                 WindowScaleChanged?.Invoke(value);
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(ScaleLevel));
             }
+        }
+        // A normalized size control, not a physical percentage: retain the
+        // existing 0.5–5 range and the user's exact stored scale on opening.
+        public double ScaleLevel
+        {
+            get => Math.Round(Math.Clamp((Scale - .5) / 4.5 * 100, 0, 100), 2);
+            set { if (double.IsFinite(value) && value != ScaleLevel) Scale = .5 + Math.Clamp(value, 0, 100) / 100 * 4.5; }
         }
 
         // layout
@@ -1046,6 +1086,8 @@ namespace DamageMeter.UI.Windows
         public SettingsWindowViewModel()
         {
             ModernPreferences.Initialize(Data);
+            ModernBroadcast.Changed += OnBroadcastChanged;
+            System.ComponentModel.PropertyChangedEventManager.AddHandler(ModernLocalization.State, OnBroadcastLanguageChanged, nameof(LocalizationState.Version));
             ToastData = new ToastViewModel();
 
             DataExporter.GlpyhExportStatusUpdated += OnGlyphExportStatusUpdated;
@@ -1075,15 +1117,7 @@ namespace DamageMeter.UI.Windows
             });
             BrowseLinkCommand = new RelayCommand(type =>
             {
-                var url = "https://github.com/neowutran/ShinraMeter";
-                switch (type.ToString())
-                {
-                    case "wiki": url += "/wiki"; break;
-                    case "patch": url += "/wiki/Patch-note"; break;
-                    case "issues": url += "/issues"; break;
-                    case "discord": url = "https://discord.gg/anUXQTp"; break;
-                }
-
+                var url = ModernBranding.ProjectLink(type?.ToString());
                 Process.Start("explorer.exe", url);
             });
             ResetCommand = new RelayCommand(_ =>
@@ -1174,6 +1208,7 @@ namespace DamageMeter.UI.Windows
         {
             foreach (Window window in Application.Current.Windows)
             {
+                if (window is DamageMeter.UI.Broadcast.NativeBroadcastWindow) continue;
                 window.Topmost = BasicTeraData.Instance.WindowData.Topmost;
                 window.ShowInTaskbar = !BasicTeraData.Instance.WindowData.Topmost;
             }

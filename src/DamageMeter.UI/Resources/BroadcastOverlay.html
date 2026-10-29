@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modern Meter — Stream overlay</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}#stage{position:absolute;transform-origin:0 0;pointer-events:none}#stage img{position:absolute;display:block;max-width:none;pointer-events:none}</style>
+</head><body><div id="stage" aria-label="Modern Meter windows"></div>
+<script>
+(() => {
+  'use strict';
+  const stage = document.getElementById('stage'), images = new Map();
+  let width = 1, height = 1;
+  function fit() {
+    const scale = Math.min(innerWidth / width, innerHeight / height);
+    stage.style.width = width + 'px'; stage.style.height = height + 'px';
+    stage.style.left = ((innerWidth - width * scale) / 2) + 'px';
+    stage.style.top = ((innerHeight - height * scale) / 2) + 'px';
+    stage.style.transform = 'scale(' + scale + ')';
+  }
+  addEventListener('resize', fit);
+  function clear() { images.forEach(image => image.remove()); images.clear(); }
+  async function poll() {
+    let delay = 100;
+    const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 2000);
+    try {
+      const response = await fetch('state', {cache:'no-store',signal:controller.signal});
+      if (!response.ok) throw new Error('offline');
+      const state = await response.json(); width = state.width; height = state.height; fit();
+      delay = Math.max(33, Math.min(200, Math.round(1000 / (state.fps || 10))));
+      const visible = new Set();
+      for (const layer of state.layers) {
+        visible.add(layer.id);
+        let image = images.get(layer.id);
+        if (!image) {
+          image = new Image(); image.dataset.windowId = layer.id; image.alt = '';
+          image.onload = () => { image.style.visibility = 'visible'; };
+          image.onerror = () => { image.style.visibility = 'hidden'; image.dataset.version = ''; };
+          images.set(layer.id,image); stage.appendChild(image);
+        }
+        image.style.left = layer.x + 'px'; image.style.top = layer.y + 'px';
+        image.style.width = layer.width + 'px'; image.style.height = layer.height + 'px';
+        image.style.opacity = layer.opacity; image.style.zIndex = layer.z;
+        if (image.dataset.version !== String(layer.version)) {
+          image.dataset.version = String(layer.version); image.src = 'frame/' + encodeURIComponent(layer.id) + '?v=' + layer.version;
+        }
+      }
+      images.forEach((image,id) => { if (!visible.has(id)) {image.remove();images.delete(id);} });
+      document.body.dataset.connected = 'true';
+    } catch (_) { clear(); document.body.dataset.connected = 'false'; delay = 1000; }
+    finally { clearTimeout(timeout); setTimeout(poll, delay); }
+  }
+  poll();
+})();
+</script></body></html>

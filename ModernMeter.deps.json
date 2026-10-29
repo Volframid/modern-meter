@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {},
     ".NETCoreApp,Version=v7.0/win-x64": {
-      "ShinraMeter/1.0.0": {
+      "ModernMeter/1.0.0": {
         "dependencies": {
           "Autoupdate": "1.0.0",
           "DamageMeter": "1.0.0",
@@ -31,7 +31,7 @@
           "DamageMeter.Reference": "1.0.0.0"
         },
         "runtime": {
-          "ShinraMeter.dll": {}
+          "ModernMeter.dll": {}
         }
       },
       "DiscordRichPresence/1.0.175": {
@@ -1699,7 +1699,7 @@
     }
   },
   "libraries": {
-    "ShinraMeter/1.0.0": {
+    "ModernMeter/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -160,21 +160,10 @@ namespace DamageMeter.UI
             Environment.Exit(0);
         }
 
-        private static async Task<bool> CheckUpdate()
+        private static Task<bool> CheckUpdate()
         {
-            SplashScreen.SetText("Checking for updates...");
-            return false; //TODO: re-enable
-            var isUpToDate = await UpdateManager.IsUpToDate().ConfigureAwait(false);
-            if (isUpToDate) { return false; }
-
-            WindowsServices.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
-            var result = App.Current.Dispatcher.Invoke(() =>
-              {
-                  var patchnotes = new UpdatePopup();
-                  patchnotes.ShowDialog();
-                  return (patchnotes.DialogResult ?? false) && UpdateManager.Update();
-              });
-            return result;
+            // Modern Meter is updated by Toolbox; never invoke the obsolete standalone updater.
+            return Task.FromResult(false);
         }
 
 
@@ -189,9 +178,7 @@ namespace DamageMeter.UI
             if (BasicTeraData.Instance.WindowData.LowPriority)
                 Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Idle;
 
-            /*TeraSniffer.Instance*/
-            PacketProcessor.Instance.Sniffer.Enabled = true;
-            /*TeraSniffer.Instance*/
+            ModernPrimalAlerts.Initialize(PacketProcessor.Instance);
             PacketProcessor.Instance.Sniffer.Warning += (str) => BasicTeraData.LogError(str, false, true);
             SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             SystemEvents.SessionEnding += SystemEvents_SessionEnding;
@@ -203,6 +190,10 @@ namespace DamageMeter.UI
             // ugly way to make sure this is instanced on main thread, since there is no
             // UI control doing it before Excel exporter does it via analysis thread
             _ = ClassIcons.Instance;
+            ModernBroadcast.Initialize();
+
+            // A connection can arrive immediately. All alert and window listeners must exist first.
+            PacketProcessor.Instance.Sniffer.Enabled = true;
 
         }
 

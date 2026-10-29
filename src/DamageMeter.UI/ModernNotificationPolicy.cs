@@ -31,6 +31,6 @@ public static class ModernNotificationPolicy
 
     public static bool BackgroundOnly(EventType type) => type is EventType.AFK or EventType.Whisper or
         EventType.MatchingSuccess or EventType.ReadyCheck or EventType.OtherUserApply or EventType.Broker or
-        EventType.PartyInvite or EventType.Trade or EventType.GenericContract or EventType.VanguardCredits or
+        EventType.PartyInvite or EventType.Trade or EventType.GenericContract or
         EventType.WakeUp or EventType.Mention;
 }

@@ -1030,6 +1030,9 @@
 6088	CritPower1	Buff	True	abs	6000	0	1	Символ мудрости			$H_W_GOODСила ваших критических ударов повышается.$COLOR_END$BRМожет повысить ваш критический урон на 50% после успешного критического удара по монстру.	icon_skills.oriental_wind_blue_tex	icon_skills.oriental_wind_blue_tex	True
 6089	CritPower1	Buff	True	abs	9000	0	2	Клятва мудрости			$H_W_GOODСила ваших критических ударов повышается.$COLOR_END$BRМожет удвоить ваш критический урон после успешного критического удара по монстру.	icon_skills.oriental_wind_red_tex	icon_skills.oriental_wind_red_tex	True
 6096	CritPower1	Buff	True	abs	9000	0	2	Кошачьи когти			Повышает множитель критического урона по монстрам на $H_W_GOOD2$COLOR_END.	icon_status.damageup_tex	icon_status.damageup_tex	True
+6097	CritPower1	Buff	True	abs	10000	0	2	Primal Omen			Doubles critical damage against monsters for 10 seconds.	icon_skills.oriental_bless_blue_tex	icon_skills.oriental_bless_blue_tex	True
+6098	CritPower1	Buff	True	abs	10000	0	2	Primal Mark			Doubles critical damage against monsters for 10 seconds.	icon_skills.oriental_bless_red_tex	icon_skills.oriental_bless_red_tex	True
+6101	CritPower1	Buff	True	abs	10000	0	2	Queen's Wrath			Doubles critical damage against monsters for 10 seconds.	icon_skills.shandramanaia_passive_legend_purple_tex	icon_skills.shandramanaia_passive_legend_purple_tex	True
 10100	HPChange	DOT	False	abs	5000	1	-11	Болезнетворность I [кристалл]			HP уменьшаются на $H_W_BAD-11$COLOR_END раз в $H_W_BAD1s$COLOR_END	icon_items.customize9ar_tex	icon_items.customize9ar_tex	True
 10101	HPChange	DOT	False	abs	5000	1	-23	Болезнетворность II [кристалл]			HP уменьшаются на $H_W_BAD-23$COLOR_END раз в $H_W_BAD1s$COLOR_END	icon_items.customize9br_tex	icon_items.customize9br_tex	True
 10102	HPChange	DOT	False	abs	5000	1	-58	Болезнетворность III [кристалл]			HP уменьшаются на $H_W_BAD-58$COLOR_END раз в $H_W_BAD1s$COLOR_END	icon_items.customize9cr_tex	icon_items.customize9cr_tex	True

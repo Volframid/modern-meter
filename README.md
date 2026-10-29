@@ -1,6 +1,6 @@
 # Modern Meter
 
-<img src="https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/application-icon.png" width="72" height="72" alt="Modern Meter damage icon">
+<img src="https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/application-icon.png" width="72" height="72" alt="Modern Meter MM monogram">
 
 A compact combat meter for TERA Toolbox, with an updated interface based on Shinra Meter.
 
@@ -17,19 +17,35 @@ For module-manager installation, use the module descriptor at https://raw.github
 
 - Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts.
 - Original game class and skill icons, customizable role colors, transparency and scale.
-- A smooth centisecond clock with an indicator for combat status.
+- A smooth centisecond clock with a transparent timer background and unchanged red/green combat indicator. The Overview button uses the Meter surface; the hover toolbar shares its frame color and opacity.
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
-- Thirteen settings sections, explicit interface language selection, and automatic Russian on Russian Windows. New interface text supports English and Russian; other existing language packs are retained with English fallback for new text. Interface language changes apply immediately to open windows.
-- An original damage-strike icon shared by the application, tray and loading screen.
-- Independent notification background opacity (10–100%) in Full settings → Appearance, applied immediately and retained after restart.
+- Fourteen settings sections and live interface language selection: English, Russian, German, French, Spanish, Italian, Brazilian Portuguese, Japanese, Korean, Simplified Chinese and Traditional Chinese. Automatic mode follows Windows. Modern interface text and settings labels change immediately in open windows; older runtime diagnostics can fall back to English.
+- The frameless MM monogram shared by the application, taskbar, tray, loading screen and every window; transparent artwork has no enclosing tile or background.
+- Independent notification background opacity (10–100%, initially 50%) in Full settings → Appearance, applied immediately and retained after restart.
+- Frameless caption icons on settings, overview and auxiliary windows; descriptive content headings are retained. Home icons have separate click regions, and export/GitHub menus use the same graphite palette. Player statistics initially center on the Meter monitor after their first data layout; dragging keeps the chosen position.
+- Mount notifications check the actual active buff on your character. An effective 2.0 suppresses overlapping 1.5 popups and queued speech; a later effective 1.5 can announce separately. Exact effect IDs also cover sound-only rules. Blue cloud means 1.5, orange cloud means 2.0. A bounded retry uses the existing event filters.
 - A new loading screen with live status, a matching update dialog, notification cards, chat, effects and upload-history windows, event editor and color picker.
 - Chat and notification functions, including whisper popups when the game is in the background, subject to the user's event and sound settings.
 
+Vanguard credit alerts start at 15,000 of 20,000 (75% for other known caps) and can appear in the foreground. Speech says “Vanguard credits are close to cap” without numbers, then “Vanguard credits are maxed out” at the cap. The popup format is unchanged. On Asura, existing self-buff 2.0 mount rules also recognize Primal Omen, Primal Mark and Queen's Wrath (10 seconds), subject to the same active-buff checks and event filters.
+
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.
+
+## Streamlabs / OBS: one source for every Meter window
+
+Streaming is **off by default** on fresh installations. Canvas size automatically follows the monitor containing Meter, including while the feature is off. Open **Full settings → Streaming** and enable the stream overlay. In Streamlabs Desktop or OBS, add or retarget one **Window Capture** to **Modern Meter — Stream**. Choose **Windows 10 (1903 and up)** as its capture method. Fit the complete source over the game capture at the canvas dimensions shown in Meter. Set Streamlabs/OBS video output to **60 FPS** for a smooth timer, and hide the former Browser Source or individual Meter capture to avoid duplicate layers.
+
+The compact Meter, encounter overview, player/HPM details, settings, notifications and WPF menus remain separate draggable windows locally. Their WPF content is projected into one transparent native capture surface without sharing native Window roots; changes draw directly without PNG encoding, HTTP or a browser frame queue. UI scaling is included in the full window root, preserving rightmost numbers. Other-monitor windows fit into the Meter-monitor canvas; hidden, minimized and closed source windows disappear. Native operating-system dialogs and other applications are outside this surface. Notification audio continues using the existing Windows/Streamlabs audio setup.
+
+The capture surface keeps its content outside the visible desktop and cannot take keyboard focus. A transparent edge keeps Windows drawing it; normal Always on top controls only affect the interactive Meter windows. Keep the stream feature enabled while using the source. FPS also depends on WPF/Windows rendering, system load and Streamlabs capture/output settings; the feature does not promise a fixed frame rate under every load. This is a display-only source; use the normal Meter windows to control the app.
+
+The feature is off by default on fresh installs. Existing **resources/config/broadcast.json** enablement and compatibility fields are retained; the native implementation does not open the former local HTTP port. After upgrading from the browser version, select the new native target once in Streamlabs/OBS.
+
+![Native Streaming controls](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/streaming-settings.png)
 
 ## Screenshots
 
-The actual Modern Meter 1.0.6 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+The Modern Meter 1.0.16 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
 
 ### Loading screen
 
@@ -87,13 +103,13 @@ The actual Modern Meter 1.0.6 interface, rendered with fictional player names an
 
 ## Uploads and personal settings
 
-Fresh installations have empty upload username and authentication-token fields, with uploading disabled. The Asura upload, whitelist and glyph service addresses are prefilled. Enter your own credentials to enable uploads.
+Fresh installations have empty upload username and authentication-token fields, with uploading disabled. The Asura upload, whitelist and glyph service addresses are prefilled. Enter your own credentials to enable uploads. Each server’s token is concealed by default; click its masked field to reveal and edit it. Leaving the field, switching tabs or deactivating the settings window conceals it again, including for newly added servers.
 
 Your settings are created locally on first launch and are not overwritten by module updates. Updating an existing installation preserves its configuration. Do not share resources/config, logs, combat exports or authentication tokens.
 
-The native runtime keeps its compatible internal ShinraMeter filenames; the module and visible interface are named Modern Meter. Updates are delivered through Toolbox rather than the original native updater.
+The application runtime is named ModernMeter (EXE, DLL and companion configuration files). The obsolete standalone updater executable is removed; Toolbox handles updates. The compatible Autoupdate library is still required by the retained runtime. Existing personal settings are retained during the filename migration.
 
-Notification opacity changes only the card background and decorative icon backing. Text and icons keep their normal visibility. A lower percentage makes the background more transparent. On the first upgrade, it inherits the previous other-window opacity; afterward the controls are independent.
+Notification opacity changes only the card background and decorative icon backing. Text and icons keep their normal visibility. New profiles start at 50%; an explicitly saved notification-opacity setting is preserved. It is independent of other-window opacity. Main and other-window opacity controls show 0–100%. The Scale control uses a 0–100 size level across the existing size range; opening settings preserves the exact saved size.
 
 Chat and party notification bubbles and audio are shown only while TERA is in the background; combat-specific alerts retain their own event rules. Cyrillic text selects an installed Russian Windows speech voice. If that voice is unavailable, a notification sound is used.
 
@@ -103,7 +119,7 @@ The legacy 1–20 Hz control is not used by the retained calculation core. The i
 
 ## Source and validation
 
-Modified interface/transport source and the completed Russian satellite resources are in src/. See scripts/build.ps1 to rebuild using the runtime libraries shipped here. The calculation, protocol-data and other original runtime libraries are retained.
+Modified interface/transport source and the completed Russian satellite resources are in src/. See scripts/build.ps1 to rebuild using the runtime libraries shipped here. The small scripts/NotificationBridge tool reproducibly adds exact notification context and the credit threshold to the retained core library before the UI build. Combat calculation and protocol-data libraries are otherwise retained.
 
 This release is checked with isolated interface, settings, localization, graph, notification, transport and packaging tests. Those checks do not replace gameplay testing on each server and Windows configuration.
 

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:DamageMeter.UI.Windows"
              xmlns:lang="clr-namespace:Lang;assembly=Lang"
              xmlns:settingsViews="clr-namespace:DamageMeter.UI.Windows.SettingsViews"
-             mc:Ignorable="d"
+             xmlns:ui="clr-namespace:DamageMeter.UI"
+             mc:Ignorable="d" Cursor="Arrow"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance local:SettingsWindowViewModel}">
     <UserControl.Resources>
@@ -26,6 +27,7 @@
                              EasingFunction="{StaticResource QuadraticEase}" />
         </Storyboard>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}" x:Key="SubmenuButtonStyle">
+            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Height" Value="Auto" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -52,6 +54,8 @@
             <Setter Property="Foreground" Value="White" />
         </Style>
         <Style TargetType="TextBlock" x:Key="BigButtonTextStyle">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Grid.Row" Value="1" />
             <Setter Property="Foreground" Value="White" />
@@ -59,8 +63,8 @@
     </UserControl.Resources>
 
     <UniformGrid Rows="3">
-        <Button Height="Auto" Command="{Binding ResetCommand}">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding ResetCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -69,8 +73,8 @@
                 <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_Reset}" />
             </Grid>
         </Button>
-        <Button Height="Auto" Command="{Binding TogglePauseCommand}">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding TogglePauseCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -103,8 +107,8 @@
             </Grid>
         </Button>
 
-        <Grid Height="Auto" MouseEnter="OnExportGridMouseEnter" Background="Transparent">
-            <Grid Margin="20">
+        <Grid Height="Auto">
+            <Grid x:Name="ExportHitArea" Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseEnter="OnExportGridMouseEnter" Background="Transparent" Cursor="Hand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -119,9 +123,9 @@
                     <Grid.RenderTransform>
                         <TranslateTransform />
                     </Grid.RenderTransform>
-                    <Border Background="#292F33"
+                    <Border Background="{DynamicResource ModernSurface}"
                             BorderThickness="1"
-                            BorderBrush="{StaticResource KrBorderColor}"
+                            BorderBrush="{DynamicResource ModernLine}"
                             Effect="{StaticResource SwitchShadow-1dp}" />
                     <UniformGrid Columns="1" HorizontalAlignment="Stretch">
                         <Button Style="{StaticResource SubmenuButtonStyle}"
@@ -191,8 +195,8 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Button Height="Auto" Command="{Binding UploadGlyphBuildCommand}">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding UploadGlyphBuildCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -202,8 +206,8 @@
             </Grid>
         </Button>
 
-        <Button Height="Auto" Command="{Binding OpenChatBoxCommand}">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding OpenChatBoxCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -212,8 +216,8 @@
                 <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_OpenChatBox}" />
             </Grid>
         </Button>
-        <Button Height="Auto" Command="{Binding OpenUploadHistoryCommand}">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding OpenUploadHistoryCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -222,18 +226,18 @@
                 <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_SystemTray_Site_export}" />
             </Grid>
         </Button>
-        <Button Height="Auto" Command="{Binding BrowseLinkCommand}" CommandParameter="discord">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding BrowseLinkCommand}" CommandParameter="project">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Path Style="{StaticResource BigButtonPathStyle}" Data="{StaticResource Svg.Discord}" />
-                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="{DynamicResource NativeText_SystemTray_Discord}" />
+                <Image Source="{x:Static ui:ModernDamageMark.Glyph}" Width="50" Height="50" Stretch="Uniform"/>
+                <TextBlock Style="{StaticResource BigButtonTextStyle}" Text="Modern Meter" />
             </Grid>
         </Button>
-        <Grid Height="Auto" MouseEnter="OnGitHubGridMouseEnter" Background="Transparent">
-            <Grid Margin="20">
+        <Grid Height="Auto">
+            <Grid x:Name="GitHubHitArea" Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseEnter="OnGitHubGridMouseEnter" Background="Transparent" Cursor="Hand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -245,9 +249,9 @@
                       IsHitTestVisible="{Binding GitHubPopupVisible, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settingsViews:SettingsHomeView}}"
                       Grid.RowSpan="2"
                       MouseLeave="OnGitHubPopupMouseLeave">
-                    <Border Background="#292F33"
+                    <Border Background="{DynamicResource ModernSurface}"
                             BorderThickness="1"
-                            BorderBrush="{StaticResource KrBorderColor}"
+                            BorderBrush="{DynamicResource ModernLine}"
                             Effect="{StaticResource SwitchShadow-1dp}" />
                     <UniformGrid Margin="0" Columns="1" HorizontalAlignment="Stretch">
                         <Button Style="{StaticResource SubmenuButtonStyle}"
@@ -320,8 +324,8 @@
             </Grid>
         </Grid>
 
-        <Button Height="Auto" Command="{Binding CloseMeterCommand}">
-            <Grid Margin="20">
+        <Button Height="Auto" Cursor="Hand" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0" Command="{Binding CloseMeterCommand}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />

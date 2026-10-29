@@ -30,19 +30,19 @@ public static class ModernPreferences
         State state;
         try { state = File.Exists(FileName) ? JsonSerializer.Deserialize<State>(File.ReadAllText(FileName)) ?? new State() : new State(); }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException) { state = new State(); }
-        if (state.OverlayOpacity is double opacity && double.IsFinite(opacity)) data.MainWindowOpacity = Math.Clamp(opacity, .05, 1);
+        if (state.OverlayOpacity is double opacity && double.IsFinite(opacity)) data.MainWindowOpacity = Math.Clamp(opacity, 0, 1);
         else
         {
             // Use the already-loaded XML; the native owner keeps its file locked.
             var xml = typeof(WindowData).GetField("_xml", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(data) as XDocument;
             var text = xml?.Root?.Element("opacity")?.Element("mainWindow")?.Value;
             if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var percent) && double.IsFinite(percent))
-                data.MainWindowOpacity = Math.Clamp(percent / 100, .05, 1);
+                data.MainWindowOpacity = Math.Clamp(percent / 100, 0, 1);
         }
-        // Inherit the existing look once; later changes to other windows are independent.
+        // New profiles start at 50%; explicit existing preferences remain intact.
         state.NotificationOpacity = state.NotificationOpacity is double notification && double.IsFinite(notification)
             ? Math.Clamp(notification, .1, 1)
-            : double.IsFinite(data.OtherWindowOpacity) ? Math.Clamp(data.OtherWindowOpacity, .1, 1) : 1;
+            : .5;
         if (state.LayoutVersion < 1)
         {
             foreach (var metrics in new[] { data.DpsMetrics, data.TankMetrics, data.HealerMetrics })
@@ -64,7 +64,7 @@ public static class ModernPreferences
     public static double GetNotificationOpacity(WindowData data)
     {
         Initialize(data);
-        return States.GetValue(data, _ => new State()).NotificationOpacity ?? 1;
+        return States.GetValue(data, _ => new State()).NotificationOpacity ?? .5;
     }
 
     public static bool SetNotificationOpacity(WindowData data, double value)

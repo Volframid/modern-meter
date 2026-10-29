@@ -20,6 +20,8 @@ namespace DamageMeter.UI
         private readonly Func<bool> _gameForeground;
         private readonly Action<SoundInterface> _playSound;
         private readonly DispatcherTimer _focusTimer;
+        private Task _soundQueue = Task.CompletedTask;
+        private readonly Dictionary<Balloon, NotifyFlashMessage> _mountBalloons = new();
 
         public double NotificationBackgroundOpacity
         {
@@ -27,7 +29,7 @@ namespace DamageMeter.UI
             private set => SetValue(NotificationBackgroundOpacityProperty, value);
         }
         public static readonly DependencyProperty NotificationBackgroundOpacityProperty = DependencyProperty.Register(
-            nameof(NotificationBackgroundOpacity), typeof(double), typeof(PopupNotification), new PropertyMetadata(1d));
+            nameof(NotificationBackgroundOpacity), typeof(double), typeof(PopupNotification), new PropertyMetadata(.5d));
 
         public PopupNotification() : this(null) { }
 
@@ -88,6 +90,7 @@ namespace DamageMeter.UI
 
         public void RemoveFocusedNotifications()
         {
+            RemoveInactiveMountNotifications();
             if (!_gameForeground()) return;
             foreach (var balloon in notificationBalloons.ToSyncArray().Where(b => ModernNotificationPolicy.BackgroundOnly(b.EventType)))
                 notificationBalloons.Remove(balloon);
@@ -95,9 +98,16 @@ namespace DamageMeter.UI
 
         public SynchronizedObservableCollection<Balloon> notificationBalloons;
 
+        private void RemoveInactiveMountNotifications()
+        {
+            foreach (var entry in _mountBalloons.ToArray())
+                if (!notificationBalloons.Contains(entry.Key) || !ModernMountNotifications.CanDeliver(entry.Value))
+                { notificationBalloons.Remove(entry.Key); _mountBalloons.Remove(entry.Key); }
+        }
+
         public void AddNotification(List<NotifyFlashMessage> flashList)
         {
-            foreach(var flash in flashList.OrderByDescending(x => x.Priority))
+            foreach(var flash in flashList.OrderByDescending(x => x.Priority).ThenByDescending(ModernMountNotifications.Weight))
             {
                 AddNotification(flash);
             }
@@ -109,7 +119,9 @@ namespace DamageMeter.UI
             Dispatcher.Invoke(() =>
             {
 
-                if (flash == null) { return; }
+                if (flash == null || !ModernMountNotifications.CanDeliver(flash)) { return; }
+                RemoveInactiveMountNotifications();
+                ModernMountNotifications.NormalizeIcon(flash);
                 var backgroundOnly = flash.Balloon != null && ModernNotificationPolicy.BackgroundOnly(flash.Balloon.EventType);
                 if (backgroundOnly && _gameForeground()) return;
 
@@ -147,12 +159,18 @@ namespace DamageMeter.UI
                         }
                     }
 
+                    if (ModernMountNotifications.Weight(flash) != 0) _mountBalloons[existing ?? flash.Balloon] = flash;
                     _present();
                     _focusTimer.Start();
                 }
 
                 if (!BasicTeraData.Instance.WindowData.MuteSound && flash.Sound != null)
-                    Task.Run(() => { if (!backgroundOnly || !_gameForeground()) _playSound(flash.Sound); });
+                    _soundQueue = _soundQueue.ContinueWith(previous =>
+                    {
+                        if (previous.IsFaulted) _ = previous.Exception;
+                        if (!BasicTeraData.Instance.WindowData.MuteSound && ModernMountNotifications.CanDeliver(flash) && (!backgroundOnly || !_gameForeground()))
+                            _playSound(flash.Sound);
+                    }, TaskScheduler.Default);
             });
         }
 

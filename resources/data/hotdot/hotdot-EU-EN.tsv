@@ -1032,6 +1032,9 @@
 6088	CritPower1	Buff	True	abs	6000	0	1	Symbol of Wisdom			$H_W_GOODYour critical strike power is increased.$COLOR_END$BRMay increase your critical damage by 50% after a successful critical strike against a monster.	icon_skills.oriental_wind_blue_tex	icon_skills.oriental_wind_blue_tex	True
 6089	CritPower1	Buff	True	abs	9000	0	2	Oath of Wisdom			$H_W_GOODYour critical strike power increases.$COLOR_END$BRMay double your critical damage after a successful critical strike against a monster.	icon_skills.oriental_wind_red_tex	icon_skills.oriental_wind_red_tex	True
 6096	CritPower1	Buff	True	abs	9000	0	2	Cat Claws			Increases critical damage multiplier against monsters by $H_W_GOOD2$COLOR_END.	icon_status.damageup_tex	icon_status.damageup_tex	True
+6097	CritPower1	Buff	True	abs	10000	0	2	Primal Omen			Doubles critical damage against monsters for 10 seconds.	icon_skills.oriental_bless_blue_tex	icon_skills.oriental_bless_blue_tex	True
+6098	CritPower1	Buff	True	abs	10000	0	2	Primal Mark			Doubles critical damage against monsters for 10 seconds.	icon_skills.oriental_bless_red_tex	icon_skills.oriental_bless_red_tex	True
+6101	CritPower1	Buff	True	abs	10000	0	2	Queen's Wrath			Doubles critical damage against monsters for 10 seconds.	icon_skills.shandramanaia_passive_legend_purple_tex	icon_skills.shandramanaia_passive_legend_purple_tex	True
 10100	HPChange	DOT	False	abs	5000	1	-11	Virulence			Reduces HP by $H_W_BAD-11$COLOR_END every $H_W_BAD1s$COLOR_END.	icon_items.customize9ar_tex	icon_items.customize9ar_tex	True
 10101	HPChange	DOT	False	abs	5000	1	-23	Virulence			Reduces HP by $H_W_BAD-23$COLOR_END every $H_W_BAD1s$COLOR_END.	icon_items.customize9br_tex	icon_items.customize9br_tex	True
 10102	HPChange	DOT	False	abs	5000	1	-58	Virulence			Reduces HP by $H_W_BAD-58$COLOR_END every $H_W_BAD1s$COLOR_END.	icon_items.customize9cr_tex	icon_items.customize9cr_tex	True

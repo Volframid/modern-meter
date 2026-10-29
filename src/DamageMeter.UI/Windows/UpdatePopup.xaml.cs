@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Windows;
 using System.Windows.Input;
 using Data;
@@ -38,14 +37,10 @@ namespace DamageMeter.UI.Windows
         {
             try
             {
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                using (var client = new WebClient())
-                {
-                    var md = client.OpenRead(new Uri("https://raw.githubusercontent.com/wiki/neowutran/shinrameter/Patch-note.md"));
-                    return new StreamReader(md).ReadToEnd().Replace("![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)","Donate");
-                }
+                return File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "README.md"));
             }
-            catch { return "Patch Notes not available"; }
+            catch (IOException) { return "Modern Meter updates are managed by TERA Toolbox."; }
+            catch (UnauthorizedAccessException) { return "Modern Meter updates are managed by TERA Toolbox."; }
 
         }
 

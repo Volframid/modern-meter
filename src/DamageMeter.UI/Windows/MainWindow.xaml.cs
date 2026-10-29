@@ -87,6 +87,7 @@ namespace DamageMeter.UI
 
         public void UpdateKeyboard(object o, EventArgs args)
         {
+            if (IsDragging) return;
             var teraWindowActive = TeraWindow.IsTeraActive();
             var meterWindowActive = TeraWindow.IsMeterActive();
 
@@ -157,6 +158,8 @@ namespace DamageMeter.UI
                 //}
 
                 #region WindowVisibility
+
+                if (IsDragging) return;
 
                 if (BasicTeraData.Instance.WindowData.InvisibleUi && !DC.Paused)
                 {

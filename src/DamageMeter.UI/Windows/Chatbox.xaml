@@ -8,7 +8,8 @@
                      Height="800"
                      MinHeight="10" MinWidth="10"
                      ResizeMode="CanResizeWithGrip"
-                     Title="Modern Meter — Chat">
+                     Title="Modern Meter — Chat"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <Window.Resources>
         <Style x:Key="ModernAuxButton" TargetType="Button" BasedOn="{StaticResource ModernButton}"><Setter Property="Padding" Value="4"/><Setter Property="Margin" Value="0"/></Style>
     </Window.Resources>
@@ -26,7 +27,8 @@
                             ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}" />
         </Grid.LayoutTransform>
         <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2" CornerRadius="10" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1"/>
-        <TextBlock Grid.Row="0" Margin="14,0,44,0" Text="{DynamicResource ModernText_460B3A7DA007}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+        <Image x:Name="ChromeBrandIcon" Grid.Row="0" Margin="14,0,0,0" Style="{StaticResource ModernCaptionIcon}"/>
+        <TextBlock Grid.Row="0" Margin="44,0,44,0" Text="{DynamicResource ModernText_460B3A7DA007}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" IsHitTestVisible="False"/>
         <Grid Grid.Row="0">
             <Button x:Name="CloseStats" HorizontalAlignment="Right" Width="34" Style="{StaticResource ModernAuxButton}" Background="Transparent"
                     Opacity="0.85"

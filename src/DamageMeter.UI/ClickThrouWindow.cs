@@ -24,6 +24,8 @@ namespace DamageMeter.UI
         private bool _snappedToBottom;
         protected bool _dragged = false;
         private bool _dragging = false;
+        private bool _snapping;
+        internal bool IsDragging => _dragging;
         private int _oldHeight;
         private int _oldWidth;
         private Thickness _margin;
@@ -65,7 +67,7 @@ namespace DamageMeter.UI
             BorderThickness = new Thickness(0);
             Topmost = BasicTeraData.Instance.WindowData.Topmost;
             ShowInTaskbar = !BasicTeraData.Instance.WindowData.Topmost;
-            Icon = BasicTeraData.Instance.ImageDatabase.Icon;
+            Icon = ModernDamageMark.ApplicationImage;
             SizeToContent = SizeToContent.WidthAndHeight;
             _margin = (Thickness)new TransparencyToMarginConverter().Convert(BasicTeraData.Instance.WindowData.AllowTransparency, typeof(Thickness), null, null);
             MouseLeftButtonDown += Move;
@@ -97,7 +99,10 @@ namespace DamageMeter.UI
         public void SnapToScreen()
         {
             if(!BasicTeraData.Instance.WindowData.SnapToBorders) return;
-            if (_dragging) return;
+            if (_dragging || _snapping) return;
+            _snapping = true;
+            try
+            {
             if (Empty && Visible) { _oldHeight = 0; HideWindow(true); return; }
             var screen = Screen.FromHandle(new WindowInteropHelper(this).Handle);
             var source = PresentationSource.FromVisual(this);
@@ -143,6 +148,8 @@ namespace DamageMeter.UI
             if (_dragged) LastSnappedPoint = new Point(snapLeft / dx, snapTop / dy);
             _dragged = false;
             if (Visible && Visibility == Visibility.Hidden) ShowWindow();
+            }
+            finally { _snapping = false; }
         }
 
         public virtual void SetClickThrou()
@@ -158,20 +165,36 @@ namespace DamageMeter.UI
 
         public void Move(object sender, MouseButtonEventArgs e)
         {
+            if (e.LeftButton != MouseButtonState.Pressed || _dragging) return;
+            var rm = ResizeMode;
             try
             {
-                if (e.LeftButton != MouseButtonState.Pressed) return;
                 _dragging = true;
-                var rm = ResizeMode;
                 if (rm == ResizeMode.CanResize || rm == ResizeMode.CanResizeWithGrip) ResizeMode = ResizeMode.NoResize;
                 DragMove();
-                ResizeMode = rm;
-                _dragged = true;
-                _dragging = false;
-                SnapToScreen();
-                App.HudContainer.SaveWindowsPos();
             }
             catch { Console.WriteLine(@"Exception Move"); }
+            finally
+            {
+                CommitDraggedPosition();
+                try
+                {
+                    if (ResizeMode != rm) ResizeMode = rm;
+                    SnapToScreen();
+                    App.HudContainer?.SaveWindowsPos();
+                }
+                catch { Console.WriteLine(@"Exception completing Move"); }
+            }
+        }
+
+        internal void CommitDraggedPosition()
+        {
+            // Size/visibility callbacks must see the new anchor before dragging
+            // is released, including when border snapping is disabled.
+            if (double.IsFinite(Left) && double.IsFinite(Top))
+                LastSnappedPoint = new Point(Left, Top);
+            _dragged = true;
+            _dragging = false;
         }
 
         protected void ClickThrouWindow_Closing(object sender, CancelEventArgs e)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
@@ -16,6 +17,7 @@ namespace DamageMeter.UI;
 public static class ModernLocalization
 {
     private static ResourceDictionary? _dictionary;
+    private static IReadOnlyDictionary<string, string> _texts = new Dictionary<string, string>();
     public static CultureInfo WindowsCulture { get; } = CultureInfo.CurrentUICulture;
     public static LocalizationState State { get; } = new();
     public static string Key(string text) => "ModernText_" + Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text))).Substring(0, 12);
@@ -30,8 +32,8 @@ public static class ModernLocalization
         CultureInfo.DefaultThreadCurrentUICulture = culture;
         FormatHelpers.Instance.CultureInfo = culture;
         if (_dictionary != null) application.Resources.MergedDictionaries.Remove(_dictionary);
-        var language = culture.TwoLetterISOLanguageName == "ru" ? "ru" : "en";
-        _dictionary = new ResourceDictionary { Source = new Uri("pack://application:,,,/ShinraMeter;component/Resources/ModernStrings." + language + ".xaml") };
+        var language = ResourceLanguage(culture);
+        _dictionary = new ResourceDictionary { Source = new Uri("pack://application:,,,/ModernMeter;component/Resources/ModernStrings." + language + ".xaml") };
         // Native labels used to be x:Static snapshots. Keep them in the same live resource
         // dictionary so open settings, dialogs and templates follow the selected language.
         var native = LP.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
@@ -41,15 +43,37 @@ public static class ModernLocalization
                 {
                     var text = LP.ResourceManager.GetString(key, culture) ?? (string)item.Value;
                     // Credits and licenses retain the original project attribution.
+                    if (_dictionary.Contains("NativeText_" + key)) continue;
                     _dictionary["NativeText_" + key] = key.Contains("License", StringComparison.OrdinalIgnoreCase)
                         || key.Contains("Author", StringComparison.OrdinalIgnoreCase)
                         || key.Contains("Credit", StringComparison.OrdinalIgnoreCase)
                         ? text : ModernBranding.ProductText(text);
                 }
+        foreach (var key in new[] { "NativeText_SystemTray_MainWindowOpacity", "NativeText_SystemTray_OtherWindowOpacity" })
+            if (_dictionary[key] is string label) _dictionary[key] = label + " (%)";
         application.Resources.MergedDictionaries.Add(_dictionary);
+        var texts = new Dictionary<string, string>();
+        foreach (var key in _dictionary.Keys)
+            if (key is string name && _dictionary[name] is string text) texts[name] = text;
+        // Resource keys remain stable when wording is edited. Resolve runtime
+        // lookups from the current English wording as well as the original key.
+        var english = language == "en" ? _dictionary : new ResourceDictionary
+            { Source = new Uri("pack://application:,,,/ModernMeter;component/Resources/ModernStrings.en.xaml") };
+        foreach (var key in english.Keys)
+            if (key is string name && name.StartsWith("ModernText_") && english[name] is string source)
+                texts[Key(source)] = _dictionary[name] as string ?? source;
+        System.Threading.Volatile.Write(ref _texts, texts);
         State.Refresh();
     }
-    public static string Get(string text) => Application.Current?.TryFindResource(Key(text)) as string ?? text;
+    public static string ResourceLanguage(CultureInfo culture) => culture.TwoLetterISOLanguageName switch
+    {
+        "ru" or "de" or "fr" or "es" or "it" or "ja" or "ko" => culture.TwoLetterISOLanguageName,
+        "pt" => "pt-BR",
+        "zh" => culture.Name.Contains("TW", StringComparison.OrdinalIgnoreCase) || culture.Name.Contains("HK", StringComparison.OrdinalIgnoreCase)
+            || culture.Name.Contains("MO", StringComparison.OrdinalIgnoreCase) || culture.Name.Contains("Hant", StringComparison.OrdinalIgnoreCase) ? "zh-TW" : "zh-CN",
+        _ => "en"
+    };
+    public static string Get(string text) => System.Threading.Volatile.Read(ref _texts).TryGetValue(Key(text), out var value) ? value : text;
 }
 
 public sealed class LocalizationState : INotifyPropertyChanged

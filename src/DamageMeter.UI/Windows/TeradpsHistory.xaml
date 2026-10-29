@@ -6,7 +6,8 @@
                      xmlns:ui="clr-namespace:DamageMeter.UI"
                      mc:Ignorable="d"
                      MinHeight="38" MinWidth="230"
-                     Title="Modern Meter — Upload history">
+                     Title="Modern Meter — Upload history"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <Window.Background>
         <SolidColorBrush Color="Transparent" Opacity="0" />
     </Window.Background>
@@ -24,7 +25,8 @@
                             ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}" />
         </Grid.LayoutTransform>
         <Border Style="{StaticResource MainBorder}" Grid.RowSpan="2" CornerRadius="10" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1"/>
-        <TextBlock Grid.Row="0" Margin="14,0,44,0" Text="{DynamicResource ModernText_7C85D9A08565}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+        <Image x:Name="ChromeBrandIcon" Grid.Row="0" Margin="14,0,0,0" Style="{StaticResource ModernCaptionIcon}"/>
+        <TextBlock Grid.Row="0" Margin="44,0,44,0" Text="{DynamicResource ModernText_7C85D9A08565}" FontFamily="Segoe UI" FontSize="12" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" IsHitTestVisible="False"/>
         <Button Grid.Row="0" x:Name="CloseStats" HorizontalAlignment="Right" Width="34" Style="{StaticResource ModernAuxButton}" Background="Transparent"
                 Opacity="0.85"
                 Foreground="White" Click="Close_OnClick" HorizontalContentAlignment="Stretch"

@@ -8,7 +8,8 @@
                      mc:Ignorable="d" Loaded="ClickThrouWindow_Loaded"
                      MinHeight="10" MinWidth="10"
                      Background="Transparent"
-                     FontFamily="Segoe UI" Title="{DynamicResource ModernText_B99326D3AD04}" d:DataContext="{d:DesignInstance ui:PlayerDamageViewModel}">
+                     FontFamily="Segoe UI" Title="{DynamicResource ModernText_B99326D3AD04}" d:DataContext="{d:DesignInstance ui:PlayerDamageViewModel}"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <Window.Resources>
         <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource ModernNavigation}" />
     </Window.Resources>

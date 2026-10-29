@@ -19,7 +19,7 @@ class ModernMeter {
             try { initializeSettings(__dirname); }
             catch (error) { mod.log('Could not initialize Modern Meter settings: ' + error.message); return; }
             mod.log('Starting Modern Meter...');
-            const child = spawn(Path.join(__dirname, 'ShinraMeter.exe'), ['--toolbox', '--modern-ui'], { cwd: __dirname, stdio: 'ignore', detached: true, windowsHide: true });
+            const child = spawn(Path.join(__dirname, 'ModernMeter.exe'), ['--toolbox', '--modern-ui'], { cwd: __dirname, stdio: 'ignore', detached: true, windowsHide: true });
             child.on('error', error => mod.log('Could not start Modern Meter: ' + error.message));
             child.unref();
         });

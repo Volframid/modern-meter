@@ -4,7 +4,8 @@
  xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
  xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
  WindowStyle="None" Title="{DynamicResource ModernText_86D5A0DDD77C}" Width="1060" Height="740" MinWidth="820" MinHeight="580" WindowStartupLocation="CenterScreen"
- Background="{DynamicResource ModernSurface}" Foreground="{DynamicResource ModernText}" FontFamily="Segoe UI" FontSize="13">
+ Background="{DynamicResource ModernSurface}" Foreground="{DynamicResource ModernText}" FontFamily="Segoe UI" FontSize="13"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
  <shell:WindowChrome.WindowChrome><shell:WindowChrome CaptionHeight="32" ResizeBorderThickness="5" GlassFrameThickness="0" CornerRadius="12"/></shell:WindowChrome.WindowChrome>
  <Window.Resources>
   <DataTemplate x:Key="EncounterLabel"><StackPanel Margin="8,4"><TextBlock Text="{Binding Info.Name}"/><TextBlock Text="{Binding Info.Area}" Style="{StaticResource ModernCaption}"/></StackPanel></DataTemplate>
@@ -12,7 +13,7 @@
  <Border x:Name="DashboardFrame" CornerRadius="12" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1" Background="{DynamicResource ModernSurface}">
  <Grid><Grid.RowDefinitions><RowDefinition Height="32"/><RowDefinition Height="*"/></Grid.RowDefinitions>
   <Grid Margin="14,0,5,0"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-   <TextBlock Text="{DynamicResource ModernText_4D1D4EE3F619}" Foreground="{DynamicResource ModernMuted}" FontSize="10" VerticalAlignment="Center"/>
+   <Image x:Name="ChromeBrandIcon" Style="{StaticResource ModernCaptionIcon}"/>
    <StackPanel Grid.Column="1" Orientation="Horizontal" shell:WindowChrome.IsHitTestVisibleInChrome="True">
     <Button Content="−" Click="MinimizeWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_D72E311C4DDA}"/>
     <Button Content="□" Click="MaximizeWindow" Style="{StaticResource ModernChromeButton}" ToolTip="{DynamicResource ModernText_AB9616C1C81C}"/>
@@ -82,7 +83,7 @@
      <Border Style="{StaticResource ModernCardStyle}"><StackPanel x:Name="AppearancePanel">
       <DockPanel Margin="0,0,0,16"><TextBlock Text="{DynamicResource ModernText_DCDE76EC8DCF}" Foreground="{DynamicResource ModernAccent}" FontSize="12" FontWeight="SemiBold"/><TextBlock Text="{DynamicResource ModernText_6ADF2B9869B0}" Style="{StaticResource ModernCaption}" HorizontalAlignment="Right"/></DockPanel>
       <Grid Height="58"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="220"/><ColumnDefinition Width="58"/></Grid.ColumnDefinitions><StackPanel VerticalAlignment="Center"><TextBlock Text="{DynamicResource ModernText_C02268EBE2FC}"/><TextBlock Text="{DynamicResource ModernText_5318D4C86F5C}" Style="{StaticResource ModernCaption}" Margin="0,4,0,0"/></StackPanel><Slider Style="{StaticResource ModernSlider}" x:Name="OverlayOpacitySlider" Grid.Column="1" Minimum="0" Maximum="1" Value="{Binding MainWindowOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding MainWindowOpacity, StringFormat={}{0:P0}}" HorizontalAlignment="Right" VerticalAlignment="Center"/></Grid>
-      <Grid Height="58"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="220"/><ColumnDefinition Width="58"/></Grid.ColumnDefinitions><StackPanel VerticalAlignment="Center"><TextBlock Text="{DynamicResource ModernText_82B31723E898}"/><TextBlock Text="{DynamicResource ModernText_4E21A699EEDA}" Style="{StaticResource ModernCaption}" Margin="0,4,0,0"/></StackPanel><Slider Style="{StaticResource ModernSlider}" x:Name="UiScaleSlider" Grid.Column="1" Minimum="0.5" Maximum="5" Value="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding Scale, StringFormat={}{0:P0}}" HorizontalAlignment="Right" VerticalAlignment="Center"/></Grid>
+      <Grid Height="58"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="220"/><ColumnDefinition Width="58"/></Grid.ColumnDefinitions><StackPanel VerticalAlignment="Center"><TextBlock Text="{DynamicResource ModernText_82B31723E898}"/><TextBlock Text="{DynamicResource ModernText_4E21A699EEDA}" Style="{StaticResource ModernCaption}" Margin="0,4,0,0"/></StackPanel><Slider Style="{StaticResource ModernSlider}" x:Name="UiScaleSlider" Grid.Column="1" Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" Value="{Binding ScaleLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/><TextBlock Grid.Column="2" Text="{Binding ScaleLevel, StringFormat={}{0:0.##}}" HorizontalAlignment="Right" VerticalAlignment="Center"/></Grid>
       <Separator Margin="0,12" Background="{DynamicResource ModernLine}"/>
       <settings:CheckboxSetting Height="44" SettingName="{DynamicResource ModernText_56130E653E13}" IsOn="{Binding StayTopmost, Mode=TwoWay}"/>
       <settings:CheckboxSetting Height="44" SettingName="{DynamicResource ModernText_F262DBF4736F}" IsOn="{Binding ClickThru, Mode=TwoWay}"/>

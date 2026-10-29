@@ -3,37 +3,34 @@ using System.Windows.Media;
 
 namespace DamageMeter.UI;
 
-/// <summary>Original Modern Meter identity: a bright impact cutting through fractured violet plates.</summary>
+/// <summary>The selected MM monogram, drawn natively without a tile or background.</summary>
 public static class ModernDamageMark
 {
-    public static DrawingImage Glyph { get; } = Create(false);
-    public static DrawingImage ApplicationImage { get; } = Create(true);
+    public static DrawingImage Glyph { get; } = Create();
+    public static DrawingImage ApplicationImage => Glyph;
 
-    private static SolidColorBrush Brush(string color) => new((Color)ColorConverter.ConvertFromString(color));
-    private static LinearGradientBrush Gradient(string start, string end) => new(
-        (Color)ColorConverter.ConvertFromString(start), (Color)ColorConverter.ConvertFromString(end),
-        new Point(0, 0), new Point(1, 1));
-
-    private static DrawingImage Create(bool tile)
+    private static DrawingImage Create()
     {
+        var violet = new LinearGradientBrush(
+            (Color)ColorConverter.ConvertFromString("#AD8AFB"),
+            (Color)ColorConverter.ConvertFromString("#9F7AF1"), new Point(0, 0), new Point(1, 1));
         var group = new DrawingGroup();
         using (var dc = group.Open())
         {
-            // Transparent bounds keep the same view box for the splash, ICO and SVG.
+            // Fixed transparent view box keeps the same optical alignment in
+            // window captions, the splash and every native ICO resolution.
             dc.DrawRectangle(Brushes.Transparent, null, new Rect(0, 0, 64, 64));
-            if (tile)
-                dc.DrawRoundedRectangle(Gradient("#302740", "#15141E"),
-                    new Pen(Brush("#615078"), 1.2), new Rect(2, 2, 60, 60), 14, 14);
-            dc.DrawGeometry(Gradient("#C5A2FF", "#7750B9"), null,
-                Geometry.Parse("M10,24 L24,10 L34,12 L26,25 L28,31 L18,42 L11,37 Z"));
-            dc.DrawGeometry(Gradient("#8C5ADC", "#AD8AFF"), null,
-                Geometry.Parse("M36,23 L48,18 L54,30 L49,45 L36,55 L27,51 L36,39 L33,32 Z"));
-            dc.DrawGeometry(Brush("#F7F2FF"), null,
-                Geometry.Parse("M46,8 L37,26 L44,23 L20,54 L27,36 L20,39 Z"));
-            var spark = new Pen(Brush("#D9C4FF"), 2.6)
-                { StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round };
-            dc.DrawLine(spark, new Point(12, 10), new Point(17, 16));
-            dc.DrawLine(spark, new Point(48, 51), new Point(53, 56));
+            dc.PushTransform(new MatrixTransform(60d / 859, 0, 0, 60d / 859,
+                2 - 196d * 60 / 859, 32 - (378d + 483d / 2) * 60 / 859));
+            dc.DrawGeometry(violet, null, Geometry.Parse(
+                "M196,777 L484,378 L621,570 L557,658 L484,525 L303,777 Z"));
+            dc.DrawGeometry(violet, null, Geometry.Parse(
+                "M398,613 L455,563 L532,709 L772,378 L890,546 L827,636 L772,525 L532,861 Z"));
+            dc.DrawGeometry(violet, null, Geometry.Parse(
+                "M686,696 L744,616 L824,732 L969,464 L1055,464 L829,848 Z"));
+            dc.DrawGeometry(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F4F3F8")), null,
+                Geometry.Parse("M969,464 L1055,464 L982,571 L911,571 Z"));
+            dc.Pop();
         }
         group.Freeze();
         var image = new DrawingImage(group); image.Freeze();

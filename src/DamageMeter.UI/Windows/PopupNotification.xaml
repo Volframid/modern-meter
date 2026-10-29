@@ -7,7 +7,8 @@
                         mc:Ignorable="d"
                         d:DesignWidth="500"
                         MinHeight="50" MinWidth="100"
-                        Title="Notification popup">
+                        Title="Notification popup"
+ xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
     <Window.Resources>
         <DataTemplate x:Key="notification">
             <ui:NotificationControl HorizontalAlignment="Center" />

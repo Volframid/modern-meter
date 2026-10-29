@@ -131,7 +131,7 @@ namespace DamageMeter.UI
         private bool _isEmpty;
         private bool _isMouseOver;
 
-        private ImageSource _windowIcon;
+        private ImageSource _windowIcon = ModernDamageMark.ApplicationImage;
         private NpcEntity _selectedEncounter; // TODO: replace NpcEntity with an EncounterViewModel
         /// <summary>
         /// This will be used for "TOTAL" encounter

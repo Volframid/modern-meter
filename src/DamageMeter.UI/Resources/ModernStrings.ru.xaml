@@ -141,4 +141,23 @@
     <sys:String x:Key="ModernText_6EFC5D27F30B">Ошибка загрузки</sys:String>
     <sys:String x:Key="ModernText_A8501D872521">Непрозрачность уведомлений (%)</sys:String>
     <sys:String x:Key="ModernText_5A0D55CCB291">Непрозрачность фона уведомлений (%)</sys:String>
+    <sys:String x:Key="ModernText_A951C5945635">Трансляция</sys:String>
+    <sys:String x:Key="ModernText_8DC5E7D9D85B">Все окна DPS-метра в одном источнике</sys:String>
+    <sys:String x:Key="ModernText_B2A7D304F008">Включить слой для трансляции</sys:String>
+    <sys:String x:Key="ModernText_958FC6B02A96">Передаются только окна Modern Meter. Рабочий стол и другие приложения не захватываются.</sys:String>
+    <sys:String x:Key="ModernText_5003C604E6E3">Окна с любого монитора объединяются в области монитора с DPS-метром. Перетаскивайте их как обычно в Modern Meter.</sys:String>
+    <sys:String x:Key="ModernText_A79A2C74A7F4">Окно для захвата</sys:String>
+    <sys:String x:Key="ModernText_30460E40D4DF">Размер области</sys:String>
+    <sys:String x:Key="ModernText_2DE5EF2D8ED4">Видимые окна</sys:String>
+    <sys:String x:Key="ModernText_574B340FB0C8">В Streamlabs / OBS добавьте один источник «Захват окна» и выберите Modern Meter — Stream. Способ захвата: Windows 10 (1903 и новее). Разместите весь источник поверх игры и скройте прежний источник «Браузер».</sys:String>
+    <sys:String x:Key="ModernText_CDFFF77A47C2">Этот источник только отображает изображение. Управляйте приложением через окна Modern Meter.</sys:String>
+    <sys:String x:Key="ModernText_B450FF5595A5">Частота обновления (кадр/с)</sys:String>
+    <sys:String x:Key="ModernText_F4DAC7B1DB33">Порт подключения</sys:String>
+    <sys:String x:Key="ModernText_807A5165098A">Ожидание Streamlabs / OBS</sys:String>
+    <sys:String x:Key="ModernText_22965568D22A">Подключено</sys:String>
+    <sys:String x:Key="ModernText_9976902EEBE2">Подключение для трансляции недоступно</sys:String>
+    <sys:String x:Key="ModernText_75081B593D15">Выключено</sys:String>
+    <sys:String x:Key="ModernText_19375D0017ED">Нативный источник захвата готов</sys:String>
+    <sys:String x:Key="ModernText_DA5C65C680C5">Кредиты Авангарда достигли максимума</sys:String>
+    <sys:String x:Key="ModernText_792B125AEF9A">Кредиты Авангарда приближаются к лимиту</sys:String>
 </ResourceDictionary>

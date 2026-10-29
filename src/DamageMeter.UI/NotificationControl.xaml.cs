@@ -29,8 +29,19 @@ namespace DamageMeter.UI
             _context.PropChanged += _context_RefreshEvent;
             _close = new Timer(_context.DisplayTime);
             _close.Elapsed += _close_Elapsed;
+            ApplyEventIcon(_context.EventType);
+            DHeight = ActualHeight;
+            ((UIElement)this).FindLogicalAncestor<PopupNotification>().DHeight += DHeight;
+            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
+            this.BeginAnimation(OpacityProperty, an);
+            _close.Start();
+        }
+
+        // Shared by the real Loaded path and isolated icon rendering checks.
+        private void ApplyEventIcon(EventType eventType)
+        {
             Color col;
-            switch (_context.EventType)
+            switch (eventType)
             {
                 case EventType.MissingAb:
                     col = Colors.Red;
@@ -99,7 +110,9 @@ namespace DamageMeter.UI
                     break;
                 case EventType.VanguardCredits:
                     col = Color.FromRgb(0xde, 0x48, 0xf2);
-                    ellImgBrush.ImageSource = BasicTeraData.Instance.ImageDatabase.Credits.Source;
+                    img.Source = BasicTeraData.Instance.ImageDatabase.Credits.Source;
+                    ell.Visibility = Visibility.Hidden;
+                    img.Visibility = Visibility.Visible;
 
                     break;
                 case EventType.WakeUp:
@@ -124,13 +137,6 @@ namespace DamageMeter.UI
                     break;
             }
 
-            //rect.Stroke = new SolidColorBrush(col);
-            //(rect.Effect as DropShadowEffect).Color = col;
-            DHeight = ActualHeight;
-            ((UIElement)this).FindLogicalAncestor<PopupNotification>().DHeight += DHeight;
-            var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
-            this.BeginAnimation(OpacityProperty, an);
-            _close.Start();
         }
 
         private void _context_RefreshEvent(object sender, System.ComponentModel.PropertyChangedEventArgs e)
