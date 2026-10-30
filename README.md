@@ -49,9 +49,13 @@ The feature is off by default on fresh installs. Existing **resources/config/bro
 
 ![Native Streaming controls](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/streaming-settings.png)
 
+## Latest fixes
+
+Mount notifications keep the new 2.0 popup visible when it overrides an active 1.5 effect. Death, floortime and floortime percentage icons render consistently across player rows and UI scales. Damage done and damage share values use clear white text.
+
 ## Screenshots
 
-The Modern Meter 1.0.18 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+The Modern Meter 1.0.19 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
 
 ### Loading screen
 

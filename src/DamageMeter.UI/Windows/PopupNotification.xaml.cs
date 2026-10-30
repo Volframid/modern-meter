@@ -178,6 +178,16 @@ namespace DamageMeter.UI
                     }
 
                     if (ModernMountNotifications.Weight(flash) != 0) _mountBalloons[existing ?? flash.Balloon] = flash;
+                    // Removing the last obsolete card can start HideWindow's fade.
+                    // IsVisible remains true until that animation completes, so
+                    // PresentNotification alone would leave the new card fading out.
+                    // Cancel the old clock before presenting the replacement.
+                    if (!Visible)
+                    {
+                        BeginAnimation(OpacityProperty, null);
+                        Opacity = 1;
+                        Visible = true;
+                    }
                     _present();
                     _focusTimer.Start();
                 }

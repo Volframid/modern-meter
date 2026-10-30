@@ -10,7 +10,7 @@
   </Style>
  </UserControl.Resources>
  <i:Interaction.Triggers><i:EventTrigger EventName="MouseRightButtonDown"><i:InvokeCommandAction Command="{Binding ShowSkillDetailsCommand}" /></i:EventTrigger></i:Interaction.Triggers>
- <Border BorderBrush="#25343B4C" BorderThickness="0,0,0,1" Padding="6,2">
+ <Border BorderBrush="#25343B4C" BorderThickness="0,0,0,1" Padding="6,2,6,1">
   <Grid x:Name="GridStats">
    <Grid.ColumnDefinitions><ColumnDefinition Width="20"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
    <Grid.RowDefinitions><RowDefinition Height="14"/><RowDefinition Height="2"/><RowDefinition Height="14"/></Grid.RowDefinitions>
