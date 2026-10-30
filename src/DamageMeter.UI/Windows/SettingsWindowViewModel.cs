@@ -251,16 +251,7 @@ namespace DamageMeter.UI.Windows
                 NotifyPropertyChanged();
             }
         }
-        public int ResetTimeout
-        {
-            get => Data.IdleResetTimeout;
-            set
-            {
-                if (Data.IdleResetTimeout == value) return;
-                Data.IdleResetTimeout = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public int ResetTimeout => 0;
         public bool IgnorePacketsThreshold
         {
             get => Data.IgnorePacketsThreshold;
@@ -727,16 +718,7 @@ namespace DamageMeter.UI.Windows
                 NotifyPropertyChanged();
             }
         }
-        public int PasteDelay
-        {
-            get => Data.LFDelay;
-            set
-            {
-                if (Data.LFDelay == value) return;
-                Data.LFDelay = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public int PasteDelay => 150;
 
 
         // dps servers
@@ -777,16 +759,7 @@ namespace DamageMeter.UI.Windows
                 NotifyPropertyChanged();
             }
         }
-        public int ExcelCmaSeconds
-        {
-            get => Data.ExcelCMADPSSeconds;
-            set
-            {
-                if (Data.ExcelCMADPSSeconds == value) return;
-                Data.ExcelCMADPSSeconds = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public int ExcelCmaSeconds => 1;
         public int UpdatesPerSecond
         {
             get => Data.UpdatesPerSecond;
@@ -1161,9 +1134,9 @@ namespace DamageMeter.UI.Windows
             Hotkeys.Copy.ForEach(h => CopyKeys.Add(new CopyKeyVM($"DPS paste {++count}", h)));
             MockParty = new List<MockPlayerViewModel>
             {
-                new MockPlayerViewModel("Deep.Yes", PlayerClass.Warrior),
-                new MockPlayerViewModel("No.Broler", PlayerClass.Lancer),
-                new MockPlayerViewModel("Priest.Kek", PlayerClass.Mystic)
+                new MockPlayerViewModel("Warrior", PlayerClass.Warrior),
+                new MockPlayerViewModel("Lancer", PlayerClass.Lancer),
+                new MockPlayerViewModel("Mystic", PlayerClass.Mystic)
             };
         }
 

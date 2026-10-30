@@ -6,12 +6,18 @@
  FontFamily="Segoe UI" UseLayoutRounding="True" Loaded="UserControl_Loaded">
  <UserControl.Resources><converters:IconConverter x:Key="iconConv"/></UserControl.Resources>
  <Grid Margin="6,6,6,4" MinWidth="310" MaxWidth="570">
-  <Border x:Name="b" CornerRadius="11" Background="{DynamicResource ModernSurface}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1"
-          Opacity="{Binding NotificationBackgroundOpacity, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=1}"/>
+  <Border x:Name="b" CornerRadius="8" BorderThickness="1"
+          Opacity="{Binding NotificationBackgroundOpacity, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=1}">
+   <Border.Background><SolidColorBrush Color="{Binding NotificationBackgroundColor, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=#14171F}"/></Border.Background>
+   <Border.BorderBrush><SolidColorBrush Color="{Binding NotificationBorderColor, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=#343B4C}"/></Border.BorderBrush>
+  </Border>
   <Grid Margin="16,14"><Grid.ColumnDefinitions><ColumnDefinition Width="48"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
    <Grid Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Top">
-    <Rectangle x:Name="rect" RadiusX="8" RadiusY="8" Fill="{DynamicResource ModernCard}" Stroke="{DynamicResource ModernAccent}" StrokeThickness="1"
-               Opacity="{Binding NotificationBackgroundOpacity, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=1}"/>
+    <Rectangle x:Name="rect" RadiusX="8" RadiusY="8" StrokeThickness="1"
+               Opacity="{Binding NotificationBackgroundOpacity, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=1}">
+     <Rectangle.Fill><SolidColorBrush Color="{Binding NotificationBackgroundColor, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=#14171F}"/></Rectangle.Fill>
+     <Rectangle.Stroke><SolidColorBrush Color="{Binding NotificationBorderColor, RelativeSource={RelativeSource AncestorType=ui:PopupNotification}, FallbackValue=#343B4C}"/></Rectangle.Stroke>
+    </Rectangle>
     <Image x:Name="img" Width="24" Height="24" Visibility="Hidden" Stretch="Uniform"/>
     <Rectangle x:Name="ell" Width="24" Height="24" RadiusX="5" RadiusY="5">
      <Rectangle.Fill><ImageBrush x:Name="ellImgBrush" ImageSource="{Binding Icon, Converter={StaticResource iconConv}}" Stretch="UniformToFill"/></Rectangle.Fill>

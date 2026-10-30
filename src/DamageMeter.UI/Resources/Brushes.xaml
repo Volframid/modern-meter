@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Colors -->
+    <Color x:Key="ModernSurfaceColor">#14171F</Color>
     <Color x:Key="KrBgColorBase">#14171F</Color>
     <Color x:Key="KrBgColorDarkBase">#0F121A</Color>
     <Color x:Key="KrBorderColorBase">#343B4C</Color>
@@ -47,7 +48,7 @@
 
     <SolidColorBrush x:Key="DarkBarColor" Color="#14171F"/>
     <SolidColorBrush x:Key="DarkBackgroundColor" Color="#14171F" />
-    <SolidColorBrush x:Key="DarkCardColor" Color="#1B202B" />
+    <SolidColorBrush x:Key="DarkCardColor" Color="{StaticResource ModernSurfaceColor}" />
 
     <SolidColorBrush x:Key="DarkPrimaryText" Color="#DD000000"/>
     <SolidColorBrush x:Key="DarkSecondaryText" Color="#89000000"/>
@@ -61,7 +62,7 @@
     <SolidColorBrush x:Key="LightBackgroundColor" Color="#FAFAFA" />
     <SolidColorBrush x:Key="LightCardColor" Color="#FFFFFF" />
     <SolidColorBrush x:Key="AccentColor" Color="{StaticResource Accent}"/>
-    <SolidColorBrush x:Key="TooltipColor" Color="#1B202B" Opacity=".9"/>
+    <SolidColorBrush x:Key="TooltipColor" Color="{StaticResource ModernSurfaceColor}" Opacity=".9"/>
 
     <SolidColorBrush x:Key="DamageText" Color="#ef5350"/>
     <SolidColorBrush x:Key="HealText" Color="#66bb6a"/>

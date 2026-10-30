@@ -45,22 +45,14 @@
         </Style>
         <Style TargetType="settings:ValueSetting">
             <Setter Property="Height" Value="32" />
-            <Setter Property="SliderColor1">
-                <Setter.Value>
-                    <SolidColorBrush x:Name="c1" Color="{Binding SelfColor}" Opacity=".8" />
-                </Setter.Value>
-            </Setter>
-            <Setter Property="SliderColor2">
-                <Setter.Value>
-                    <SolidColorBrush x:Name="c2" Color="{Binding SelfColor}" />
-                </Setter.Value>
-            </Setter>
+            <Setter Property="SliderColor1" Value="{DynamicResource ModernAccent}"/>
+            <Setter Property="SliderColor2" Value="{DynamicResource ModernAccent}"/>
         </Style>
         
         <Style x:Key="MetricComboBox" TargetType="ComboBox" BasedOn="{StaticResource ModernCombo}">
             <Setter Property="ItemsSource" Value="{Binding AvailableMetrics}"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="ItemContainerStyle"><Setter.Value><Style TargetType="ComboBoxItem"><Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="10,5"/><Setter Property="MinWidth" Value="230"/></Style></Setter.Value></Setter>
+            <Setter Property="ItemContainerStyle"><Setter.Value><Style TargetType="ComboBoxItem" BasedOn="{StaticResource ModernComboItem}"><Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="10,5"/><Setter Property="MinWidth" Value="230"/></Style></Setter.Value></Setter>
             <Setter Property="MinWidth" Value="90"/><Setter Property="Margin" Value="0,0,6,0"/>
             <Setter Property="ItemTemplate"><Setter.Value><DataTemplate>
                 <TextBlock Text="{ui:LocalizedValue Converter={StaticResource EnumDescriptionConverter}}" TextTrimming="CharacterEllipsis" ToolTip="{ui:LocalizedValue Converter={StaticResource EnumDescriptionConverter}}"/>
@@ -133,8 +125,6 @@
                                                   SettingName="{DynamicResource NativeText_SystemTray_Count_only_party_members}" />
                         <settings:CheckboxSetting IsOn="{Binding IgnorePacketsThreshold, Mode=TwoWay}"
                                                   SettingName="{DynamicResource NativeText_SystemTray_IgnorePacketsThreshold}" />
-                        <settings:ValueSetting Value="{Binding ResetTimeout, Mode=TwoWay}"
-                                               SettingName="{DynamicResource NativeText_IdleResetTimeout}" Min="0" Max="600" />
 
                     </StackPanel>
                 </ScrollViewer></TabItem>
@@ -160,16 +150,16 @@
                         <settings:CheckboxSetting IsOn="{Binding FullscreenOverlay, Mode=TwoWay}"
                                                   SettingName="{DynamicResource NativeText_EnableOverlay}" IsEnabled="False" 
                                                   Visibility="Collapsed"/>
-                        <settings:ValueSetting Value="{Binding NumberOfPlayersDisplayed, Mode=TwoWay}"
+                        <settings:ValueSetting PreciseInput="True" Value="{Binding NumberOfPlayersDisplayed, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_NumberPlayersDisplayed}" Min="1" Max="30" />
-                        <settings:ValueSetting x:Name="MainOpacitySetting" Value="{Binding MainWindowOpacityPercent, Mode=TwoWay}"
+                        <settings:ValueSetting PreciseInput="True" x:Name="MainOpacitySetting" Value="{Binding MainWindowOpacityPercent, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_SystemTray_MainWindowOpacity}"
                                                Min="0" Max="100" />
-                        <settings:ValueSetting x:Name="OtherOpacitySetting" Value="{Binding OtherWindowsOpacityPercent, Mode=TwoWay}"
+                        <settings:ValueSetting PreciseInput="True" x:Name="OtherOpacitySetting" Value="{Binding OtherWindowsOpacityPercent, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_SystemTray_OtherWindowOpacity}"
                                                Min="0" Max="100" />
-                        <settings:ValueSetting x:Name="NotificationOpacitySetting" Value="{Binding NotificationOpacityPercent, Mode=TwoWay}" SettingName="{DynamicResource ModernText_5A0D55CCB291}" Min="10" Max="100" />
-                        <settings:ValueSetting x:Name="ScaleLevelSetting" Value="{Binding ScaleLevel, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0" Max="100" />
+                        <settings:ValueSetting PreciseInput="True" x:Name="NotificationOpacitySetting" Value="{Binding NotificationOpacityPercent, Mode=TwoWay}" SettingName="{DynamicResource ModernText_5A0D55CCB291}" Min="10" Max="100" />
+                        <settings:ValueSetting PreciseInput="True" InputStep="0.1" x:Name="ScaleLevelSetting" Value="{Binding ScaleLevel, Mode=TwoWay}" SettingName="{DynamicResource ModernText_F102986B39EF}" Min="0" Max="100" />
                         <!--<settings:ValueSetting Value="{Binding UpdatesPerSecond, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_UpdatesPerSecond}" Min="1" Max="20" />-->
 
@@ -196,7 +186,7 @@
                     </StackPanel>
                 </ScrollViewer></TabItem>
                 <!--Layout-->
-                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Layout}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_A58DA793C725}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6,6,16,12">
+                <TabItem><TabItem.Header><StackPanel Orientation="Horizontal"><Path Data="{StaticResource Svg.Layout}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TabItem}}" Width="15" Height="15" Stretch="Uniform" Margin="0,0,10,0"/><TextBlock Text="{DynamicResource ModernText_A58DA793C725}" VerticalAlignment="Center"/></StackPanel></TabItem.Header><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="6,6,16,12">
                     <StackPanel Grid.IsSharedSizeScope="True">
                         <TextBlock Text="{DynamicResource ModernText_F978CD477527}" Style="{StaticResource ModernHeading}" Margin="0,0,0,6"/>
                         <TextBlock Text="{DynamicResource ModernText_5937BF91AA5A}" TextWrapping="Wrap" Foreground="{DynamicResource ModernMuted}" Margin="0,0,0,18"/>
@@ -245,11 +235,11 @@
                                                    ChoicesType="{x:Type data:GraphMode}"
                                                    IsEnabled="{Binding RealtimeGraphEnabled}" />
 
-                        <settings:ValueSetting Value="{Binding RealtimeGraphDisplayedInterval, Mode=TwoWay}"
+                        <settings:ValueSetting PreciseInput="True" Value="{Binding RealtimeGraphDisplayedInterval, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_RealtimeGraphDisplayedInterval}" Min="0"
                                                Max="600"
                                                IsEnabled="{Binding RealtimeGraphEnabled}" />
-                        <settings:ValueSetting Value="{Binding RealtimeGraphCMAseconds, Mode=TwoWay}"
+                        <settings:ValueSetting PreciseInput="True" Value="{Binding RealtimeGraphCMAseconds, Mode=TwoWay}"
                                                SettingName="{DynamicResource NativeText_RealtimeGraphCmaSeconds}" Min="1"
                                                Max="60">
                             <settings:ValueSetting.Style>
@@ -584,10 +574,6 @@
                                                   SettingName="{DynamicResource NativeText_SystemTray_Autoexport_to_Excel}" />
                         <settings:CheckboxSetting IsOn="{Binding JsonAutoExport, Mode=TwoWay}"
                                                   SettingName="{DynamicResource NativeText_SystemTray_Autoexport_to_Json}" />
-                        <settings:ValueSetting Value="{Binding ExcelCmaSeconds, Mode=TwoWay}"
-                                               SettingName="{DynamicResource NativeText_SystemTray_ExcelCMADPSSeconds}"
-                                               Min="1"
-                                               Max="60" />
                     </StackPanel>
                 </ScrollViewer></TabItem>
                 <!--Hotkeys-->
@@ -599,8 +585,10 @@
                                                   SettingName="{DynamicResource NativeText_FormatPasteString}" />
                         <settings:CheckboxSetting IsOn="{Binding DisableIngameChatPaste, Mode=TwoWay}"
                                                   SettingName="{DynamicResource NativeText_NoPaste}" />
-                        <settings:ValueSetting Value="{Binding PasteDelay, Mode=TwoWay}"
-                                               SettingName="{DynamicResource NativeText_DelayToWaitPasting}" Min="0" Max="600" />
+                        <Grid Height="32" Margin="35,0,14,0"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="{DynamicResource NativeText_DelayToWaitPasting}" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="FixedPasteDelay" Grid.Column="1" Text="150 ms" Foreground="{DynamicResource ModernMuted}" VerticalAlignment="Center"/>
+                        </Grid>
                         <Separator Opacity=".2" />
 
                         <settings:HotkeySetting SettingName="{DynamicResource ModernText_73EC388AA484}"

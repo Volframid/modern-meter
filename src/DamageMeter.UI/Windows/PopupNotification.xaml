@@ -23,19 +23,12 @@
                             ScaleX="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}"
                             ScaleY="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ClickThrouWindow}, Path=Scale}" />
         </Grid.LayoutTransform>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Rectangle Name="spacer" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
-        <ItemsControl Grid.Row="1" ItemTemplate="{StaticResource notification}" Name="content">
+        <ItemsControl ItemTemplate="{StaticResource notification}" Name="content">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical" VerticalAlignment="Stretch" Name="mainPanel"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Rectangle Name="bottomspacer" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
     </Grid>
 </ui:ClickThrouWindow>

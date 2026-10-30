@@ -96,7 +96,7 @@ namespace DamageMeter.UI
             if (AllowsTransparency)
                 Dispatcher.InvokeIfRequired(() => BeginAnimation(OpacityProperty, OpacityAnimation(val)), DispatcherPriority.DataBind);
         }
-        public void SnapToScreen()
+        public virtual void SnapToScreen()
         {
             if(!BasicTeraData.Instance.WindowData.SnapToBorders) return;
             if (_dragging || _snapping) return;

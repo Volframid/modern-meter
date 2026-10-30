@@ -26,6 +26,10 @@ public static class ModernPreferences
 
     public static void Initialize(WindowData data)
     {
+        // These are fixed product defaults rather than adjustable preferences.
+        data.LFDelay = 150;
+        data.ExcelCMADPSSeconds = 1;
+        data.IdleResetTimeout = 0;
         if (States.TryGetValue(data, out _)) return;
         State state;
         try { state = File.Exists(FileName) ? JsonSerializer.Deserialize<State>(File.ReadAllText(FileName)) ?? new State() : new State(); }

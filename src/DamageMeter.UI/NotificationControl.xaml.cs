@@ -18,23 +18,44 @@ namespace DamageMeter.UI
         public NotificationControl()
         {
             InitializeComponent();
-            //Width = 0;
+            Unloaded += (_, _) => ReleaseLifetime();
         }
         Balloon _context;
         Timer _close;
-        public double DHeight;
+        private int _lifetime;
+        private bool _closing;
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            ReleaseLifetime();
             _context = (Balloon)DataContext;
             _context.PropChanged += _context_RefreshEvent;
-            _close = new Timer(_context.DisplayTime);
-            _close.Elapsed += _close_Elapsed;
             ApplyEventIcon(_context.EventType);
-            DHeight = ActualHeight;
-            ((UIElement)this).FindLogicalAncestor<PopupNotification>().DHeight += DHeight;
+            Height = double.NaN;
+            BeginAnimation(HeightProperty, null);
             var an = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(300));
             this.BeginAnimation(OpacityProperty, an);
+            RestartCloseTimer();
+        }
+
+        private void RestartCloseTimer()
+        {
+            if (_close != null) { _close.Stop(); _close.Elapsed -= _close_Elapsed; _close.Dispose(); }
+            _close = new Timer(_context.DisplayTime);
+            _close.Elapsed += _close_Elapsed;
             _close.Start();
+        }
+
+        private void ReleaseLifetime()
+        {
+            _lifetime++;
+            _closing = false;
+            if (_context != null) _context.PropChanged -= _context_RefreshEvent;
+            _context = null;
+            if (_close != null)
+            {
+                _close.Stop(); _close.Elapsed -= _close_Elapsed; _close.Dispose(); _close = null;
+            }
+            BeginAnimation(HeightProperty, null);
         }
 
         // Shared by the real Loaded path and isolated icon rendering checks.
@@ -141,34 +162,35 @@ namespace DamageMeter.UI
 
         private void _context_RefreshEvent(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Refresh")
+            Dispatcher.InvokeIfRequired(() =>
             {
-                _close?.Stop();
-                _close?.Start();
-            }
-            else if (e.PropertyName == "BodyText")
-            {
-                TextBlock.Text = _context.BodyText;
-                var par = ((UIElement) this).FindLogicalAncestor<PopupNotification>();
-                par.DHeight -= DHeight;
-                DHeight = ActualHeight;
-                par.DHeight += DHeight;
-            }
+                if (!ReferenceEquals(sender, _context)) return;
+                if (e.PropertyName == "Refresh")
+                {
+                    _lifetime++; _closing = false;
+                    BeginAnimation(HeightProperty, null); Height = double.NaN;
+                    RestartCloseTimer();
+                }
+                else if (e.PropertyName == "BodyText") TextBlock.Text = _context.BodyText;
+            }, System.Windows.Threading.DispatcherPriority.Normal);
         }
 
         private void _close_Elapsed(object sender, ElapsedEventArgs e)
         {
-            _close.Stop();
+            var version = _lifetime;
+            var context = _context;
             Dispatcher.InvokeIfRequired(() =>
             {
+                if (version != _lifetime || context == null || _closing || !ReferenceEquals(sender, _close)) return;
+                _close.Stop(); _closing = true;
                 var h = this.ActualHeight;
                 var an = new DoubleAnimation(h, 0, TimeSpan.FromMilliseconds(300)) { EasingFunction = new QuadraticEase() };
                 an.Completed += (s, ev) =>
                 {
+                    if (version != _lifetime || !ReferenceEquals(_context, context)) return;
                     var parent = ((UIElement)this).FindLogicalAncestor<PopupNotification>();
-                    parent?.RemoveMe(_context);
-                    if (parent != null) parent.DHeight -= DHeight;
-                    _close.Dispose();
+                    parent?.RemoveMe(context);
+                    ReleaseLifetime();
                 };
                 //this.BeginAnimation(WidthProperty, an);
                 this.BeginAnimation(HeightProperty, an);

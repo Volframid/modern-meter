@@ -88,7 +88,7 @@
 
     <SolidColorBrush x:Key="ColorPickerDarkBorderBrush" Color="#343B4C" />
 
-    <SolidColorBrush x:Key="ColorCanvasBackgroundBrush" Color="#1B202B" />
+    <SolidColorBrush x:Key="ColorCanvasBackgroundBrush" Color="{StaticResource ModernSurfaceColor}" />
 
     <SolidColorBrush x:Key="HorizontalSliderTrackNormalBackground"
                      Color="#343B4C" />
@@ -105,6 +105,7 @@
     <Style x:Key="ColorCanvasTextBoxStyle"
            TargetType="TextBox"
            BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="Background"
                 Value="Transparent" />
         <Setter Property="Foreground"
@@ -442,7 +443,7 @@
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Margin="4,6,4,6"
-                                            Style="{StaticResource AppSliderStyle}"
+                                            Style="{DynamicResource ModernSlider}"
                                             Value="{Binding R, RelativeSource={RelativeSource TemplatedParent}}"
                                             VerticalAlignment="Center" />
                                     <TextBox Grid.Row="0"
@@ -463,7 +464,7 @@
                                             Grid.Row="1"
                                             Grid.Column="1"
                                             Margin="4,6,4,6"
-                                            Style="{StaticResource AppSliderStyle}"
+                                            Style="{DynamicResource ModernSlider}"
                                             Value="{Binding G, RelativeSource={RelativeSource TemplatedParent}}"
                                             VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1"
@@ -484,7 +485,7 @@
                                             Grid.Row="2"
                                             Grid.Column="1"
                                             Margin="4,6,4,6"
-                                            Style="{StaticResource AppSliderStyle}"
+                                            Style="{DynamicResource ModernSlider}"
                                             Value="{Binding B, RelativeSource={RelativeSource TemplatedParent}}"
                                             VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2"
@@ -505,7 +506,7 @@
                                             SmallChange="1"
                                             LargeChange="10"
                                             Margin="4,6,4,6"
-                                            Style="{StaticResource AppSliderStyle}"
+                                            Style="{DynamicResource ModernSlider}"
                                             Value="{Binding Path=A, RelativeSource={RelativeSource TemplatedParent}}"
                                             VerticalAlignment="Center"
                                             Visibility="{Binding Path=UsingAlphaChannel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />

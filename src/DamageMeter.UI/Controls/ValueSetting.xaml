@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
+             xmlns:settings="clr-namespace:TCC.UI.Controls.Settings" xmlns:modern="clr-namespace:DamageMeter.UI.Controls"
              mc:Ignorable="d" 
             d:DesignWidth="300">
     <UserControl.Resources>
@@ -146,7 +146,7 @@
         </Style>
 
         <ControlTemplate x:Key="SliderTemplate">
-            <Slider Width="{Binding SliderWidth.Value, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Style="{StaticResource AppSliderStyle}" ValueChanged="Slider_ValueChanged" Loaded="FrameworkElement_OnLoaded" HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="Slider_MouseDoubleClick"
+            <Slider Width="{Binding SliderWidth.Value, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Style="{StaticResource ModernSlider}" SmallChange="{Binding InputStep, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" ValueChanged="Slider_ValueChanged" Loaded="FrameworkElement_OnLoaded" HorizontalAlignment="Stretch" VerticalAlignment="Center" MouseDoubleClick="Slider_MouseDoubleClick"
                     Maximum="{Binding Max, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" 
                     Minimum="{Binding Min, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" 
                     Value="{Binding Value, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Margin="0" />
@@ -204,12 +204,29 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox TextAlignment="Right" Background="Transparent" LostKeyboardFocus="TextBox_LostFocus"
+            <Grid>
+            <TextBox TextAlignment="Center" Background="Transparent" LostKeyboardFocus="TextBox_LostFocus"
                      Foreground="White" BorderThickness="0" LostFocus="TextBox_LostFocus" KeyDown="UIElement_OnKeyDown"
                      VerticalAlignment="Center" Margin="0 0 5 0" 
                      Text="{Binding Value, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}, StringFormat={}{0:0.##}}"
                      CaretBrush="{Binding SliderColor2, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:ValueSetting}}"
-                     Visibility="{Binding TextBoxVisibility, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" />
+                     >
+                <TextBox.Style><Style TargetType="TextBox"><Setter Property="Visibility" Value="{Binding TextBoxVisibility, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}"/><Style.Triggers><DataTrigger Binding="{Binding PreciseInput, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBox.Style>
+            </TextBox>
+            <ContentControl>
+                <ContentControl.Style><Style TargetType="ContentControl"><Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers><DataTrigger Binding="{Binding PreciseInput, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Value="True">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Setter Property="ContentTemplate"><Setter.Value><DataTemplate>
+                            <modern:ModernNumberBox Minimum="{Binding Min, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Maximum="{Binding Max, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}"
+                                                    Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}"
+                                                    Step="{Binding InputStep, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}" Margin="0,0,8,0" Height="28"
+                                                    AutomationProperties.Name="{Binding SettingName, RelativeSource={RelativeSource AncestorType=settings:ValueSetting}}"/>
+                        </DataTemplate></Setter.Value></Setter>
+                    </DataTrigger></Style.Triggers>
+                </Style></ContentControl.Style>
+            </ContentControl>
+            </Grid>
 
             <ContentControl Grid.Column="1" >
                 <ContentControl.Style>

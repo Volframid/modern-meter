@@ -39,7 +39,7 @@
 
     <SolidColorBrush x:Key="ColorPickerDarkBorderBrush" Color="#343B4C" />
 
-    <SolidColorBrush x:Key="PopupBackgroundBrush" Color="#1B202B" />
+    <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{StaticResource ModernSurfaceColor}" />
 
     <Style x:Key="ColorItemContainerStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="ToolTip" Value="{Binding Name}" />

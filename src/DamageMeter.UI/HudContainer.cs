@@ -162,8 +162,7 @@ namespace DamageMeter.UI
                 {
                     if (window is Broadcast.NativeBroadcastWindow) continue;
                     if (window is ClickThrouWindow interactive && interactive.IsDragging) continue;
-                    window.Topmost = false;
-                    window.Topmost = true;
+                    WindowsServices.EnsureAboveForeground(window);
                 }
             });
         }

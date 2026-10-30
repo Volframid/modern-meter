@@ -7,6 +7,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Data.Actions.Notify.SoundElements;
 using System.Windows.Threading;
+using System.Windows.Media;
+using Forms = System.Windows.Forms;
 using DamageMeter.UI.Windows;
 
 namespace DamageMeter.UI
@@ -22,6 +24,7 @@ namespace DamageMeter.UI
         private readonly DispatcherTimer _focusTimer;
         private Task _soundQueue = Task.CompletedTask;
         private readonly Dictionary<Balloon, NotifyFlashMessage> _mountBalloons = new();
+        private bool _placing;
 
         public double NotificationBackgroundOpacity
         {
@@ -30,6 +33,10 @@ namespace DamageMeter.UI
         }
         public static readonly DependencyProperty NotificationBackgroundOpacityProperty = DependencyProperty.Register(
             nameof(NotificationBackgroundOpacity), typeof(double), typeof(PopupNotification), new PropertyMetadata(.5d));
+        public Color NotificationBackgroundColor { get => (Color)GetValue(NotificationBackgroundColorProperty); private set => SetValue(NotificationBackgroundColorProperty, value); }
+        public static readonly DependencyProperty NotificationBackgroundColorProperty = DependencyProperty.Register(nameof(NotificationBackgroundColor), typeof(Color), typeof(PopupNotification), new PropertyMetadata(Colors.Black));
+        public Color NotificationBorderColor { get => (Color)GetValue(NotificationBorderColorProperty); private set => SetValue(NotificationBorderColorProperty, value); }
+        public static readonly DependencyProperty NotificationBorderColorProperty = DependencyProperty.Register(nameof(NotificationBorderColor), typeof(Color), typeof(PopupNotification), new PropertyMetadata(Colors.White));
 
         public PopupNotification() : this(null) { }
 
@@ -45,6 +52,8 @@ namespace DamageMeter.UI
             InitializeComponent();
             NotificationBackgroundOpacity = ModernPreferences.GetNotificationOpacity(BasicTeraData.Instance.WindowData);
             SettingsWindowViewModel.NotificationOpacityChanged += OnNotificationOpacityChanged;
+            SettingsWindowViewModel.WindowColorsChanged += OnNotificationColorsChanged;
+            OnNotificationColorsChanged();
             notificationBalloons = new SynchronizedObservableCollection<Balloon>();
             notificationBalloons.CollectionChanged += NotificationBalloons_CollectionChanged;
             content.ItemsSource = notificationBalloons;
@@ -61,17 +70,26 @@ namespace DamageMeter.UI
             Dispatcher.Invoke(() => NotificationBackgroundOpacity = value);
         }
 
+        private void OnNotificationColorsChanged()
+        {
+            if (Dispatcher.HasShutdownStarted) return;
+            if (!Dispatcher.CheckAccess()) { Dispatcher.BeginInvoke(new Action(OnNotificationColorsChanged)); return; }
+            NotificationBackgroundColor = BasicTeraData.Instance.WindowData.BackgroundColor;
+            NotificationBorderColor = BasicTeraData.Instance.WindowData.BorderColor;
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             SettingsWindowViewModel.NotificationOpacityChanged -= OnNotificationOpacityChanged;
+            SettingsWindowViewModel.WindowColorsChanged -= OnNotificationColorsChanged;
             _focusTimer.Stop();
             base.OnClosed(e);
         }
 
         private void PresentNotification()
         {
-            Topmost = false;
-            Topmost = true;
+            // Showing a card must not repeatedly demote/promote the HUD or activate it.
+            Topmost = BasicTeraData.Instance.WindowData.Topmost;
             if (!IsVisible) ShowWindow();
         }
 
@@ -174,31 +192,35 @@ namespace DamageMeter.UI
             });
         }
 
-        public double DHeight
-        {
-            get => (double)GetValue(DHeightProperty);
-            set => SetValue(DHeightProperty, value);
-        }
-
-        public static readonly DependencyProperty DHeightProperty = DependencyProperty.Register("DHeight", typeof(double), typeof(PopupNotification));
-
         internal void RemoveMe(Balloon context)
         {
-            var item = notificationBalloons.ToSyncArray().FirstOrDefault(x => x.TitleText == context.TitleText && x.Icon == context.Icon && x.BodyText == context.BodyText);
-            if (item != null) notificationBalloons.Remove(item);
+            notificationBalloons.Remove(context);
         }
 
-        protected override Size MeasureOverride(Size availableSize)
+        public override void SnapToScreen()
         {
-            base.MeasureOverride(availableSize);
-            var totalHeight = content.DesiredSize.Height;
-            if (DHeight > content.DesiredSize.Height)
+            if (_placing || IsDragging || !IsLoaded || !IsVisible) return;
+            var anchor = LastSnappedPoint ?? new Point(Left, Top);
+            var source = PresentationSource.FromVisual(this);
+            if (source?.CompositionTarget == null || !double.IsFinite(anchor.X) || !double.IsFinite(anchor.Y)) return;
+            var transform = source.CompositionTarget.TransformToDevice;
+            var dx = transform.M11; var dy = transform.M22;
+            // A growing card must not choose a different monitor by HWND overlap.
+            var screen = Forms.Screen.FromPoint(new System.Drawing.Point(
+                (int)Math.Round(anchor.X * dx), (int)Math.Round(anchor.Y * dy)));
+            var bounds = TeraWindow.IsTeraFullScreen() ? screen.Bounds : screen.WorkingArea;
+            var area = new Rect(bounds.Left / dx, bounds.Top / dy, bounds.Width / dx, bounds.Height / dy);
+            var location = BasicTeraData.Instance.WindowData.SnapToBorders
+                ? ModernNotificationPlacement.Place(anchor, new Size(ActualWidth, ActualHeight), area) : anchor;
+            _placing = true;
+            try
             {
-                if (SnappedToBottom) {spacer.Height = DHeight - totalHeight; bottomspacer.Height = 0;}
-                else {bottomspacer.Height = DHeight - totalHeight; spacer.Height=0;}
+                if (Math.Abs(Left - location.X) > .01) Left = location.X;
+                if (Math.Abs(Top - location.Y) > .01) Top = location.Y;
+                SnappedToBottom = location.Y < anchor.Y;
+                _dragged = false;
             }
-            else { spacer.Height = 0; bottomspacer.Height = 0;}
-            return base.MeasureOverride(availableSize);
+            finally { _placing = false; }
         }
 
         public override void SaveWindowPos()

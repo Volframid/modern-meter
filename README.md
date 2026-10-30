@@ -1,5 +1,7 @@
 # Modern Meter
 
+Notification cards retain their user-placed anchor as cards arrive, refresh and disappear. Expired or removed cards release their timers; card growth stays on the anchor's monitor. The HUD does not repeatedly toggle hidden windows through the topmost band during combat updates.
+
 <img src="https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/application-icon.png" width="72" height="72" alt="Modern Meter MM monogram">
 
 A compact combat meter for TERA Toolbox, with an updated interface based on Shinra Meter.
@@ -21,7 +23,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
 - Fourteen settings sections and live interface language selection: English, Russian, German, French, Spanish, Italian, Brazilian Portuguese, Japanese, Korean, Simplified Chinese and Traditional Chinese. Automatic mode follows Windows. Modern interface text and settings labels change immediately in open windows; older runtime diagnostics can fall back to English.
 - The frameless MM monogram shared by the application, taskbar, tray, loading screen and every window; transparent artwork has no enclosing tile or background.
-- Independent notification background opacity (10–100%, initially 50%) in Full settings → Appearance, applied immediately and retained after restart.
+- One notification background opacity setting (10–100%, initially 50%) in Full settings → Appearance controls both Meter status messages and separate notification cards. Their surface and frame colors follow the Meter; text and icons stay opaque.
 - Frameless caption icons on settings, overview and auxiliary windows; descriptive content headings are retained. Home icons have separate click regions, and export/GitHub menus use the same graphite palette. Player statistics initially center on the Meter monitor after their first data layout; dragging keeps the chosen position.
 - Mount notifications check the actual active buff on your character. An effective 2.0 suppresses overlapping 1.5 popups and queued speech; a later effective 1.5 can announce separately. Exact effect IDs also cover sound-only rules. Blue cloud means 1.5, orange cloud means 2.0. A bounded retry uses the existing event filters.
 - A new loading screen with live status, a matching update dialog, notification cards, chat, effects and upload-history windows, event editor and color picker.
@@ -30,6 +32,10 @@ For module-manager installation, use the module descriptor at https://raw.github
 Vanguard credit alerts start at 15,000 of 20,000 (75% for other known caps) and can appear in the foreground. Speech says “Vanguard credits are close to cap” without numbers, then “Vanguard credits are maxed out” at the cap. The popup format is unchanged. On Asura, existing self-buff 2.0 mount rules also recognize Primal Omen, Primal Mark and Queen's Wrath (10 seconds), subject to the same active-buff checks and event filters.
 
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.
+
+Settings and Overview share one dark surface, rounded selection menus and slim scroll indicators. The encounter menu follows the compact meter's background color and opacity while its text stays opaque. All numeric settings, including the TTS limit, support centered direct entry and small-step arrow buttons alongside matching violet sliders. Press Enter or leave the field to apply typed values. Scale arrows adjust the existing 0–100 size level by 0.1. The role previews are named Warrior, Lancer and Mystic.
+
+Chat-paste waiting time is fixed at 150 ms. Excel DPS averaging uses one second, and automatic idle reset is disabled; these fixed values replace older saved values when the meter starts.
 
 ## Streamlabs / OBS: one source for every Meter window
 

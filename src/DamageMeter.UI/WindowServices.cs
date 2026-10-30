@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
 
 namespace DamageMeter.UI
 {
@@ -37,6 +39,37 @@ namespace DamageMeter.UI
             handled = true;
             return new IntPtr(MA_NOACTIVATE);
         }
+
+        public static bool IsAbove(IntPtr target, IntPtr reference, Func<IntPtr, IntPtr> previous)
+        {
+            if (target == IntPtr.Zero || reference == IntPtr.Zero) return false;
+            if (target == reference) return true;
+            var cursor = reference;
+            for (var i = 0; i < 4096; i++)
+            {
+                cursor = previous(cursor);
+                if (cursor == target) return true;
+                if (cursor == IntPtr.Zero || cursor == reference) return false;
+            }
+            return false;
+        }
+
+        public static void EnsureAboveForeground(Window window)
+        {
+            if (!window.IsVisible) return;
+            if (!window.Topmost) window.Topmost = true;
+            var handle = new WindowInteropHelper(window).Handle;
+            var foreground = GetForegroundWindow();
+            if (handle == IntPtr.Zero || foreground == IntPtr.Zero ||
+                IsAbove(handle, foreground, cursor => GetWindow(cursor, 3))) return;
+            // HWND_TOPMOST, NOMOVE | NOSIZE | NOACTIVATE | NOOWNERZORDER.
+            // Never demote an existing HUD or disturb the game's activation/capture.
+            SetWindowPos(handle, new IntPtr(-1), 0, 0, 0, 0, 0x0213);
+        }
+
+        [DllImport("user32.dll")] private static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")] private static extern IntPtr GetWindow(IntPtr window, uint command);
+        [DllImport("user32.dll")] private static extern bool SetWindowPos(IntPtr window, IntPtr after, int x, int y, int width, int height, uint flags);
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]

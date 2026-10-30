@@ -8,7 +8,7 @@
  xmlns:mm="clr-namespace:DamageMeter.UI" Icon="{x:Static mm:ModernDamageMark.ApplicationImage}">
  <Window.Resources>
   <Style x:Key="SplashButton" TargetType="Button">
-   <Setter Property="Foreground" Value="#F0F2FA"/><Setter Property="Background" Value="#1B202B"/>
+   <Setter Property="Foreground" Value="#F0F2FA"/><Setter Property="Background" Value="{DynamicResource ModernSurface}"/>
    <Setter Property="BorderBrush" Value="#343B4C"/><Setter Property="BorderThickness" Value="1"/>
    <Setter Property="Padding" Value="18,9"/><Setter Property="Cursor" Value="Hand"/>
    <Setter Property="FontSize" Value="12"/>
@@ -44,7 +44,7 @@
      <TextBlock Text="{DynamicResource ModernText_90E640097904}" FontSize="12" Foreground="#A7AFC4" TextWrapping="Wrap"/>
     </StackPanel>
    </Grid>
-   <Border Grid.Row="2" Background="#1B202B" CornerRadius="9" BorderBrush="#2C3342" BorderThickness="1" Padding="14,13">
+   <Border Grid.Row="2" Background="{DynamicResource ModernSurface}" CornerRadius="9" BorderBrush="#2C3342" BorderThickness="1" Padding="14,13">
     <Grid>
      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="4"/></Grid.RowDefinitions>
      <Grid Margin="0,0,0,13"><Grid.ColumnDefinitions><ColumnDefinition Width="14"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>

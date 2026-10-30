@@ -106,6 +106,11 @@ namespace TCC.UI.Controls.Settings
         public static readonly DependencyProperty UseMaxProperty =
             DependencyProperty.Register("UseMax", typeof(bool), typeof(ValueSetting), new PropertyMetadata(false));
 
+        public static readonly DependencyProperty PreciseInputProperty = DependencyProperty.Register(nameof(PreciseInput), typeof(bool), typeof(ValueSetting), new PropertyMetadata(true));
+        public bool PreciseInput { get => (bool)GetValue(PreciseInputProperty); set => SetValue(PreciseInputProperty, value); }
+        public static readonly DependencyProperty InputStepProperty = DependencyProperty.Register(nameof(InputStep), typeof(double), typeof(ValueSetting), new PropertyMetadata(1d));
+        public double InputStep { get => (double)GetValue(InputStepProperty); set => SetValue(InputStepProperty, value); }
+
         public bool UseSpinner
         {
             get => (bool)GetValue(UseSpinnerProperty);
