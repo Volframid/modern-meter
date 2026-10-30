@@ -1089,12 +1089,12 @@
         <Setter Property="Width" Value="12" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="3 0 4 0" />
-        <Setter Property="Fill" Value="#5fff" />
+        <Setter Property="Fill" Value="White" />
 
     </Style>
     <Style x:Key="MetricBorderStyle"
            TargetType="Border">
-        <Setter Property="Background" Value="#1fff" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Height" Value="14" />
         <Setter Property="CornerRadius" Value="7" />
         <Setter Property="VerticalAlignment" Value="Center" />

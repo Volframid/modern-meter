@@ -128,13 +128,17 @@
     </Style>
     <Style x:Key="ModernNumberArrow" TargetType="RepeatButton">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernMuted}"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="RepeatButton">
-            <Border x:Name="ArrowSurface" Background="{TemplateBinding Background}" CornerRadius="3">
+            <Border x:Name="ArrowSurface" Background="Transparent">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
             <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="ArrowSurface" Property="Background" Value="#28AD8AFF"/></Trigger>
-                <Trigger Property="IsPressed" Value="True"><Setter TargetName="ArrowSurface" Property="Background" Value="#38AD8AFF"/></Trigger>
+                <Trigger Property="IsMouseOver" Value="True"><Setter Property="Foreground" Value="{DynamicResource ModernText}"/></Trigger>
+                <Trigger Property="IsPressed" Value="True"><Setter Property="Foreground" Value="{DynamicResource ModernAccent}"/></Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate></Setter.Value></Setter>
     </Style>

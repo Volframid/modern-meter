@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -38,9 +39,8 @@ public sealed class ModernNumberBox : UserControl
         grid.ColumnDefinitions.Add(new ColumnDefinition());
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(20) });
         _editor = new TextBox { Name = "ValueEditor", Background = Brushes.Transparent, BorderThickness = new Thickness(0),
-            Padding = new Thickness(0), Margin = new Thickness(20, 0, 20, 0), VerticalContentAlignment = VerticalAlignment.Center,
-            TextAlignment = TextAlignment.Center, Cursor = Cursors.IBeam };
-        Grid.SetColumnSpan(_editor, 2);
+            Padding = new Thickness(0), Margin = new Thickness(6, 0, 4, 0), VerticalContentAlignment = VerticalAlignment.Center,
+            TextAlignment = TextAlignment.Left, Cursor = Cursors.IBeam };
         _editor.SetResourceReference(TextBox.ForegroundProperty, "ModernAccent");
         _editor.LostKeyboardFocus += (_, _) => CommitText();
         _editor.PreviewKeyDown += OnEditorKeyDown;
@@ -54,10 +54,10 @@ public sealed class ModernNumberBox : UserControl
             var direction = i == 0 ? 1 : -1;
             var icon = new Path { Data = Geometry.Parse(i == 0 ? "M0,4 L4,0 L8,4" : "M0,0 L4,4 L8,0"),
                 Width = 7, Height = 4, Stretch = Stretch.Fill, StrokeThickness = 1.2 };
-            icon.SetResourceReference(Shape.StrokeProperty, "ModernMuted");
             var button = new RepeatButton { Name = i == 0 ? "IncreaseValue" : "DecreaseValue", Content = icon,
                 Focusable = false, Cursor = Cursors.Hand, Delay = 350, Interval = 100, Padding = new Thickness(0) };
             button.SetResourceReference(StyleProperty, "ModernNumberArrow");
+            icon.SetBinding(Shape.StrokeProperty, new Binding(nameof(Foreground)) { Source = button });
             button.Width = double.NaN;
             button.Height = double.NaN;
             Grid.SetRow(button, i);

@@ -33,7 +33,7 @@ Vanguard credit alerts start at 15,000 of 20,000 (75% for other known caps) and 
 
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.
 
-Settings and Overview share one dark surface, rounded selection menus and slim scroll indicators. The encounter menu follows the compact meter's background color and opacity while its text stays opaque. All numeric settings, including the TTS limit, support centered direct entry and small-step arrow buttons alongside matching violet sliders. Press Enter or leave the field to apply typed values. Scale arrows adjust the existing 0–100 size level by 0.1. The role previews are named Warrior, Lancer and Mystic.
+Settings and Overview share one dark surface, rounded selection menus and slim scroll indicators. The encounter menu uses the compact meter's background color with a fully opaque surface, so underlying player rows never show through the list. Boss labels use the shared violet accent. Small metric icons are white with transparent badge backgrounds. All numeric settings, including the TTS limit, support left-aligned direct entry and small-step arrow buttons alongside matching violet sliders. Hovering an arrow emphasizes only its glyph, without a box over the number. Press Enter or leave the field to apply typed values. Scale arrows adjust the existing 0–100 size level by 0.1. The role previews are named Warrior, Lancer and Mystic.
 
 Chat-paste waiting time is fixed at 150 ms. Excel DPS averaging uses one second, and automatic idle reset is disabled; these fixed values replace older saved values when the meter starts.
 
@@ -51,7 +51,7 @@ The feature is off by default on fresh installs. Existing **resources/config/bro
 
 ## Screenshots
 
-The Modern Meter 1.0.16 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+The Modern Meter 1.0.18 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
 
 ### Loading screen
 

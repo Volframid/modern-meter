@@ -2,10 +2,10 @@
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
  xmlns:ui="clr-namespace:DamageMeter.UI" xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum">
  <UserControl.Resources>
-  <DataTemplate x:Key="ModernEncounter"><StackPanel><TextBlock Text="{Binding Info.Name}" FontWeight="Normal" FontSize="11" Foreground="{DynamicResource ModernText}"/></StackPanel></DataTemplate>
+  <DataTemplate x:Key="ModernEncounter"><StackPanel><TextBlock Text="{Binding Info.Name}" FontWeight="Normal" FontSize="11" Foreground="{DynamicResource ModernAccent}"/></StackPanel></DataTemplate>
   <Style x:Key="MeterEncounterPopup" TargetType="Border" BasedOn="{StaticResource ModernComboPopup}">
-   <Setter Property="Background"><Setter.Value><SolidColorBrush Color="{Binding BackgroundColor}" Opacity="{Binding WindowOpacity}"/></Setter.Value></Setter>
-   <Setter Property="BorderBrush"><Setter.Value><SolidColorBrush Color="{Binding BorderColor}" Opacity="{Binding WindowOpacity}"/></Setter.Value></Setter>
+   <Setter Property="Background"><Setter.Value><SolidColorBrush Color="{Binding BackgroundColor, Converter={ui:ModernOpaqueColorConverter}}"/></Setter.Value></Setter>
+   <Setter Property="BorderBrush"><Setter.Value><SolidColorBrush Color="{Binding BorderColor, Converter={ui:ModernOpaqueColorConverter}}"/></Setter.Value></Setter>
   </Style>
  </UserControl.Resources>
  <Grid MinWidth="265">

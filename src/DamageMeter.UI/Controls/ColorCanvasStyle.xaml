@@ -105,7 +105,8 @@
     <Style x:Key="ColorCanvasTextBoxStyle"
            TargetType="TextBox"
            BasedOn="{StaticResource {x:Type TextBox}}">
-        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="6,0,4,0"/>
         <Setter Property="Background"
                 Value="Transparent" />
         <Setter Property="Foreground"

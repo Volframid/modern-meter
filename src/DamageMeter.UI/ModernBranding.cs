@@ -34,7 +34,7 @@ public static class ModernBranding
         catch (IOException) { }
         catch (UnauthorizedAccessException) { }
         catch (Newtonsoft.Json.JsonException) { }
-        return "1.0.17";
+        return "1.0.18";
     }
 
     public static string ProductText(string? text) => (text ?? "")
