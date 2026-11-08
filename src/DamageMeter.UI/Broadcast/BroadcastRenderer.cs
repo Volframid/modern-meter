@@ -20,11 +20,67 @@ public sealed record BroadcastVisual(string Id, FrameworkElement Root, Broadcast
 public sealed class BroadcastRenderer : IDisposable
 {
     private readonly Dictionary<IntPtr, Surface> _surfaces = new();
+    private readonly Dictionary<IntPtr, int> _windowOrder = new();
+    private readonly Dictionary<IntPtr, System.Drawing.Rectangle> _monitorBounds = new();
+    private readonly Dictionary<IntPtr, Window> _trackedWindows = new();
+    private readonly HashSet<IntPtr> _orderMisses = new();
+    private readonly Func<long> _timestamp;
+    private long _nextMetadataAt;
+    internal int MetadataRefreshCount { get; private set; }
     private readonly uint _process = (uint)Environment.ProcessId;
     private long _version;
     public BroadcastBounds Canvas { get; private set; } = new(0, 0, 0, 0);
 
-    public BroadcastRenderer() { RefreshCanvas(); }
+    public BroadcastRenderer() : this(Stopwatch.GetTimestamp) { }
+    internal BroadcastRenderer(Func<long> timestamp) { _timestamp = timestamp; RefreshCanvas(); }
+
+    private void OnWindowActivity(object? sender, EventArgs args) => _nextMetadataAt = 0;
+
+    private void TrackWindows(IReadOnlyDictionary<IntPtr, Window> windows)
+    {
+        foreach (var entry in windows)
+        {
+            if (entry.Value is NativeBroadcastWindow) continue;
+            if (_trackedWindows.TryGetValue(entry.Key, out var tracked))
+            {
+                if (ReferenceEquals(tracked, entry.Value)) continue;
+                UntrackWindow(entry.Key); // Windows can recycle a recently closed HWND.
+            }
+            var window = entry.Value;
+            window.Activated += OnWindowActivity; window.Deactivated += OnWindowActivity;
+            window.StateChanged += OnWindowActivity; window.Closed += OnWindowActivity;
+            _trackedWindows.Add(entry.Key, window); _nextMetadataAt = 0;
+        }
+        foreach (var handle in _trackedWindows.Keys.Where(handle => !windows.ContainsKey(handle)).ToArray())
+            UntrackWindow(handle);
+    }
+
+    private void UntrackWindow(IntPtr handle)
+    {
+        var window = _trackedWindows[handle];
+        window.Activated -= OnWindowActivity; window.Deactivated -= OnWindowActivity;
+        window.StateChanged -= OnWindowActivity; window.Closed -= OnWindowActivity;
+        _trackedWindows.Remove(handle); _nextMetadataAt = 0;
+    }
+
+    private void RefreshMetadata(bool force = false)
+    {
+        var now = _timestamp();
+        if (!force && now < _nextMetadataAt) return;
+        _nextMetadataAt = now + Stopwatch.Frequency / 4;
+        RefreshCanvas(); _windowOrder.Clear(); _monitorBounds.Clear();
+        if (!force) _orderMisses.Clear();
+        var z = 100000;
+        EnumWindows((window, _) => { _windowOrder[window] = z--; return true; }, IntPtr.Zero);
+        MetadataRefreshCount++;
+    }
+
+    private System.Drawing.Rectangle MonitorBounds(IntPtr handle)
+    {
+        if (!_monitorBounds.TryGetValue(handle, out var bounds))
+            _monitorBounds.Add(handle, bounds = Forms.Screen.FromHandle(handle).Bounds);
+        return bounds;
+    }
 
     public void RefreshCanvas()
     {
@@ -37,12 +93,10 @@ public sealed class BroadcastRenderer : IDisposable
 
     public IReadOnlyList<BroadcastVisual> Scan()
     {
-        RefreshCanvas();
-        var order = new Dictionary<IntPtr, int>(); var z = 100000;
-        EnumWindows((window, _) => { order[window] = z--; return true; }, IntPtr.Zero);
         var sources = PresentationSource.CurrentSources.OfType<HwndSource>().Where(source => source.Dispatcher.CheckAccess()).ToArray();
         var roots = sources.Where(source => !source.IsDisposed && source.RootVisual is Window)
             .ToDictionary(source => source.Handle, source => (Window)source.RootVisual);
+        TrackWindows(roots); RefreshMetadata();
         var layers = new List<BroadcastVisual>();
         foreach (var source in sources)
         {
@@ -63,12 +117,18 @@ public sealed class BroadcastRenderer : IDisposable
                 var width = b.X - a.X; var height = b.Y - a.Y;
                 if (!double.IsFinite(width) || !double.IsFinite(height) || width < 1 || height < 1) continue;
                 var owner = window == null ? GetWindow(source.Handle, 4) : source.Handle;
-                var monitor = Forms.Screen.FromHandle(roots.ContainsKey(owner) ? owner : source.Handle).Bounds;
+                var monitor = MonitorBounds(roots.ContainsKey(owner) ? owner : source.Handle);
                 var bounds = BroadcastFrames.Fold(new BroadcastBounds(a.X, a.Y, width, height),
                     new BroadcastBounds(monitor.X, monitor.Y, monitor.Width, monitor.Height), Canvas);
                 var id = "w" + source.Handle.ToInt64().ToString("x");
-                layers.Add(new BroadcastVisual(id, visual, bounds, window?.Opacity ?? 1,
-                    order.TryGetValue(source.Handle, out var level) ? level : 200000));
+                if (!_windowOrder.TryGetValue(source.Handle, out var level))
+                {
+                    // New popup HWNDs must get their correct order immediately.
+                    // Child HWNDs are not top-level windows; poll those misses only once per metadata period.
+                    if (_orderMisses.Add(source.Handle)) { RefreshMetadata(true); _orderMisses.Add(source.Handle); }
+                    if (!_windowOrder.TryGetValue(source.Handle, out level)) level = 200000;
+                }
+                layers.Add(new BroadcastVisual(id, visual, bounds, window?.Opacity ?? 1, level));
             }
             catch (Exception error) when (error is InvalidOperationException or ArgumentException or COMException) { }
         }
@@ -93,7 +153,12 @@ public sealed class BroadcastRenderer : IDisposable
         return layers;
     }
 
-    public void Clear() { foreach (var item in _surfaces.Values) item.Dispose(); _surfaces.Clear(); }
+    public void Clear()
+    {
+        foreach (var item in _surfaces.Values) item.Dispose(); _surfaces.Clear();
+        foreach (var handle in _trackedWindows.Keys.ToArray()) UntrackWindow(handle);
+        _windowOrder.Clear(); _monitorBounds.Clear(); _orderMisses.Clear(); _nextMetadataAt = 0;
+    }
     public void Dispose() => Clear();
 
     // Also used by isolated fixture tests: no HWND, production App or input required.

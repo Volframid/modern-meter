@@ -6,6 +6,10 @@ Notification cards retain their user-placed anchor as cards arrive, refresh and 
 
 A compact combat meter for TERA Toolbox, with an updated interface based on Shinra Meter.
 
+## Runtime efficiency
+
+Boss gauges detach event subscriptions and release their timer when unloaded. Active enrage phases reuse one timer. Streaming reuses short-lived OS metadata and placement results while preserving the existing visual update cadence and immediate refresh for relevant window or canvas changes. No new runtime dependency is required.
+
 ## Install
 
 1. Install the Microsoft .NET 7 Desktop Runtime (x64) if it is not already available.

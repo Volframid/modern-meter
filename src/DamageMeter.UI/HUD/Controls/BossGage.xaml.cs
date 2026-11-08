@@ -16,7 +16,7 @@ namespace DamageMeter.UI.HUD.Controls
         private static readonly DoubleAnimation DoubleAnimation = new DoubleAnimation();
 
         private readonly int AnimationTime = 350;
-        private Boss _boss;
+        private Boss? _boss;
         private long _currentHp;
         private bool _enraged;
         private long _maxHp;
@@ -28,7 +28,47 @@ namespace DamageMeter.UI.HUD.Controls
         private float nextEnragePerc = 90;
 
 
-        private Timer NumberTimer = new Timer(1000);
+        private Timer? NumberTimer;
+        private int _lifetime;
+
+        private void StopNumberTimer()
+        {
+            if (NumberTimer == null) return;
+            NumberTimer.Stop();
+            NumberTimer.Elapsed -= NumberTimer_Elapsed;
+            NumberTimer.Dispose();
+            NumberTimer = null;
+        }
+
+        private void StartNumberTimer()
+        {
+            if (NumberTimer == null)
+            {
+                NumberTimer = new Timer(1000);
+                NumberTimer.Elapsed += NumberTimer_Elapsed;
+            }
+            _lifetime++;
+            NumberTimer.Start();
+        }
+
+        private void NumberTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            var lifetime = _lifetime;
+            if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownFinished) return;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (lifetime != _lifetime || _boss == null || !_enraged || !ReferenceEquals(sender, NumberTimer)) return;
+                CurrentEnrageTime--;
+            }));
+        }
+
+        private void ReleaseBoss()
+        {
+            _lifetime++;
+            if (_boss != null) _boss.PropertyChanged -= boss_PropertyChanged;
+            _boss = null;
+            StopNumberTimer();
+        }
 
         public BossGage()
         {
@@ -92,6 +132,7 @@ namespace DamageMeter.UI.HUD.Controls
 
         private void boss_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (!ReferenceEquals(sender, _boss)) return;
             if (e.PropertyName == "CurrentHP")
             {
                 _currentHp = ((Boss) sender).CurrentHP;
@@ -109,13 +150,12 @@ namespace DamageMeter.UI.HUD.Controls
                 if (_enraged)
                 {
                     SlideEnrageIndicator(CurrentPercentage);
-                    NumberTimer = new Timer(1000);
-                    NumberTimer.Elapsed += (s, ev) => { Dispatcher.BeginInvoke(new Action(() => { CurrentEnrageTime--; })); };
-                    NumberTimer.Enabled = true;
+                    StartNumberTimer();
                 }
                 else
                 {
                     NumberTimer?.Stop();
+                    _lifetime++;
 
                     NextEnragePercentage = CurrentPercentage - 10;
                     SlideEnrageIndicator(NextEnragePercentage);
@@ -128,6 +168,7 @@ namespace DamageMeter.UI.HUD.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            ReleaseBoss();
             _boss = (Boss) DataContext;
             _boss.PropertyChanged += boss_PropertyChanged;
 
@@ -160,10 +201,7 @@ namespace DamageMeter.UI.HUD.Controls
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            NumberTimer.Enabled = false;
-            NumberTimer.Dispose();
-            //_boss.PropertyChanged -= boss_PropertyChanged; // seems not needed
-            _boss = null;
+            ReleaseBoss();
         }
     }
 }

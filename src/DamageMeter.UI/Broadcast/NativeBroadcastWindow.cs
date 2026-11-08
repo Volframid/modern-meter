@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -19,6 +20,8 @@ public sealed class NativeBroadcastWindow : Window
     private readonly Dictionary<string, Rectangle> _mirrors = new();
     private readonly Dictionary<string, BroadcastContentProjection> _projections = new();
     private BroadcastBounds _bounds = new(0, 0, 1, 1);
+    private long _nextPlacementAt;
+    internal int PlacementCheckCount { get; private set; }
     public int LayerCount => _mirrors.Count;
 
     static NativeBroadcastWindow()
@@ -54,6 +57,7 @@ public sealed class NativeBroadcastWindow : Window
 
     public void Update(BroadcastBounds canvas, IReadOnlyList<BroadcastVisual> layers)
     {
+        var changedCanvas = _bounds != canvas;
         _canvas.Width = canvas.Width; _canvas.Height = canvas.Height;
         _bounds = canvas;
         var available = Math.Max(0, canvas.Width - 1);
@@ -64,7 +68,7 @@ public sealed class NativeBroadcastWindow : Window
         // Windows composing the surface without displaying a second local Meter.
         if (new WindowInteropHelper(this).Handle == IntPtr.Zero)
         { var anchor = Anchor(); Left = anchor.X - canvas.Width + 1; Top = anchor.Y; Width = canvas.Width; Height = canvas.Height; }
-        else PlaceCaptureSurface();
+        else if (changedCanvas || Stopwatch.GetTimestamp() >= _nextPlacementAt) PlaceCaptureSurface();
         var seen = new HashSet<string>();
         foreach (var layer in layers)
         {
@@ -111,6 +115,8 @@ public sealed class NativeBroadcastWindow : Window
     {
         var handle = new WindowInteropHelper(this).Handle;
         if (handle == IntPtr.Zero) return;
+        _nextPlacementAt = Stopwatch.GetTimestamp() + Stopwatch.Frequency / 4;
+        PlacementCheckCount++;
         var width = Math.Max(1, (int)Math.Round(_bounds.Width));
         var height = Math.Max(1, (int)Math.Round(_bounds.Height));
         var anchor = Anchor(); var x = anchor.X - width + 1; var y = anchor.Y;
