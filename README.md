@@ -6,6 +6,10 @@ Notification cards retain their user-placed anchor as cards arrive, refresh and 
 
 A compact combat meter for TERA Toolbox, with an updated interface based on Shinra Meter.
 
+## Asura 100.02 #92
+
+The English and Russian encounter catalogues include 79 NPC records across Damned Citadel, Fusion Laboratory, Cursed Fusion Laboratory, Chaos Ice Throne, Catalepticon (Easy) and Imperator's Sanctum. Boss identification and maximum HP come from the corresponding DataCenter records.
+
 ## Runtime efficiency
 
 Boss gauges detach event subscriptions and release their timer when unloaded. Active enrage phases reuse one timer. Streaming reuses short-lived OS metadata and placement results while preserving the existing visual update cadence and immediate refresh for relevant window or canvas changes. No new runtime dependency is required.

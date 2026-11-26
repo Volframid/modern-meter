@@ -19010,4 +19010,95 @@
 	<Zone id="9999" name="unknown" >
 		<Monster name="Vanguard Initiative" id="9999" isBoss="False" hp="0" speciesId="0" />
 	</Zone>
+	<Zone id="3041" name="Damned Citadel" >
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Teleportal" id="1502" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Harnovog" id="2000" isBoss="True" hp="6573500000" speciesId="10" />
+	</Zone>
+	<Zone id="3105" name="Fusion Laboratory" >
+		<Monster name="Defeat Rogash." id="100" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Rogash" id="1000" isBoss="True" hp="6573500000" speciesId="6" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Teleportal" id="1502" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Drone" id="2000" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Hasmina" id="50000" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Hasmina" id="50001" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Hoakha" id="50100" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Hoakha" id="50101" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Teleportal" id="50200" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Teleportal" id="50201" isBoss="False" hp="99999" speciesId="0" />
+	</Zone>
+	<Zone id="3205" name="Cursed Fusion Laboratory" >
+		<Monster name="Defeat Rogash." id="100" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Rampaging Rogash" id="1000" isBoss="True" hp="12064875000" speciesId="6" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Teleportal" id="1502" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Drone" id="2000" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Hasmina" id="50000" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Hasmina" id="50001" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Hoakha" id="50100" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Hoakha" id="50101" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Teleportal" id="50200" isBoss="False" hp="99999" speciesId="0" />
+		<Monster name="Teleportal" id="50201" isBoss="False" hp="99999" speciesId="0" />
+	</Zone>
+	<Zone id="3209" name="Chaos Ice Throne" >
+		<Monster name="Defeat Kethro." id="100" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Complete the Honor Lab." id="200" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Defeat Slayer Hellen." id="300" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Gatekeeper Kethro" id="1000" isBoss="True" hp="20000000000" speciesId="7" />
+		<Monster name="Young Kethro" id="1100" isBoss="False" hp="5000000000" speciesId="0" />
+		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Slayer Hellen" id="2000" isBoss="True" hp="29000000000" speciesId="7" />
+		<Monster name="Underground Passage" id="5001" isBoss="False" hp="10000000000" speciesId="0" />
+		<Monster name="Underground Passage" id="5002" isBoss="False" hp="10000000000" speciesId="0" />
+		<Monster name="Underground Passage" id="5005" isBoss="False" hp="10000000000" speciesId="0" />
+		<Monster name="Underground Passage" id="5006" isBoss="False" hp="10000000000" speciesId="0" />
+		<Monster name="Underground Passage" id="5007" isBoss="False" hp="10000000000" speciesId="0" />
+		<Monster name="Underground Passage" id="5008" isBoss="False" hp="10000000000" speciesId="0" />
+	</Zone>
+	<Zone id="3400" name="Catalepticon (Easy)" >
+		<Monster name="Defeat Lumikan." id="100" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Lumikan" id="1000" isBoss="True" hp="5000000000" speciesId="6" />
+		<Monster name="Minion" id="1021" isBoss="False" hp="420000000000" speciesId="0" />
+		<Monster name="Teleportal" id="1503" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Exit Teleportal" id="1504" isBoss="False" hp="10000" speciesId="0" />
+	</Zone>
+	<Zone id="3401" name="Imperator's Sanctum" >
+		<Monster name="Defeat Pahoegar" id="911" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Defeat Archdevas" id="912" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Defeat Dakuryon" id="913" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Defeat Archdevas" id="914" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Defeat the Imperator" id="915" isBoss="False" hp="0" speciesId="0" />
+		<Monster name="Pahoegar" id="1000" isBoss="False" hp="1544687160" speciesId="7" />
+		<Monster name="Golem Shard" id="1001" isBoss="False" hp="1000000" speciesId="0" />
+		<Monster name="Exit Teleportal" id="1501" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Bloodshard Repository Teleportal" id="1502" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Imperator's Sanctum Teleportal" id="1503" isBoss="False" hp="10000" speciesId="0" />
+		<Monster name="Dakuryon" id="2000" isBoss="False" hp="1544687160" speciesId="0" />
+		<Monster name="Bloodshard Monument" id="2003" isBoss="False" hp="249000" speciesId="0" />
+		<Monster name="Archdevan Sorcerer" id="2016" isBoss="False" hp="60935370" speciesId="0" />
+		<Monster name="Archdevan Archer" id="2017" isBoss="False" hp="250000" speciesId="0" />
+		<Monster name="Archdevan Priest" id="2018" isBoss="False" hp="71688670" speciesId="0" />
+		<Monster name="Archdevan Knight" id="2019" isBoss="False" hp="250000" speciesId="0" />
+		<Monster name="Archdevan Guard" id="2020" isBoss="False" hp="6500000" speciesId="0" />
+		<Monster name="Archdevan Specimen" id="2021" isBoss="False" hp="6500000" speciesId="0" />
+		<Monster name="Archdevan Leader" id="2022" isBoss="False" hp="6500000" speciesId="0" />
+		<Monster name="Archdevan Swordsman" id="2023" isBoss="False" hp="250000" speciesId="0" />
+		<Monster name="Archdevan Hermit" id="2027" isBoss="False" hp="71688670" speciesId="0" />
+		<Monster name="Archdevan Sniper" id="2028" isBoss="False" hp="71688670" speciesId="0" />
+		<Monster name="Archdevan Blood Knight" id="2030" isBoss="False" hp="71688670" speciesId="0" />
+		<Monster name="Archdevan Mutant" id="2031" isBoss="False" hp="143377330" speciesId="0" />
+		<Monster name="Archdevan Warrior" id="2032" isBoss="False" hp="71688670" speciesId="0" />
+		<Monster name="Treasure Chest" id="2999" isBoss="False" hp="500000" speciesId="0" />
+		<Monster name="Imperator" id="3000" isBoss="True" hp="3513669533" speciesId="0" />
+		<Monster name="Monument of Fury" id="3001" isBoss="False" hp="80000" speciesId="0" />
+		<Monster name="Monument of Greed" id="3002" isBoss="False" hp="80000" speciesId="0" />
+		<Monster name="Monument of Dispair" id="3003" isBoss="False" hp="80000" speciesId="0" />
+		<Monster name="Monument of Massacre" id="3004" isBoss="False" hp="80000" speciesId="0" />
+		<Monster name="Demokron Specimen" id="3005" isBoss="False" hp="500000" speciesId="0" />
+		<Monster name="Cursed Archdeva" id="3007" isBoss="False" hp="6500000" speciesId="0" />
+		<Monster name="Arunic Orrery" id="9007" isBoss="False" hp="13038" speciesId="0" />
+	</Zone>
 </Zones>
