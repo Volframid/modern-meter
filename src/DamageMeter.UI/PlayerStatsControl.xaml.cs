@@ -2,15 +2,16 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace DamageMeter.UI
 {
     public partial class PlayerStatsControl : INotifyPropertyChanged
     {
-        private readonly DoubleAnimation _animation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(250)) {EasingFunction = new QuadraticEase()};
+        private readonly DoubleAnimation _animation = new(0, TimeSpan.FromMilliseconds(100)) { EasingFunction = new QuadraticEase() };
+        private double _targetDamageFactor = double.NaN;
 
         private bool _isHovered;
         public bool IsHovered
@@ -30,34 +31,51 @@ namespace DamageMeter.UI
 
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
+            DataContextChanged += (_, _) =>
+            {
+                if (IsLoaded) ObserveDamage();
+            };
         }
 
         private PlayerDamageViewModel? _observed;
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
+        private void OnUnloaded(object sender, RoutedEventArgs e) => DisconnectDamage();
+
+        private void OnLoaded(object sender, RoutedEventArgs e) => ObserveDamage();
+
+        private void DisconnectDamage()
         {
             if (_observed != null) _observed.DamageFactorChanged -= OnDamageFactorChanged;
             _observed = null;
+            _targetDamageFactor = double.NaN;
+            DpsIndicator.BeginAnimation(RangeBase.ValueProperty, null);
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void ObserveDamage()
         {
-            OnUnloaded(sender, e);
-            if (!(DataContext is PlayerDamageViewModel vm)) return;
+            DisconnectDamage();
+            if (DataContext is not PlayerDamageViewModel vm) return;
             _observed = vm;
-            OnDamageFactorChanged(vm.DamageFactor);
             vm.DamageFactorChanged += OnDamageFactorChanged;
         }
 
         private void OnDamageFactorChanged(double factor)
         {
-            Dispatcher.InvokeAsync(() =>
+            if (!Dispatcher.CheckAccess())
             {
-                _animation.To = factor;
-                _animation.Duration = TimeSpan.FromSeconds(0.1);
-                IndicatorGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _animation);
-            });
+                var source = _observed;
+                Dispatcher.InvokeAsync(() =>
+                {
+                    if (source is not null && ReferenceEquals(source, _observed)) OnDamageFactorChanged(factor);
+                });
+                return;
+            }
 
+            factor = double.IsFinite(factor) ? Math.Clamp(factor, 0, 1) : 0;
+            if (factor == _targetDamageFactor) return;
+            _targetDamageFactor = factor;
+            _animation.To = factor;
+            DpsIndicator.BeginAnimation(RangeBase.ValueProperty, _animation);
         }
 
         private void DragWindow(object sender, MouseButtonEventArgs e)

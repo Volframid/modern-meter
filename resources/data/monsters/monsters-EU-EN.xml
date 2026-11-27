@@ -18691,10 +18691,10 @@
 		<Monster name="Azart’s Shade" id="1006" isBoss="False" hp="27448770" speciesId="0" />
 		<Monster name="Azart’s Shade" id="1007" isBoss="False" hp="27448770" speciesId="0" />
 	</Zone>
-	<Zone id="3036" name="Sky Cruiser Endeavor (Hard)" >
+	<Zone id="3036" name="Sky Cruiser Endeavor (Extreme)" >
 		<Monster name="(Boss) Use a teleportal to get to the Sky Cruiser (Hard) and defeat Darkan." id="914" isBoss="False" hp="0" speciesId="0" />
-		<Monster name="Darkan (Hard)" id="1000" isBoss="True" hp="32360535187" speciesId="10" />
-		<Monster name="Darkan" id="1001" isBoss="True" hp="11491097475" speciesId="10" />
+		<Monster name="Darkan" id="1000" isBoss="True" hp="32360535187" speciesId="10" />
+		<Monster name="Nightmare Darkan" id="1001" isBoss="True" hp="11491097475" speciesId="10" />
 		<Monster name="Darkan’s Clone" id="1010" isBoss="True" hp="200000000" speciesId="10" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" speciesId="0" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" speciesId="0" />
@@ -18736,9 +18736,9 @@
 		<Monster name="Priest Buff Stone" id="7001" isBoss="False" hp="0" speciesId="0" />
 		<Monster name="Mystic Buff Stone" id="7002" isBoss="False" hp="0" speciesId="0" />
 	</Zone>
-	<Zone id="3047" name="unknown" >
+	<Zone id="3047" name="Hall of the Argon Queen" >
 		<Monster name="Defeat Resurrected Shandra Manaya." id="100" isBoss="False" hp="0" speciesId="0" />
-		<Monster name="Resurrected Shandra Manaya" id="1000" isBoss="False" hp="31047998720" speciesId="2" />
+		<Monster name="Revivified Shandra Manaya" id="1000" isBoss="True" hp="31047998720" speciesId="2" />
 		<Monster name="Jelena" id="1101" isBoss="False" hp="0" speciesId="0" />
 		<Monster name="Teleportal" id="1501" isBoss="False" hp="10000" speciesId="0" />
 		<Monster name="Teleportal" id="1502" isBoss="False" hp="10000" speciesId="0" />
@@ -19101,4 +19101,39 @@
 		<Monster name="Cursed Archdeva" id="3007" isBoss="False" hp="6500000" speciesId="0" />
 		<Monster name="Arunic Orrery" id="9007" isBoss="False" hp="13038" speciesId="0" />
 	</Zone>
+  <Zone id="804" name="Kelsaik's Nest (Japanese Tournament)">
+    <Monster id="1000" name="Kelsaik" isBoss="True" hp="50000000" speciesId="4" />
+  </Zone>
+  <Zone id="3044" name="Stormed Citadel">
+    <Monster id="1000" name="Harnovog" isBoss="True" hp="13582800000" speciesId="10" />
+    <Monster id="2000" name="Harnovog" isBoss="True" hp="13780550000" speciesId="10" />
+  </Zone>
+  <Zone id="3050" name="Lost Sky Garden">
+    <Monster id="46704" name="Immortal Verno" isBoss="True" hp="80000000000" speciesId="0" />
+  </Zone>
+  <Zone id="3109" name="Ice Throne">
+    <Monster id="1000" name="Guardian Kethro" isBoss="True" hp="4725289360" speciesId="7" />
+    <Monster id="2000" name="Rampaging Hellen" isBoss="True" hp="5425289360" speciesId="7" />
+  </Zone>
+  <Zone id="3132" name="Makhaon's Residence">
+    <Monster id="3000" name="Larval Makhaon" isBoss="True" hp="20000000000" speciesId="0" />
+    <Monster id="4000" name="Makhaon" isBoss="True" hp="23000000000" speciesId="0" />
+  </Zone>
+  <Zone id="3137" name="Corrupted RK-9 Kennel">
+    <Monster id="1000" name="Ventarun" isBoss="True" hp="22000000000" speciesId="9" />
+    <Monster id="2000" name="Hexapleon" isBoss="True" hp="22000000000" speciesId="9" />
+    <Monster id="3000" name="Corrupted RK-9" isBoss="True" hp="57500000000" speciesId="9" />
+  </Zone>
+  <Zone id="3147" name="Hall of the Argon Queen (Hard)">
+    <Monster id="1000" name="Revivified Shandra Manaya" isBoss="True" hp="72500000000" speciesId="2" />
+  </Zone>
+  <Zone id="3943" name="Жуткий Шпиль Страха">
+    <Monster id="1000" name="Тень Дуриона" isBoss="True" hp="62000000000" speciesId="0" />
+    <Monster id="2000" name="Тень Лукмии" isBoss="True" hp="62000000000" speciesId="6" />
+  </Zone>
+  <Zone id="3982" name="Грот Заблудших Душ">
+    <Monster id="1000" name="Злобная Недра" isBoss="True" hp="20000000000" speciesId="10" />
+    <Monster id="2000" name="Злобный Питакум" isBoss="True" hp="21000000000" speciesId="10" />
+    <Monster id="3000" name="Злобный Калеус" isBoss="True" hp="35000000000" speciesId="3" />
+  </Zone>
 </Zones>

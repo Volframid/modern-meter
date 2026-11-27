@@ -14,6 +14,28 @@
   <Grid x:Name="GridStats">
    <Grid.ColumnDefinitions><ColumnDefinition Width="20"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
    <Grid.RowDefinitions><RowDefinition Height="14"/><RowDefinition Height="2"/><RowDefinition Height="14"/></Grid.RowDefinitions>
+   <ProgressBar x:Name="DpsIndicator" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                Minimum="0" Maximum="1" Value="{Binding DamageFactor, Mode=OneWay}"
+                Foreground="{Binding Role, Converter={palette:RoleToColorConverter}}"
+                Background="#24343B4C" Focusable="False" IsHitTestVisible="False">
+    <ProgressBar.Template>
+     <ControlTemplate TargetType="ProgressBar">
+      <Grid x:Name="PART_Track">
+       <Border Background="{TemplateBinding Background}" CornerRadius="4"/>
+       <Border x:Name="PART_Indicator" HorizontalAlignment="Left"
+               Background="{TemplateBinding Foreground}" CornerRadius="4">
+        <Border.OpacityMask>
+         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <GradientStop Offset="0" Color="#2AFFFFFF"/>
+          <GradientStop Offset="0.76" Color="#58FFFFFF"/>
+          <GradientStop Offset="1" Color="#BFFFFFFF"/>
+         </LinearGradientBrush>
+        </Border.OpacityMask>
+       </Border>
+      </Grid>
+     </ControlTemplate>
+    </ProgressBar.Template>
+   </ProgressBar>
    <Path x:Name="Class" Grid.RowSpan="3" Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Fill="{Binding Role, Converter={palette:RoleToColorConverter}}" Stretch="Uniform" Width="16" Height="16" Margin="0,0,4,0" />
    <TextBlock x:Name="LabelName"
                        ToolTip="{Binding FullName}"
@@ -44,10 +66,6 @@
                 </TextBlock.Style>
             </TextBlock>
    <TextBlock x:Name="ExactDps" Grid.Column="2" Text="{Binding GlobalDps}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource ModernText}" VerticalAlignment="Center" HorizontalAlignment="Right" ToolTip="{Binding IndividualDps}" />
-   <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Height="2" Background="#30343B4C" CornerRadius="2"/>
-   <Border x:Name="DpsIndicator" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Height="2" HorizontalAlignment="Left" Background="{Binding Role, Converter={palette:RoleToColorConverter}}" CornerRadius="2">
-    <Border x:Name="IndicatorGovernor" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=l:PlayerStatsControl}, Converter={x:Static l:ModernRowWidthConverter.Instance}}"><Border.LayoutTransform><ScaleTransform ScaleX="{Binding DamageFactor, Mode=OneWay}"/></Border.LayoutTransform></Border>
-   </Border>
    <l:CompactMetricsPanel x:Name="SecondaryMetrics" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center">
     <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric1}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>
     <l:CompactMetricCell Content="{Binding}" Tag="{Binding Metric2}" ContentTemplate="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource MetricTemplateSelector}}" VerticalContentAlignment="Center"/>

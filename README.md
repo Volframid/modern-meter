@@ -6,9 +6,9 @@ Notification cards retain their user-placed anchor as cards arrive, refresh and 
 
 A compact combat meter for TERA Toolbox, with an updated interface based on Shinra Meter.
 
-## Asura 100.02 #92
+## Asura 100.02 #93
 
-The English and Russian encounter catalogues include 79 NPC records across Damned Citadel, Fusion Laboratory, Cursed Fusion Laboratory, Chaos Ice Throne, Catalepticon (Easy) and Imperator's Sanctum. Boss identification and maximum HP come from the corresponding DataCenter records.
+The English and Russian encounter catalogues use the current Asura boss IDs and dungeon names. The compact meter now resolves Revivified Shandra Manaya in Hall of the Argon Queen (Hard), as well as bosses in Stormed Citadel, Lost Sky Garden, Ice Throne, Makhaon's Residence and Corrupted RK-9 Kennel. Boss identification and maximum HP come from the corresponding DataCenter records. When an English name is missing, the catalogue uses the matching Russian text if available.
 
 ## Runtime efficiency
 
@@ -25,7 +25,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 
 ## Features
 
-- Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts.
+- Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts. Rounded, translucent role-colored fills behind player names show each player's share of the total damage.
 - Original game class and skill icons, customizable role colors, transparency and scale.
 - A smooth centisecond clock with a transparent timer background and unchanged red/green combat indicator. The Overview button uses the Meter surface; the hover toolbar shares its frame color and opacity.
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
@@ -59,11 +59,11 @@ The feature is off by default on fresh installs. Existing **resources/config/bro
 
 ## Latest fixes
 
-Mount notifications keep the new 2.0 popup visible when it overrides an active 1.5 effect. Death, floortime and floortime percentage icons render consistently across player rows and UI scales. Damage done and damage share values use clear white text.
+The compact meter uses translucent damage-share fills and includes the updated Asura boss and dungeon labels.
 
 ## Screenshots
 
-The Modern Meter 1.0.19 interface, rendered with fictional player names and example combat data. No personal profiles, account details or combat logs are used.
+Screenshots use fictional player names and sample combat data rendered by Modern Meter.
 
 ### Loading screen
 
@@ -78,7 +78,9 @@ The Modern Meter 1.0.19 interface, rendered with fictional player names and exam
 
 ### Compact overlay
 
-![Compact overlay with exact DPS, a combat indicator and deaths in slot 5](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/compact-meter.png)
+![Compact meter with rounded damage-share fills behind player names](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/compact-meter.png)
+
+![Compact meter at reduced opacity showing Revivified Shandra Manaya](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/compact-meter-transparency.png)
 
 ### Encounter overview
 

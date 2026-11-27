@@ -19220,4 +19220,30 @@
 		<Monster name="Проклятый архидеванец" id="3007" isBoss="False" hp="6500000" speciesId="0" />
 		<Monster name="Устройство блокировки телепортации" id="9007" isBoss="False" hp="13038" speciesId="0" />
 	</Zone>
+  <Zone id="804" name="Гнездо Келсаика - японские турниры">
+    <Monster id="1000" name="Келсаик" isBoss="True" hp="50000000" speciesId="4" />
+  </Zone>
+  <Zone id="3044" name="Захваченная крепость Тенебриса">
+    <Monster id="1000" name="Тарниб" isBoss="True" hp="13582800000" speciesId="10" />
+    <Monster id="2000" name="Тарниб" isBoss="True" hp="13780550000" speciesId="10" />
+  </Zone>
+  <Zone id="3050" name="Затерянный небесный сад">
+    <Monster id="46704" name="Бессмертный Верно" isBoss="True" hp="80000000000" speciesId="0" />
+  </Zone>
+  <Zone id="3109" name="Ледяной трон">
+    <Monster id="1000" name="Стражник Кетро" isBoss="True" hp="4725289360" speciesId="7" />
+    <Monster id="2000" name="Взбешенная Елена" isBoss="True" hp="5425289360" speciesId="7" />
+  </Zone>
+  <Zone id="3132" name="Резиденция Махаона">
+    <Monster id="3000" name="Личинка Махаона" isBoss="True" hp="20000000000" speciesId="0" />
+    <Monster id="4000" name="Махаон" isBoss="True" hp="23000000000" speciesId="0" />
+  </Zone>
+  <Zone id="3137" name="Искажённый ангар RK-9">
+    <Monster id="1000" name="Вентарон" isBoss="True" hp="22000000000" speciesId="9" />
+    <Monster id="2000" name="Гексапреон" isBoss="True" hp="22000000000" speciesId="9" />
+    <Monster id="3000" name="Искажённый RK-9" isBoss="True" hp="57500000000" speciesId="9" />
+  </Zone>
+  <Zone id="3147" name="Обитель Возрожденной Королевы (сложно)">
+    <Monster id="1000" name="Возрожденная Шандра Манайя" isBoss="True" hp="72500000000" speciesId="2" />
+  </Zone>
 </Zones>
