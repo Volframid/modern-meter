@@ -1,0 +1,41 @@
+name: Publish Modern Meter release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'Volframid/modern-meter'
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Verify build version
+        shell: pwsh
+        run: |
+          $expected = "$($env:GITHUB_REF_NAME.Substring(1)).0"
+          foreach ($binary in 'ModernMeter.dll', 'ModernMeter.exe') {
+            $version = (Get-Item -LiteralPath $binary).VersionInfo.FileVersion
+            if ($version -ne $expected) { throw "$binary has version $version. Expected $expected." }
+          }
+
+      - name: Package Toolbox runtime
+        shell: pwsh
+        run: python scripts/package-release.py $env:GITHUB_REF_NAME (Join-Path $env:RUNNER_TEMP 'modern-meter-release')
+
+      - name: Publish validated assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $asset = Join-Path $env:RUNNER_TEMP "modern-meter-release/modern-meter-$env:GITHUB_REF_NAME"
+          gh release create $env:GITHUB_REF_NAME "$asset.zip" "$asset.sha256" --repo $env:GITHUB_REPOSITORY --verify-tag --latest --generate-notes --title "Modern Meter $($env:GITHUB_REF_NAME.Substring(1))"

@@ -17,11 +17,13 @@ Boss gauges detach event subscriptions and release their timer when unloaded. Ac
 ## Install
 
 1. Install the Microsoft .NET 7 Desktop Runtime (x64) if it is not already available.
-2. Download the latest Modern Meter release, and extract the modern-meter folder into Toolbox/mods.
+2. Download the Modern Meter ZIP from the [latest GitHub release](https://github.com/Volframid/modern-meter/releases/latest), and extract the modern-meter folder into Toolbox/mods.
 3. Use one meter integration at a time: disable the old Shinra Meter module before enabling Modern Meter.
 4. Start Toolbox, then log into your character. Toolbox installs the external-interface dependency automatically.
 
-For module-manager installation, use the module descriptor at https://raw.githubusercontent.com/Volframid/modern-meter/main/module.json.
+For module-manager installation, use the module descriptor at https://raw.githubusercontent.com/Volframid/modern-meter/main/module.json. Existing installations update through Toolbox on startup.
+
+Modern Meter uses major, minor and patch versions. New compatible features increment the minor version and reset the patch to zero. Bug fixes increment the patch. Breaking changes increment the major version. The version in the module descriptor is used for the Windows build and must match the release tag.
 
 ## Features
 
