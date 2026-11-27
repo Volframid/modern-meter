@@ -61,11 +61,14 @@
         <DataTemplate x:Key="MockPlayer" DataType="local:MockPlayerViewModel">
             <Border Background="{DynamicResource ModernCard}" BorderBrush="{DynamicResource ModernLine}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,12">
                 <StackPanel>
-                    <Border Width="280" HorizontalAlignment="Left" CornerRadius="6" BorderThickness="1" Margin="0,0,0,12">
-                        <Border.Background><SolidColorBrush Color="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource AncestorType=Window}}"/></Border.Background>
-                        <Border.BorderBrush><SolidColorBrush Color="{Binding DataContext.BorderColor, RelativeSource={RelativeSource AncestorType=Window}}"/></Border.BorderBrush>
-                        <ui:PlayerStatsControl/>
-                    </Border>
+                    <Grid Width="280" HorizontalAlignment="Left" Margin="0,0,0,12">
+                        <Border x:Name="PreviewFrame" CornerRadius="6" BorderThickness="1" IsHitTestVisible="False"
+                                Opacity="{Binding DataContext.MainWindowOpacity, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                            <Border.Background><SolidColorBrush Color="{Binding DataContext.BackgroundColor, RelativeSource={RelativeSource AncestorType=TabControl}}"/></Border.Background>
+                            <Border.BorderBrush><SolidColorBrush Color="{Binding DataContext.BorderColor, RelativeSource={RelativeSource AncestorType=TabControl}}"/></Border.BorderBrush>
+                        </Border>
+                        <ui:PlayerStatsControl Margin="1"/>
+                    </Grid>
                     <UniformGrid Columns="5">
                         <StackPanel><TextBlock Text="{DynamicResource ModernText_EBF2B9CF2880}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric1, Mode=TwoWay}"/></StackPanel>
                         <StackPanel><TextBlock Text="{DynamicResource ModernText_BC23E19E7189}" Style="{StaticResource ModernCaption}" Margin="0,0,0,4"/><ComboBox Style="{StaticResource MetricComboBox}" SelectedItem="{Binding Metric2, Mode=TwoWay}"/></StackPanel>

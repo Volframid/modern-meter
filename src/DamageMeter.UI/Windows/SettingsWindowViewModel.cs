@@ -118,28 +118,23 @@ namespace DamageMeter.UI.Windows
             }
         }
 
-        public MockPlayerViewModel(string name, PlayerClass c)
+        public MockPlayerViewModel(string name, PlayerClass playerClass, long dps, long partyDps)
         {
-            var rng = new Random();
-
             Name = name;
-            Class = c;
-            DamageFactor = rng.NextDouble();
-            GlobalDps = ModernDpsFormat.Format(rng.Next(100_000, 40_000_000), TimeSpan.TicksPerSecond);
+            Class = playerClass;
+            DamageFactor = partyDps > 0 ? dps / (double)partyDps : 0;
+            GlobalDps = ModernDpsFormat.Format(dps, TimeSpan.TicksPerSecond);
             IndividualDps = GlobalDps;
-            DamagePerc = Math.Round(rng.NextDouble() * 100) + "%";
-            DamageDone = FormatHelpers.Instance.FormatValue(rng.Next(100_000_000, 2_000_000_000));
-            CritRate = Math.Round(rng.NextDouble() * 100) + "%";
-            HealCritRate = Math.Round(rng.NextDouble() * 100) + "%";
-            DamageFromCrits = Math.Round(rng.NextDouble() * 100) + "%";
-            Deaths = rng.Next(0, 20);
-            FloorTime = TimeSpan.FromSeconds(rng.Next(0, 500)).ToString(@"mm\:ss");
-            FloorTimePerc = Math.Round(rng.NextDouble() * 100) + "%";
-            AggroPerc = Math.Round(rng.NextDouble() * 100) + "%";
-            EnduDebuffUptime = rng.NextDouble() * 100;
-            EnduDebuffUptimeStr = Math.Round(EnduDebuffUptime) + "%";
-            Increased = rng.NextDouble() >= 0.5;
-            Decreased = !Increased;
+            DamagePerc = Math.Round(DamageFactor * 100) + "%";
+            DamageDone = FormatHelpers.Instance.FormatValue(dps * 60);
+            CritRate = "91%";
+            HealCritRate = "87%";
+            DamageFromCrits = "95%";
+            FloorTime = "00:00";
+            FloorTimePerc = "0%";
+            AggroPerc = Role == PlayerRole.Tank ? "98%" : "1%";
+            EnduDebuffUptime = 85;
+            EnduDebuffUptimeStr = "85%";
         }
     }
 
@@ -1132,11 +1127,12 @@ namespace DamageMeter.UI.Windows
 
             var count = 0;
             Hotkeys.Copy.ForEach(h => CopyKeys.Add(new CopyKeyVM($"DPS paste {++count}", h)));
+            const long samplePartyDps = 102_191_578;
             MockParty = new List<MockPlayerViewModel>
             {
-                new MockPlayerViewModel("Warrior", PlayerClass.Warrior),
-                new MockPlayerViewModel("Lancer", PlayerClass.Lancer),
-                new MockPlayerViewModel("Mystic", PlayerClass.Mystic)
+                new MockPlayerViewModel("Warrior", PlayerClass.Warrior, 40_296_351, samplePartyDps) { CritRate = "93%" },
+                new MockPlayerViewModel("Lancer", PlayerClass.Lancer, 25_555_555, samplePartyDps) { CritRate = "82%", Deaths = 1, FloorTime = "00:03", FloorTimePerc = "5%" },
+                new MockPlayerViewModel("Mystic", PlayerClass.Mystic, 5_813_123, samplePartyDps)
             };
         }
 

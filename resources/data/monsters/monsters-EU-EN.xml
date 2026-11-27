@@ -19111,11 +19111,17 @@
   <Zone id="3050" name="Lost Sky Garden">
     <Monster id="46704" name="Immortal Verno" isBoss="True" hp="80000000000" speciesId="0" />
   </Zone>
+  <Zone id="3108" name="Cursed Antaroth's Abyss">
+    <Monster id="1000" name="Nightmare Ghergof" isBoss="True" hp="19827478297" speciesId="7" />
+    <Monster id="2000" name="Nightmare Kalioth" isBoss="True" hp="22000000000" speciesId="7" />
+    <Monster id="3000" name="Cursed Antaroth" isBoss="True" hp="42000000000" speciesId="2" />
+  </Zone>
   <Zone id="3109" name="Ice Throne">
     <Monster id="1000" name="Guardian Kethro" isBoss="True" hp="4725289360" speciesId="7" />
     <Monster id="2000" name="Rampaging Hellen" isBoss="True" hp="5425289360" speciesId="7" />
   </Zone>
   <Zone id="3132" name="Makhaon's Residence">
+    <Monster id="1000" name="Ferocious Jewel Lizard" isBoss="True" hp="15000000000" speciesId="8" />
     <Monster id="3000" name="Larval Makhaon" isBoss="True" hp="20000000000" speciesId="0" />
     <Monster id="4000" name="Makhaon" isBoss="True" hp="23000000000" speciesId="0" />
   </Zone>

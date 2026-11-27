@@ -19230,11 +19230,17 @@
   <Zone id="3050" name="Затерянный небесный сад">
     <Monster id="46704" name="Бессмертный Верно" isBoss="True" hp="80000000000" speciesId="0" />
   </Zone>
+  <Zone id="3108" name="Проклятый Омут Антароса">
+    <Monster id="1000" name="Бездушный Герков" isBoss="True" hp="19827478297" speciesId="7" />
+    <Monster id="2000" name="Бездушный Калиос" isBoss="True" hp="22000000000" speciesId="7" />
+    <Monster id="3000" name="Проклятый Антарос" isBoss="True" hp="42000000000" speciesId="2" />
+  </Zone>
   <Zone id="3109" name="Ледяной трон">
     <Monster id="1000" name="Стражник Кетро" isBoss="True" hp="4725289360" speciesId="7" />
     <Monster id="2000" name="Взбешенная Елена" isBoss="True" hp="5425289360" speciesId="7" />
   </Zone>
   <Zone id="3132" name="Резиденция Махаона">
+    <Monster id="1000" name="Свирепая блестящая ящерица" isBoss="True" hp="15000000000" speciesId="8" />
     <Monster id="3000" name="Личинка Махаона" isBoss="True" hp="20000000000" speciesId="0" />
     <Monster id="4000" name="Махаон" isBoss="True" hp="23000000000" speciesId="0" />
   </Zone>

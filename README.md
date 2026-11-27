@@ -8,7 +8,7 @@ A compact combat meter for TERA Toolbox, with an updated interface based on Shin
 
 ## Asura 100.02 #93
 
-The English and Russian encounter catalogues use the current Asura boss IDs and dungeon names. The compact meter now resolves Revivified Shandra Manaya in Hall of the Argon Queen (Hard), as well as bosses in Stormed Citadel, Lost Sky Garden, Ice Throne, Makhaon's Residence and Corrupted RK-9 Kennel. Boss identification and maximum HP come from the corresponding DataCenter records. When an English name is missing, the catalogue uses the matching Russian text if available.
+The English and Russian encounter catalogues use the current Asura boss IDs and dungeon names. This includes Revivified Shandra Manaya in Hall of the Argon Queen (Hard), Ferocious Jewel Lizard in Makhaon's Residence, and all three bosses in Cursed Antaroth's Abyss. Boss identification and maximum HP come from the corresponding DataCenter records. When an English name is missing, the catalogue uses the matching Russian text if available.
 
 ## Runtime efficiency
 
@@ -25,7 +25,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 
 ## Features
 
-- Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts. Rounded, translucent role-colored fills behind player names show each player's share of the total damage.
+- Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts. The compact overlay, Encounter overview and Metrics previews show each player's damage share with the same rounded, translucent role-colored fill.
 - Original game class and skill icons, customizable role colors, transparency and scale.
 - A smooth centisecond clock with a transparent timer background and unchanged red/green combat indicator. The Overview button uses the Meter surface; the hover toolbar shares its frame color and opacity.
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
@@ -59,7 +59,7 @@ The feature is off by default on fresh installs. Existing **resources/config/bro
 
 ## Latest fixes
 
-The compact meter uses translucent damage-share fills and includes the updated Asura boss and dungeon labels.
+Metrics previews use matching bar lengths and damage percentages for all three roles, and reflect the overlay opacity setting.
 
 ## Screenshots
 
@@ -80,11 +80,9 @@ Screenshots use fictional player names and sample combat data rendered by Modern
 
 ![Compact meter with rounded damage-share fills behind player names](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/compact-meter.png)
 
-![Compact meter at reduced opacity showing Revivified Shandra Manaya](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/compact-meter-transparency.png)
-
 ### Encounter overview
 
-![Encounter overview and individual player statistics](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/encounter-overview.png)
+![Encounter overview with translucent player damage-share bars](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/encounter-overview.png)
 
 <details>
 <summary>Appearance controls and refresh information</summary>
@@ -103,7 +101,7 @@ Screenshots use fictional player names and sample combat data rendered by Modern
 <details>
 <summary>Five metric slots for DPS, tanks and healers</summary>
 
-![Slot 4 empty and slot 5 set to deaths for every role](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/metric-layout.png)
+![Metrics settings with matching damage-share previews for damage dealers, tanks and healers](https://raw.githubusercontent.com/Volframid/modern-meter/main/docs/screenshots/metric-layout.png)
 
 </details>
 
