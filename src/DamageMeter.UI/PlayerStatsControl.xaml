@@ -26,9 +26,12 @@
                Background="{TemplateBinding Foreground}" CornerRadius="4">
         <Border.OpacityMask>
          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-          <GradientStop Offset="0" Color="#2AFFFFFF"/>
-          <GradientStop Offset="0.76" Color="#58FFFFFF"/>
-          <GradientStop Offset="1" Color="#BFFFFFFF"/>
+          <GradientStop Offset="0" Color="#18FFFFFF"/>
+          <GradientStop Offset="0.65" Color="#31FFFFFF"/>
+          <GradientStop Offset="0.76" Color="#37FFFFFF"/>
+          <GradientStop Offset="0.875" Color="#53FFFFFF"/>
+          <GradientStop Offset="0.875" Color="#FFFFFFFF"/>
+          <GradientStop Offset="1" Color="#FFFFFFFF"/>
          </LinearGradientBrush>
         </Border.OpacityMask>
        </Border>

@@ -21,6 +21,10 @@ internal static class ModernNotificationContext
         public bool OwnMount;
         public long Ticket;
     }
+    private const int AsuraVanguardWarning = 95_000;
+    private const int AsuraVanguardCap = 100_000;
+    private static bool _creditsThresholdInstalled;
+
     private static readonly ConditionalWeakTable<NotifyFlashMessage, Effect> Effects = new();
     internal static Effect? Get(NotifyFlashMessage flash) => Effects.TryGetValue(flash, out var effect) ? effect : null;
 
@@ -31,6 +35,9 @@ internal static class ModernNotificationContext
             ?? throw new MissingFieldException(type.FullName, "ModernAbnormalityObserved");
         var credits = type.GetField("ModernCreditsObserved", BindingFlags.Public | BindingFlags.Static)
             ?? throw new MissingFieldException(type.FullName, "ModernCreditsObserved");
+        var threshold = type.GetField("ModernCreditsThreshold", BindingFlags.Public | BindingFlags.Static);
+        threshold?.SetValue(null, (Func<int, int>)GetCreditsThreshold);
+        _creditsThresholdInstalled = threshold != null;
         abnormality.SetValue(null, (Action<object, object, int, int>)Record);
         credits.SetValue(null, (Action<object, int>)UpdateCredits);
     }
@@ -44,17 +51,41 @@ internal static class ModernNotificationContext
         ModernMountNotifications.RefreshEffective();
     }
 
+    private static bool IsAsura(string? name) =>
+        string.Equals(name, "Asura", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(name, "Asura TEST", StringComparison.OrdinalIgnoreCase);
+
+    private static int GetCreditsThreshold(int fallback) =>
+        IsAsura(PacketProcessor.Instance.Server?.Name) ? AsuraVanguardWarning : fallback;
+
+    private static string CreditsMessage(int amount, int cap) =>
+        ModernLocalization.Get(amount >= cap ? "Vanguard credits are maxed out" : "Vanguard credits are close to cap");
+
     private static void UpdateCredits(object value, int amount)
     {
-        if (value is not NotifyFlashMessage flash || flash.Sound is not TextToSpeech speech) return;
+        if (value is not NotifyFlashMessage flash) return;
         var processor = PacketProcessor.Instance;
         var name = processor.Server?.Name;
+        if (_creditsThresholdInstalled && IsAsura(name))
+        {
+            string message = CreditsMessage(amount, AsuraVanguardCap);
+            if (flash.Balloon is { } balloon)
+            {
+                var culture = Lang.LP.Culture;
+                string original = Lang.LP.VanguardCredits + amount.ToString();
+                string balance = $"{amount.ToString("N0", culture)} / {AsuraVanguardCap.ToString("N0", culture)}";
+                balloon.TitleText = balloon.TitleText.Replace(original, message, StringComparison.Ordinal);
+                balloon.BodyText = balloon.BodyText.Replace(original, balance, StringComparison.Ordinal);
+            }
+            if (flash.Sound is TextToSpeech asuraSpeech) asuraSpeech.Text = message;
+            return;
+        }
+
+        if (flash.Sound is not TextToSpeech speech) return;
         var factory = typeof(PacketProcessor).GetProperty("MessageFactory", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(processor);
         var version = Convert.ToInt64(factory?.GetType().GetField("Version")?.GetValue(factory) ?? 0);
         var cap = version == 351828 ? 9000
             : name == "Menma's TERA" || name == "MT: The Dream" ? 100000 : 20000;
-        // Keep voice settings, custom file sounds and the existing popup intact.
-        speech.Text = amount >= cap ? ModernLocalization.Get("Vanguard credits are maxed out")
-            : ModernLocalization.Get("Vanguard credits are close to cap");
+        speech.Text = CreditsMessage(amount, cap);
     }
 }

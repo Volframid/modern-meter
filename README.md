@@ -25,7 +25,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 
 ## Features
 
-- Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts. The compact overlay, Encounter overview and Metrics previews show each player's damage share with the same rounded, translucent role-colored fill.
+- Compact player and party DPS with full integers, aligned configurable metrics, critical/healing rates and death counts. The compact overlay, Encounter overview and Metrics previews show each player's damage share with the same rounded role-colored bar, with a softly translucent fill over a solid lower edge.
 - Original game class and skill icons, customizable role colors, transparency and scale.
 - A smooth centisecond clock with a transparent timer background and unchanged red/green combat indicator. The Overview button uses the Meter surface; the hover toolbar shares its frame color and opacity.
 - Overview with encounter history, player statistics and recorded graphs; right-click a player for original skill, buff and healing details.
@@ -37,7 +37,7 @@ For module-manager installation, use the module descriptor at https://raw.github
 - A new loading screen with live status, a matching update dialog, notification cards, chat, effects and upload-history windows, event editor and color picker.
 - Chat and notification functions, including whisper popups when the game is in the background, subject to the user's event and sound settings.
 
-Vanguard credit alerts start at 15,000 of 20,000 (75% for other known caps) and can appear in the foreground. Speech says “Vanguard credits are close to cap” without numbers, then “Vanguard credits are maxed out” at the cap. The popup format is unchanged. On Asura, existing self-buff 2.0 mount rules also recognize Primal Omen, Primal Mark and Queen's Wrath (10 seconds), subject to the same active-buff checks and event filters.
+On Asura, Vanguard credit alerts start at 95,000. At 100,000 the popup and speech switch from “Vanguard credits are close to cap” to “Vanguard credits are maxed out”. The popup also shows the current balance and cap. Other supported servers use 75% of their configured cap for the early warning. On Asura, existing self-buff 2.0 mount rules also recognize Primal Omen, Primal Mark and Queen's Wrath (10 seconds), subject to the same active-buff checks and event filters.
 
 Graph collection is **off by default**. Enable it in Full settings → Graph if wanted. Collection runs in the background and the graph is available in Overview; no graph expands beneath the compact meter. Data collection uses some CPU and memory, particularly during long encounters.
 
@@ -59,7 +59,7 @@ The feature is off by default on fresh installs. Existing **resources/config/bro
 
 ## Latest fixes
 
-Metrics previews use matching bar lengths and damage percentages for all three roles, and reflect the overlay opacity setting.
+The Compact overlay, Encounter overview and Metrics previews use the same softer bar fill and solid role-colored lower edge. The fight clock stays green and continues updating smoothly if your character dies while the boss encounter is still active. The boss kill or a confirmed encounter reset ends the timer. Metrics previews use matching bar lengths and damage percentages for all three roles, and reflect the overlay opacity setting.
 
 ## Screenshots
 

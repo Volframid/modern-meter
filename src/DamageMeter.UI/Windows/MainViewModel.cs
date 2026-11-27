@@ -405,7 +405,7 @@ namespace DamageMeter.UI
             FightClock.PropertyChanged += (_, e) => { if (e.PropertyName == nameof(ModernFightClock.Text)) TimerText = FightClock.Text; };
             _combatObserver = new ModernCombatObserver(PacketProcessor.Instance.Sniffer,
                 () => PacketProcessor.Instance.EntityTracker?.MeterUser?.Id.Id,
-                active => App.MainDispatcher.BeginInvoke(new Action(() => FightClock.SetCombat(active))),
+                _ => App.MainDispatcher.BeginInvoke(new Action(() => FightClock.SetCombat(_combatObserver?.IsInCombat == true))),
                 target: () => PacketProcessor.Instance.Encounter?.Id.Id);
             FightClock.Start();
             Players = new SynchronizedObservableCollection<PlayerDamageViewModel>();
