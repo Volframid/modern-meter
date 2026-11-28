@@ -111,11 +111,13 @@ public sealed class ModernCombatObserver : IDisposable
                 }
 
                 var data = message.Data;
-                if (data.Count >= 23 && ((_life != 0 && opcode == _life) || (_despawn != 0 && opcode == _despawn)))
+                var isLife = _life != 0 && opcode == _life;
+                var isDespawn = _despawn != 0 && opcode == _despawn;
+                if ((isLife && data.Count >= 23) || (isDespawn && data.Count >= 26))
                 {
                     var id = BitConverter.ToUInt64(data.Array!, data.Offset + 2);
-                    var state = data.Array![data.Offset + 22];
-                    if (_life == opcode && id == _self())
+                    var state = isDespawn ? BitConverter.ToUInt32(data.Array!, data.Offset + 22) : data.Array![data.Offset + 22];
+                    if (isLife && id == _self())
                     {
                         if (state != 0)
                         {
@@ -130,11 +132,13 @@ public sealed class ModernCombatObserver : IDisposable
                         return;
                     }
 
-                    if ((_life == opcode && state == 0) || (_despawn == opcode && (state == 3 || state == 5)))
+                    // Asura's training boss reset removes the old actor with type 0.
+                    // Type 1 is a visibility change, so the fight can still be active.
+                    if (isLife ? state == 0 : state is 0 or 3 or 5)
                     {
                         GetCombatState();
-                        if (id == (_activeBoss ?? _target()))
-                            FinishBoss(id, _despawn == opcode && state == 3);
+                        if (id == (_activeBoss ?? _target()) && (id != _finishedBoss || _canRepull))
+                            FinishBoss(id, isDespawn && state == 3);
                     }
                     return;
                 }
